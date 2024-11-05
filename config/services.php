@@ -31,4 +31,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'api' => [
+        'key' => env('API_KEY'),
+        'base_uri' => 'https://api.rawg.io/api/',
+    ],
+
 ];
