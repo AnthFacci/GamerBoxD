@@ -8,6 +8,12 @@ body{
 ;
 }
 
+/* Navbar custom, aumentar altura */
+
+.navbar-custom{
+    height: 80px;
+}
+
 /* Classe usada para espaçamento das ancor na nav */
 .ancor-link{
     display: flex;
@@ -31,25 +37,29 @@ body{
 
 .normal{
     width: 50%;
-    height: 800px;
+    height: 100%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
 }
 
-.normal > img{
-    width: 60%;
-    height: 40%;
-    border-radius: 15px;
-    border: 2px solid black;
+.masked-image {
+    width: 70%;
+    height: 82%;
+    object-fit: cover;
+    mask-image: url('/public/svg/Cruz.png'); /* Caminho para a máscara */
+    mask-size: cover;
+    -webkit-mask-image: url('/public/svg/Cruz.png'); /* Para suporte em navegadores baseados no WebKit */
+    -webkit-mask-size: cover;
 }
+
 
 
 /* normal three  (três imagens) */
 
 .normal_three{
     width: 50%;
-    height: 800px;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -65,17 +75,32 @@ body{
 /* Classe para aplicar gap nas duas div que contém as imagens */
 
 .class-custom{
-    gap: 80px;
+
 }
 
 /* Caixa de login arquivo components/authentication-card.blade */
 
 .login-box-custom{
-    width: 400px;
-    height: 400px;
+    width: 90%;
+    height: 100%;
     background-color: #DA85DD !important;
     color: white;
     font-weight: bold;
+    border: 2px solid transparent;
+    border-radius: 30px !important;
+    margin: 0px !important;
+}
+
+/* Div principal para comportar a login form e a logo no topo */
+
+.login_logo{
+    height: auto;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px !important  ;
+    padding: 0px !important;
 }
 
 /* Alteração do Background do login box */
@@ -85,13 +110,36 @@ body{
     color: white;
     font-weight: bold;
     border-radius: 20px;
+    width: 90%;
+    height: auto;
+}
+
+.logo_login_cad{
+    transform: rotate(317deg);
+}
+
+/* Div principal para comportar a cadastro form e a logo no topo */
+
+.logo_form{
+    height: 100%;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px !important  ;
+    padding: 0px !important;
+}
+
+.logo_x{
+    width: 40px;
+    align-self: flex-start;
 }
 
 /* Botão de criar conta no login box */
 
 .custom-button-login-criar{
-    background-color: #734774; 
-    color: white !important; 
+    background-color: #734774;
+    color: white !important;
     font-weight: bold;
     width: 100%;
     border-radius: 15px;
@@ -119,4 +167,206 @@ body{
 
 .btn-register-custom:hover{
     color: white !important;
+}
+/*********************************************************************** Estilos Personalizados *******************************************************************************/
+/******************************************************************************* JOGOS *******************************************************************************/
+
+/* Classe para definição da div do carousel lançamento */
+.lancamentos{
+    padding-top: 40px;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+}
+
+.carousel_lanc{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    /* border: 2px solid blue; */
+}
+
+.lancamentos > h1{
+    font-size: 20px;
+    color: #f5f5f5;
+}
+
+h1 > small > a{
+    text-decoration: none;
+    font-size: 16px;
+    color: #5e5d5d;
+}
+
+.btn_hr{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    gap: 10px;
+    /* border: 1px solid blueviolet; */
+}
+
+.btn_hr > hr{
+    height: 2px;
+    width: 94%;
+    color: white;
+    border: 2px solid white;
+}
+
+.btn_hr > .btn_caro{
+    /* border: 1px solid red; */
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+}
+
+/* Classe para estilização dos botões */
+
+.btn_caro > button{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    border: 2px solid #f5f5f5;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Classe para adaptação da seta do carousel */
+
+.arrows{
+    width: 30px;
+    height: 25px;
+    align-self: center;
+}
+
+.cards_acessados{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    overflow: hidden;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+}
+
+.cards_acessados::-webkit-scrollbar {
+    display: none;  /* Oculta a scrollbar no WebKit (Chrome, Safari, etc.) */
+}
+
+.cards_breve{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    overflow: hidden;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+}
+
+.cards_breve::-webkit-scrollbar {
+    display: none;  /* Oculta a scrollbar no WebKit (Chrome, Safari, etc.) */
+}
+
+.cards_avaliados{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    overflow: hidden;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+}
+
+.cards_avaliados::-webkit-scrollbar {
+    display: none;  /* Oculta a scrollbar no WebKit (Chrome, Safari, etc.) */
+}
+
+.cards_lancamentos{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    overflow: hidden;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+}
+
+.cards_lancamentos::-webkit-scrollbar {
+    display: none;  /* Oculta a scrollbar no WebKit (Chrome, Safari, etc.) */
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-start;
+    height: 280px;
+    width: 205px;
+    background-color: #BCBCBC;
+    flex-shrink: 0;
+    border-radius: 15px;
+    min-width: 205px; /* Define a largura mínima de cada item */
+    flex-shrink: 0;
+}
+
+.card > a{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-start;
+    flex-shrink: 0;
+    border-radius: 15px;
+    min-width: 205px; /* Define a largura mínima de cada item */
+    flex-shrink: 0;
+    text-decoration: none;
+    color: rgb(33, 37, 41);
+}
+
+.img_lancamento{
+    margin-top: 10px;
+    width: 90%;
+    height: 80%;
+    border-radius: 15px;
+}
+
+.nome_nota{
+    display: flex;
+    width: 95%;
+    flex-grow: 1;
+}
+
+.nm_lancamento{
+    margin: 0px;
+    width: 80%;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.nt_lancamento{
+    margin: 0px;
+    width: 20%;
+    display: flex;
+    justify-content: flex-end;
+    align-self: flex-end;
+    font-size: 45px;
+    font-weight: bold;
 }

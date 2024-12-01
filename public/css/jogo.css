@@ -1,0 +1,322 @@
+.capa{
+    width: 100%;
+    height: 590px;
+    display: flex;
+    justify-content: center;
+}
+
+.cima{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    padding-top: 80px;
+    gap: 20px;
+}
+
+.text{
+    height: 400px;
+    width: 40%;
+    /* height: auto; */
+    font-weight: bold;
+    color: black;
+}
+
+.nome_desc{
+    height: 52%;
+    width: 100%;
+    border: 1px solid brown;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.nome_desc > p{
+    font-size: 12px;
+}
+
+.funcoes{
+    height: 48%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.acoes2{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid white;
+}
+
+.acoes2 > img{
+    width: 30%;
+    height: 30%;
+    cursor: pointer;
+}
+
+.text > p{
+    font-size: 12px;
+}
+
+.img_capa{
+    width: 300px;
+    height: 400px;
+}
+
+.img_capa > img {
+    width: 100%;
+    height: 100%;
+}
+
+.metricas{
+    padding: 15px;
+    width: 300px;
+    height: 400px;
+    background-color: #f5f5f5;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.plataformas{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 14px;
+    color: rgb(33, 37, 41);
+    flex-wrap: wrap;
+    font-weight: bold;
+}
+
+.plataformas > hr{
+    border: 2px solid black;
+    width: 100%;
+}
+
+.nota{
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    color: rgb(33, 37, 41);
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.nota > span > .nota_jogo{
+    font-size: 110px;
+}
+
+.nota > hr{
+    width: 100%;
+    border: 2px solid black;
+}
+
+.generos{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 14px;
+    color: rgb(33, 37, 41);
+    flex-wrap: wrap;
+    font-weight: bold;
+}
+
+.acoes{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.acoes > img{
+    width: 10%;
+    height: 10%;
+    cursor: pointer;
+}
+
+.ranking{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    color: #f5f5f5;
+    font-weight: bold;
+}
+
+.ranking > button{
+    border: 1px solid #f5f5f5;
+    border-radius: 16px;
+    padding: 10px;
+    background-color: transparent;
+    color: #f5f5f5;
+    width: 70%;
+    transition: .4s;
+    font-weight: bold;
+}
+
+.ranking > button:hover{
+    background-color: white;
+    color: rgb(33, 37, 41);
+}
+
+.quadrados_nota{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.quadrado{
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.ruim{
+    background-color: #CC697B;
+}
+
+.mid{
+    background-color: #96D9E0;
+}
+
+.bom{
+    background-color: #6ECC8E;
+}
+
+.comentarios{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.outras_imagens{
+    display: flex;
+    gap: 10px;
+    width: 30%;
+    height: fit-content;
+    border: 1px solid firebrick;
+}
+
+.user_comentarios{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    height: fit-content;
+}
+
+.comentario{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    gap: 10px;
+}
+
+.foto_usuario{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.foto_usuario > img{
+    width: 80%;
+    height: 30%;
+    border-radius: 10px;
+}
+
+.informações_comentario{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 4px;
+}
+
+.informações_comentario > span{
+     color: rgb(147, 156, 165);
+     font-size: 16px;
+     font-weight: bold;
+}
+
+.rating{
+    display: flex;
+    gap: 2px;
+    align-items: center;
+    justify-content: flex-start;
+    width: fit-content;
+    height: fit-content;
+    color: #BCBCBC;
+}
+
+.rating > .quadrado_rating{
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.finalizado{
+    color: #e7e0e0;
+}
+
+.like{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.like > img{
+    width: 25px;
+    height: 25px;
+}
+
+
+#review_form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+#review_form form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#review_form textarea {
+    padding: 10px;
+    font-size: 14px;
+    resize: none;
+    min-height: 100px;
+}
+
+#review_form button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#review_form button[type="button"] {
+    background-color: #f44336;
+}

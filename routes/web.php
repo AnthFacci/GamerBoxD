@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JogosController;
+use App\Http\Controllers\AllGames;
+use App\Http\Controllers\JogoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +17,19 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/jogos', [JogosController::class, 'index'])->name('jogos');
+Route::prefix('filtros')->group(function (){
+    Route::get('/', [AllGames::class, 'index'] )->name('catalogo');
+    Route::post('/', [AllGames::class, 'carregarJogos']);
+    Route::post('/nextOrPrevious', [AllGames::class, 'carregarJogosByLink']);
+    Route::post('/searchByName', [AllGames::class, 'searchByName']);
+});
+
+Route::prefix('jogo')->group(function () {
+    Route::get('{id}', [JogoController::class, 'index'])->name('jogo');
+    Route::post('storeReview', [JogoController::class, 'storeReview'])->name('store.review');
+});
 
 
 Route::middleware([

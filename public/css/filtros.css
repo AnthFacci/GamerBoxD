@@ -1,0 +1,254 @@
+/* Alteração do padding da div main */
+
+.custom-padding{
+    padding-left: 45px !important;
+    padding-right: 45px !important;
+    gap: 5%;
+}
+
+/********************************************************* DIV FILTROS ************************************************************/
+
+.filtros{
+    width: 15%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.filtros > .titulo > h1{
+    font-size: 30px;
+}
+
+.filtros > .titulo > small > a{
+    color: #808080;
+    text-decoration: none;
+}
+
+.titulo{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-height: fit-content;
+    justify-content: space-between;
+}
+
+.filtros > hr{
+    width: 100%;
+    border: 3px solid #f5f5f5;
+}
+
+/* FILTRO DE CATEGORIAS */
+
+.categoria{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    max-height: fit-content;
+}
+
+.form_categoria > h1{
+    font-size: 24px;
+}
+
+.filtros > .categoria > .form_categoria > .form-check{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.filtros > .categoria > .form_categoria > .form-check > .form-check-input{
+    background-color: transparent !important;
+    border-radius: 0px;
+    width: .8rem;
+    height: .8rem;
+    border: 2px solid #f5f5f5;
+}
+
+
+/* FILTRO DE PLATAFORMAS */
+
+.plataforma{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    max-height: fit-content;
+}
+
+.form_plataforma > h1{
+    font-size: 24px;
+}
+
+.filtros > .plataforma > .form_plataforma > .form-check{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.filtros > .plataforma > .form_plataforma > .form-check > .form-check-input{
+    background-color: transparent !important;
+    border-radius: 0px;
+    width: .8rem;
+    height: .8rem;
+    border: 2px solid #f5f5f5;
+}
+
+/* FILTRO DE LANÇAMENTOS */
+
+.lancamentos{
+    padding: 0px !important;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    max-height: fit-content;
+}
+
+.form_lancamentos{
+    width: 100%;
+}
+
+.form_lancamentos > h1{
+    font-size: 24px;
+}
+
+.filtros > .lancamentos > .form_lancamentos > .form-check{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.filtros > .lancamentos > .form_lancamentos > .form-check > .form-check-input{
+    background-color: transparent !important;
+    border-radius: 0px;
+    width: .8rem;
+    height: .8rem;
+    border: 2px solid #f5f5f5;
+}
+
+.custom-range{
+    width: 100%;
+}
+
+/**************************************************** DIV JOGOS FILTRADOS ********************************************************/
+
+.jogos{
+    width: 80%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 4px solid red;
+    gap: 20px;
+}
+
+.jogos > .pesquisa_ordenar > form > #search{
+    width: 65% !important;
+    display: flex;
+    position: relative;
+}
+
+.jogo_input{
+    border: 1px solid blue;
+    min-width: 100%;
+    border-radius: 15px;
+    padding-left: 10px;
+}
+
+#pesquisar{
+    background-color: transparent;
+    position: absolute;
+    right: 0px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000000; /* Define a cor preta para o ícone */
+    border: none;
+}
+
+.jogos > .pesquisa_ordenar > form{
+    display: flex;
+    gap: 15px;
+    height: 30px;
+}
+
+.btn-group{
+    height: auto;
+    width: 35%;
+    border: 2px solid royalblue;
+}
+
+.all_games{
+    width: 100%;
+    height: fit-content;
+    border: 2px solid blueviolet;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.card_jogos{
+    min-width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.pagination{
+    border: 3px solid brown;
+    width: 350px;
+    height: 40px;
+    display: flex;
+}
+
+.previous{
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 40%;
+    cursor: pointer;
+}
+
+.next{
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 40%;
+    cursor: pointer;
+}
+
+.paginas{
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 20%;
+    cursor: pointer;
+    border: 1px solid blue;
+}
+
+.paginas > div{
+    border: 1px solid #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+    width: auto;
+    font-weight: bold;
+    flex: 1;
+}
+
