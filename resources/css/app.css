@@ -3,6 +3,19 @@
 
 /*********************************************************************** Estilos Personalizados *******************************************************************************/
 
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/poppins-v15-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('../fonts/poppins-v15-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/poppins-v15-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../fonts/poppins-v15-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/poppins-v15-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/poppins-v15-latin-regular.svg#Poppins') format('svg'); /* Legacy iOS */
+}
+
 body{
     background-color: #000000 !important;
 ;
@@ -182,6 +195,8 @@ body{
     border: 2px solid transparent;
     border-radius: 30px !important;
     margin: 0px !important;
+    font-family: 'Poppins';
+    text-transform: lowercase;
 }
 
 /* Div principal para comportar a login form e a logo no topo */
@@ -205,6 +220,8 @@ body{
     border-radius: 20px;
     width: 90%;
     height: auto;
+    text-transform: lowercase;
+    font-family: 'Poppins'
 }
 
 .logo_login_cad{
@@ -237,6 +254,8 @@ body{
     width: 100%;
     border-radius: 15px;
     transition: .4s;
+    text-transform: lowercase;
+    font-family: 'Poppins'
 }
 
 .custom-button-login-criar:hover{
@@ -256,6 +275,8 @@ body{
     font-weight: bold;
     color: #DA85DD !important;
     transition: .4s;
+    text-transform: lowercase;
+    font-family: 'Poppins'
 }
 
 .btn-register-custom:hover{
@@ -291,6 +312,8 @@ h1 > small > a{
     text-decoration: none;
     font-size: 16px;
     color: #5e5d5d;
+    text-transform: lowercase;
+    font-family: 'Poppins'
 }
 
 .btn_hr{
@@ -445,21 +468,26 @@ h1 > small > a{
     display: flex;
     width: 95%;
     flex-grow: 1;
+    gap: 20px;
 }
 
 .nm_lancamento{
     margin: 0px;
-    width: 80%;
+    width: 70%;
     font-weight: bold;
     font-size: 14px;
+    text-transform: lowercase;
+    font-family: 'Poppins'
 }
 
 .nt_lancamento{
-    margin: 0px;
+    margin: 0;
     width: 20%;
     display: flex;
     justify-content: flex-end;
     align-self: flex-end;
     font-size: 45px;
     font-weight: bold;
+    
+    font-family: 'Poppins'
 }

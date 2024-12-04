@@ -40,7 +40,7 @@
         {{-- Main Section --}}
         <div class="container-fluid flex-grow-1 d-flex flex-column h-auto border border-danger" style="padding: 0px !important; margin-top: 80px;">
             <div class="capa container-fluid" style="padding: 0px !important;">
-                @if ((int)$game['metacritic'] <= 39)
+                @if ((int)$game['rating'] <= 2)
                     <div class="cima" style="background-color: #CC697B;">
                         <div class="img_capa">
                             <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}">
@@ -126,7 +126,7 @@
                                 <hr>
                             </div>
                             <div class="nota">
-                                <span><span class="nota_jogo">{{$game['metacritic']}}</span>/100</span>
+                                <span><span class="nota_jogo">{{number_format(floatval($game['rating']) * 20)}}</span>/100</span>
                                 <hr>
                             </div>
                             <div class="generos">
@@ -136,8 +136,8 @@
                             </div>
                         </div>
                     </div>
-                @elseif ((int)$game['metacritic'] >= 40 && (int)$game['metacritic'] <= 74)
-                    <div class="cima" style="background-color: #6ECC8E;">
+                @elseif ((float)$game['rating'] > 2 && (float)$game['rating'] <= 3.7)
+                    <div class="cima" style="background-color: #96D9E0;">
                         <div class="img_capa">
                             <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}">
                         </div>
@@ -211,7 +211,7 @@
                                 <hr>
                             </div>
                             <div class="nota">
-                                <span><span class="nota_jogo">{{$game['metacritic']}}</span>/100</span>
+                                <span><span class="nota_jogo">{{number_format(floatval($game['rating']) * 20)}}</span>/100</span>
                                 <hr>
                             </div>
                             <div class="generos">
@@ -221,7 +221,7 @@
                             </div>
                         </div>
                     </div>
-                @elseif ((int)$game['metacritic'] >= 75)
+                @elseif ((int)$game['rating'] > 3.7)
                     <div class="cima" style="background-color: #53e584;">
                         <div class="img_capa">
                             <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}">
@@ -297,7 +297,7 @@
                                 <hr>
                             </div>
                             <div class="nota">
-                                <span><span class="nota_jogo">{{$game['metacritic']}}</span>/100</span>
+                                <span><span class="nota_jogo">{{number_format(floatval($game['rating']) * 20)}}</span>/100</span>
                                 <hr>
                             </div>
                             <div class="generos">
@@ -382,7 +382,7 @@
                                 <hr>
                             </div>
                             <div class="nota">
-                                <span><span class="nota_jogo">{{$game['metacritic']}}</span>/100</span>
+                                <span><span class="nota_jogo">{{number_format(floatval($game['rating']) * 20)}}</span>/100</span>
                                 <hr>
                             </div>
                             <div class="generos">

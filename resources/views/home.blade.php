@@ -34,7 +34,7 @@
     {{-- MAIN SECTION --}}
     <div class="container-fluid flex-grow-1 d-flex h-auto">
       <div class="flex-grow-1 d-flex justify-content-center align-items-center class-custom">
-        <div class="normal">
+        <div class="normal">  
             <div class="img">
                 <img src="{{$data[0]['background_image']}}" alt="Imagem dentro da div" class="masked-image" id="imagemCruz">
             </div>
@@ -44,7 +44,9 @@
             <img src="{{$data[1]['background_image']}}" alt="Imagem dentro da div" class="w-100 h-100" style="object-fit: cover; object-position: center;" />
           </div>
           <div class="d-flex justify-content-center align-items-center rounded-circle overflow-hidden custom-round-image2" style="width: 180px; height: 180px;">
-            <img src="{{$data[2]['background_image']}}" alt="Imagem dentro da div" class="w-100 h-100" style="object-fit: cover; object-position: center;" />
+            <!-- <a href="{{route('jogo', ['id' => $data[0]['id']])}}"> -->
+              <img src="{{$data[2]['background_image']}}" alt="Imagem dentro da div" class="w-100 h-100" style="object-fit: cover; object-position: center;" />
+            <!-- </a> -->
           </div>
           <div class="d-flex justify-content-center align-items-center rounded-circle overflow-hidden custom-round-image" style="width: 180px; height: 180px;">
             <img src="{{$data[3]['background_image']}}" alt="Imagem dentro da div" class="w-100 h-100" style="object-fit: cover; object-position: center;" />

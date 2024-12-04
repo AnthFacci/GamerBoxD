@@ -34,7 +34,7 @@
       {{-- MAIN SECTION --}}
         <div class="container-fluid flex-grow-1 d-flex flex-column h-auto mb-5" style="margin-top: 60px;">
             {{-- CAROUSEL DE LANÇAMENTOS --}}
-            <div class="lancamentos">
+            {{-- <div class="lancamentos">
                 <h1>novos Lançamentos <small><a href="{{route('catalogo')}}">(ver tudo)</a></small></h1>
                 <div class="carousel_lanc">
                     <div class="btn_hr">
@@ -43,8 +43,8 @@
                             <button id="right_lancamento"><img src="{{ asset('svg/right.svg') }}" alt="seta para direita carousel lançamentos" class="arrows"></button>
                             <button id="left_lancamento"><img src="{{ asset('svg/left.svg') }}" alt="seta para esquerda carousel lançamentos" class="arrows"></button>
                         </div>
-                    </div>
-                    <div class="cards_lancamentos" id="cards_lancamentos">
+                    </div> --}}
+                    {{-- <div class="cards_lancamentos" id="cards_lancamentos">
                         @foreach ($dataLancamentos['results'] as $jogo)
                             @if (intval($jogo['rating'] == 0))
                                 <div class="card" style="background-color: #BCBCBC;">
@@ -96,9 +96,9 @@
                                 </div>
                             @endif
                         @endforeach
-                    </div>
-                </div>
-            </div>
+                    </div> --}}
+                {{-- </div>
+            </div> --}}
             {{-- CAROUSEL MAIS ACESSADOS --}}
             <div class="lancamentos">
                 <h1>mais acessados <small><a href="{{route('catalogo')}}">(ver tudo)</a></small></h1>
@@ -120,11 +120,11 @@
                                             @if ($jogo['rating'] == 0)
                                                 <p class="nt_lancamento">-</p>
                                             @else
-                                                <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']), 1) }}</p>
+                                                <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
                                             @endif
                                         </div>
                                 </div>
-                            @elseif (intval($jogo['rating']) >= 1 && intval($jogo['rating'] <= 2 ))
+                            @elseif (floatval($jogo['rating']) > 0 && floatval($jogo['rating'] <= 2 ))
                                 <div class="card" style="background-color: #CC697B;">
                                     <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento">
                                     <div class="nome_nota">
@@ -132,19 +132,19 @@
                                         @if ($jogo['rating'] == 0)
                                             <p class="nt_lancamento">-</p>
                                         @else
-                                            <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']), 1) }}</p>
+                                            <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
                                         @endif
                                     </div>
                                 </div>
-                            @elseif (intval($jogo['rating']) >= 3 && intval($jogo['rating'] <= 4 ))
-                                <div class="card" style="background-color: #6ECC8E;">
+                                @elseif (floatval($jogo['rating']) > 2 && floatval($jogo['rating'] <= 3.7 ))
+                                <div class="card" style="background-color: #96D9E0;">
                                     <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento">
                                     <div class="nome_nota">
                                         <p class="nm_lancamento">{{ $jogo['name'] }}</p>
                                         @if ($jogo['rating'] == 0)
                                             <p class="nt_lancamento">-</p>
                                         @else
-                                            <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']), 1) }}</p>
+                                            <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
                                         @endif
                                     </div>
                                 </div>
@@ -156,7 +156,7 @@
                                         @if ($jogo['rating'] == 0)
                                             <p class="nt_lancamento">-</p>
                                         @else
-                                            <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']), 1) }}</p>
+                                            <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
                                         @endif
                                     </div>
                                 </div>
@@ -186,11 +186,11 @@
                                             @if ($jogo['rating'] == 0)
                                                 <p class="nt_lancamento">-</p>
                                             @else
-                                                <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']), 1) }}</p>
+                                                <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
                                             @endif
                                         </div>
                                 </div>
-                            @elseif (intval($jogo['rating']) >= 1 && intval($jogo['rating'] <= 2 ))
+                            @elseif (floatval($jogo['rating']) > 0 && floatval($jogo['rating'] <= 2 ))
                                 <div class="card" style="background-color: #CC697B;">
                                     <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento">
                                     <div class="nome_nota">
@@ -198,19 +198,19 @@
                                         @if ($jogo['rating'] == 0)
                                             <p class="nt_lancamento">-</p>
                                         @else
-                                            <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']), 1) }}</p>
+                                            <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
                                         @endif
                                     </div>
                                 </div>
-                            @elseif (intval($jogo['rating']) >= 3 && intval($jogo['rating'] <= 4 ))
-                                <div class="card" style="background-color: #6ECC8E;">
+                            @elseif (floatval($jogo['rating']) > 2 && floatval($jogo['rating'] <= 3.7 ))
+                                <div class="card" style="background-color: #96D9E0;">
                                     <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento">
                                     <div class="nome_nota">
                                         <p class="nm_lancamento">{{ $jogo['name'] }}</p>
                                         @if ($jogo['rating'] == 0)
                                             <p class="nt_lancamento">-</p>
                                         @else
-                                            <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']), 1) }}</p>
+                                            <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
                                         @endif
                                     </div>
                                 </div>
@@ -222,7 +222,7 @@
                                         @if ($jogo['rating'] == 0)
                                             <p class="nt_lancamento">-</p>
                                         @else
-                                            <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']), 1) }}</p>
+                                            <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
                                         @endif
                                     </div>
                                 </div>
@@ -253,12 +253,12 @@
                                                 @if ($jogo['rating'] == 0)
                                                     <p class="nt_lancamento">-</p>
                                                 @else
-                                                    <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']), 1) }}</p>
+                                                    <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
                                                 @endif
                                             </div>
                                         </a>
                                 </div>
-                            @elseif (intval($jogo['rating']) >= 1 && intval($jogo['rating'] <= 2 ))
+                            @elseif (floatval($jogo['rating']) > 0 && floatval($jogo['rating'] <= 2 ))
                                 <div class="card" style="background-color: #CC697B;">
                                     <a href="">
                                         <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento">
@@ -267,13 +267,13 @@
                                             @if ($jogo['rating'] == 0)
                                                 <p class="nt_lancamento">-</p>
                                             @else
-                                                <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']), 1) }}</p>
+                                                <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
                                             @endif
                                         </div>
                                     </a>
                                 </div>
-                            @elseif (intval($jogo['rating']) >= 3 && intval($jogo['rating'] <= 4 ))
-                                <div class="card" style="background-color: #6ECC8E;">
+                                @elseif (floatval($jogo['rating']) > 2 && floatval($jogo['rating'] <= 3.7 ))
+                                <div class="card" style="background-color: #96D9E0;">
                                     <a href="">
                                         <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento">
                                         <div class="nome_nota">
@@ -281,7 +281,7 @@
                                             @if ($jogo['rating'] == 0)
                                                 <p class="nt_lancamento">-</p>
                                             @else
-                                                <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']), 1) }}</p>
+                                                <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
                                             @endif
                                         </div>
                                     </a>
@@ -295,7 +295,7 @@
                                             @if ($jogo['rating'] == 0)
                                                 <p class="nt_lancamento">-</p>
                                             @else
-                                                <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']), 1) }}</p>
+                                                <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
                                             @endif
                                         </div>
                                     </a>

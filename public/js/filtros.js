@@ -186,14 +186,15 @@ function carregarJogos(data){
         let card = document.createElement('div');
         card.className = 'card';
         // Verificação de métrica para diferenciar coloração
-        if(jogo.metacritic <= 39)
-            card.style.backgroundColor = '#CC697B';
-        else if(jogo.metacritic >= 40 || jogo.metacritic <= 74)
-            card.style.backgroundColor = '#6ECC8E';
-        else if(jogo.metacritic >= 75)
-            card.style.backgroundColor = '#53e584';
-        else
+        if(jogo.rating == 0)
             card.style.backgroundColor = '#BCBCBC';
+        else if(jogo.rating <= 2)
+            card.style.backgroundColor = '#CC697B';
+        else if(jogo.rating > 2 && jogo.rating <= 3.7)
+            card.style.backgroundColor = '#96D9E0';
+        else if(jogo.rating > 3.7)
+            card.style.backgroundColor = '#53e584';
+        
         // Criação da imagem do card do jogo
         let img_card = document.createElement('img');
         img_card.src = jogo.background_image;
@@ -212,7 +213,7 @@ function carregarJogos(data){
         if(jogo.metacritic == 0)
             p_nota.innerHTML = '-';
         else
-            p_nota.innerHTML = jogo.metacritic
+            p_nota.innerHTML = Math.round(jogo.rating * 20);
 
         // Atribuindo os elementos dentro da div principal
         div_nm_nt.append(p_nome, p_nota);
