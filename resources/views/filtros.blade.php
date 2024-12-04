@@ -59,21 +59,21 @@
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="casual" id="casual" name="genres[]">
-                            <label class="form-check-label" for="casual">
-                              casual
+                            <input class="form-check-input" type="checkbox" value="massively-multiplayer" id="multiplayer" name="genres[]">
+                            <label class="form-check-label" for="multiplayer">
+                              multiplayer
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="racing" id="corrida" name="genres[]">
-                            <label class="form-check-label" for="corrida">
-                              corrida
+                            <input class="form-check-input" type="checkbox" value="role-playing-games-rpg" id="rpg" name="genres[]">
+                            <label class="form-check-label" for="rpg">
+                              rpg
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="sports" id="esportes" name="genres[]">
-                            <label class="form-check-label" for="esportes">
-                              esportes
+                            <input class="form-check-input" type="checkbox" value="shooter" id="tiro" name="genres[]">
+                            <label class="form-check-label" for="tiro">
+                              tiro
                             </label>
                         </div>
                     </form>
@@ -82,13 +82,7 @@
                  {{-- Filtro plataforma --}}
                  <div class="plataforma">
                     <form action="" method="get" class="form_plataforma">
-                        <h1>categoria</h1>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="8" id="3ds" name="platforms[]">
-                            <label class="form-check-label" for="3ds">
-                              nintendo 3ds
-                            </label>
-                        </div>
+                        <h1>plataforma</h1>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="7" id="switch" name="platforms[]">
                             <label class="form-check-label" for="switch">
@@ -102,15 +96,21 @@
                             </label>
                         </div>
                         <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="18" id="ps4" name="platforms[]">
+                            <label class="form-check-label" for="ps4">
+                              playstation 4
+                            </label>
+                        </div>
+                        <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="187" id="ps5" name="platforms[]">
                             <label class="form-check-label" for="ps5">
                               playstation 5
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="186" id="xbpx" name="platforms[]">
-                            <label class="form-check-label" for="xbpx">
-                              xbox series x/s
+                            <input class="form-check-input" type="checkbox" value="1" id="xbox" name="platforms[]">
+                            <label class="form-check-label" for="xbox">
+                              xbox one
                             </label>
                         </div>
                     </form>
@@ -120,15 +120,14 @@
 
                 <div class="lancamentos">
                     <form action="" method="get" class="form_lancamentos">
-                        <h1>lançamentos</h1>
+                        {{-- <h1>lançamentos</h1>
                         <div class="form-group d-flex flex-column">
                             <input type="range" class="custom-range" min="1958" max="2024" step="0.5" id="anos_lancamento">
                             <div class="d-flex justify-content-between align-items-center">
                                 <span>1958</span>
-                                {{-- Depois colocar de forma dinâmica o ano atual --}}
                                 <span>2024</span>
                             </div>
-                         </div>
+                         </div> --}}
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="released" id="embreve" name="released">
                             <label class="form-check-label" for="embreve">
@@ -146,7 +145,7 @@
                             <button id="pesquisar"><i class="fas fa-search"></i></button>
                         </div>
 
-                        <div class="btn-group">
+                        {{-- <div class="btn-group">
                             <button type="button" class="btn btn-custom d-flex justify-center align-items-center align-content-center   dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                               <span>Action</span>
                             </button>
@@ -157,7 +156,7 @@
                               <li><hr class="dropdown-divider"></li>
                               <li><a class="dropdown-item" href="#">Separated link</a></li>
                             </ul>
-                          </div>
+                          </div> --}}
                     </form>
                 </div>
 
