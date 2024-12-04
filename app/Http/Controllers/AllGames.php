@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\User;
 use App\Services\RAWG;
 use DateTime;
 use Error;
@@ -16,7 +18,9 @@ class AllGames extends Controller
     }
 
     public function index(){
-        return view('filtros');
+        $userId = auth()->id();
+        $informacoes_user = User::where('id', $userId)->first();
+        return view('filtros', compact('informacoes_user'));
     }
 
     public function carregarJogos(Request $request){

@@ -15,28 +15,36 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     @endpush
     <div class="text-white min-vh-100 d-flex flex-column">
-    {{-- NAVBAR SECTION --}}
-        <nav class="navbar navbar-custom">
-            <div class="container-fluid d-flex align-items-center justify-content-between px-5">
-            <a class="navbar-brand text-white">Navbar</a>
-            <div class="d-flex align-items-center g-3 form-ancor">
-                <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">
-                    <i class="fa fa-search"></i>
+        <nav class="navbar navbar-expand-lg fixed-top navbar-css">
+            <div class="container-fluid justify-content-evenly">
+                <a class="navbar-brand ps-5 logo-site" href="{{route('home')}}">
+                    <img src="{{asset('svg/logo.png')}}" alt="logo gamerboxd" width="auto" height="auto" loading="lazy">
+                </a>
+
+                <button class="navbar-toggler text-white border-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-                </form>
-                <div class="ancor-link">
-                <a href="{{route('login')}}">Login</a>
-                <a href="{{route('register')}}">Criar Conta</a>
-                <a href="{{route('jogos')}}">Jogos</a>
-                <a href="#">Listas</a>
+
+                <div class="collapse navbar-collapse pe-5 justify-content-end" id="navbarNav">
+                    <div class="navbar-nav ms-auto ancor-nav nav-custom">
+                        @if (auth()->check())
+                        <a href="{{route('home')}}" class="nav-link_real">home</a>
+                        <a href="{{route('jogos')}}" class="nav-link_real">jogos</a>
+                        <a href="{{route('catalogo')}}" class="nav-link_real">filtros</a>
+                        <a href="{{route('dashboard')}}" class="nav-link_real"><img src="{{$informacoes_user->profile_photo_url}}" alt=""></a>
+                        @else
+                            <a href="{{route('login')}}" class="nav-link_real">login</a>
+                            <a href="{{route('register')}}" class="nav-link_real">criar conta</a>
+                            <a href="{{route('home')}}" class="nav-link_real">home</a>
+                            <a href="{{route('jogos')}}" class="nav-link_real">jogos</a>
+                            <a href="{{route('catalogo')}}" class="nav-link_real">filtros</a>
+                        @endif
+                    </div>
                 </div>
-            </div>
             </div>
         </nav>
       {{-- MAIN SECTION --}}
-        <div class="container-fluid flex-grow-1 d-flex h-auto mt-4 custom-padding">
+        <div class="container-fluid flex-grow-1 d-flex h-auto custom-padding" style="margin-top: 80px;">
             <div class="filtros">
                 <div class="titulo">
                     <h1>filtros</h1><small><a href="">limpar</a></small>
@@ -65,9 +73,9 @@
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="racing" id="corrida" name="genres[]">
-                            <label class="form-check-label" for="corrida">
-                              corrida
+                            <input class="form-check-input" type="checkbox" value="role-playing" id="role-playing" name="genres[]">
+                            <label class="form-check-label" for="role-playing">
+                              rpg
                             </label>
                         </div>
                         <div class="form-check">

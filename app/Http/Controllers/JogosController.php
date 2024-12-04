@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\User;
 use App\Services\RAWG;
 use DateTime;
 use Illuminate\Http\Request;
@@ -16,6 +18,8 @@ class JogosController extends Controller
     }
 
     public function index(){
+        $userId = auth()->id();
+        $informacoes_user = User::where('id', $userId)->first();
         // Datas para o carousel lançamentos
         $dataParamsLanc = (new DateTime())->format('Y-m-d');
         $dataLancPassado = (new DateTime())->modify('-7 days')->format('Y-m-d');
@@ -47,6 +51,6 @@ class JogosController extends Controller
         $dataAcessados = $this->RAWG->makeRequest('games', $paramsMaisAcessados);
         $dataEmBreve = $this->RAWG->makeRequest('games', $paramsBreve);
         $dataAvaliados = $this->RAWG->makeRequest('games', $paramsMaisAvaliados);
-        return view('jogos', compact('dataLancamentos', 'dataAcessados', 'dataEmBreve', 'dataAvaliados'));
+        return view('jogos', compact('dataLancamentos', 'dataAcessados', 'dataEmBreve', 'dataAvaliados', 'informacoes_user'));
     }
 }
