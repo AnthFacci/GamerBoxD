@@ -196,6 +196,8 @@
     height: 25px;
     border-radius: 5px;
     cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
 }
 
 .ruim{
@@ -208,6 +210,13 @@
 
 .bom{
     background-color: #6ECC8E;
+}
+
+.quadrado:hover,
+.quadrado:hover ~ .quadrado,
+.quadrado:hover ~ .quadrado:hover,
+.quadrado:hover ~ .quadrado:hover ~ .quadrado {
+    opacity: 1;
 }
 
 .comentarios{

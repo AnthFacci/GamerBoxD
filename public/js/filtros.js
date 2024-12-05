@@ -185,6 +185,12 @@ function carregarJogos(data){
         // Criação da div do card
         let card = document.createElement('div');
         card.className = 'card';
+
+        // Criação link jogos
+        let link = document.createElement('a');
+        link.href = `/jogo/${jogo.id}`; 
+        link.className = 'link-jogo'; 
+
         // Verificação de métrica para diferenciar coloração
         if(jogo.rating == 0)
             card.style.backgroundColor = '#BCBCBC';
@@ -218,7 +224,9 @@ function carregarJogos(data){
         // Atribuindo os elementos dentro da div principal
         div_nm_nt.append(p_nome, p_nota);
         card.append(img_card,div_nm_nt);
-        card_jogos.append(card);
+        link.append(card);
+        card_jogos.append(link);
+
     });
     // Criar paginação
     if(document.getElementsByClassName('pagination').length > 0){

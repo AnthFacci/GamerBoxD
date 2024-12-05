@@ -86,6 +86,8 @@ document.getElementById('reviewForm').addEventListener('submit', function (e) {
     });
 });
 
+
+
 function storeGame(id_playlist,id_game, event){
     if (event) {
         event.preventDefault();
@@ -185,3 +187,40 @@ function redirectToLogin() {
     // Redireciona para a página de login
     window.location.href = loginRoute;
 }
+
+
+const quadradosLista = document.querySelectorAll('.quadrado');
+const ratingInput = reviewForm.querySelector('input[name="rating"]'); // Campo de rating no formulário
+
+quadradosLista.forEach((quadrado, index) => {
+    // Atribui um ID único ao quadrado (opcional, pode ser qualquer identificador)
+    quadrado.setAttribute('data-id', index); // Você pode mudar o valor para o ID do jogo ou outro valor relevante
+
+    quadrado.addEventListener('mouseover', () => {
+        for (let i = 0; i <= index; i++) {
+            quadradosLista[i].style.opacity = '1'; // Opacidade 100% para os quadrados à esquerda
+        }
+        for (let i = index + 1; i < quadradosLista.length; i++) {
+            quadradosLista[i].style.opacity = '0.5'; // Opacidade 50% para os quadrados à direita
+        }
+    });
+
+    quadrado.addEventListener('mouseout', () => {
+        quadradosLista.forEach(q => {
+            q.style.opacity = '0.5'; // Opacidade 50% para todos os quadrados
+        });
+    });
+
+    quadrado.addEventListener('click', () => {
+        const quadradoId = quadrado.getAttribute('data-id'); // Obter o ID do quadrado clicado
+        const ratingValue = quadrado.getAttribute('data-value'); // Obter o valor do quadrado clicado
+        console.log('Você clicou no quadrado com ID:', quadradoId);
+        console.log('Valor do rating:', ratingValue);
+
+        // Atualiza o valor do rating no formulário
+        ratingInput.value = ratingValue; // Altera o valor do campo rating no formulário
+
+        // Exibe o formulário de review
+        reviewForm.style.display = 'block'; // Supondo que o reviewForm esteja inicialmente escondido
+    });
+});
