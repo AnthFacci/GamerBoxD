@@ -206,6 +206,10 @@
     gap: 30px;
 }
 
+.card_jogos > a {
+    text-decoration: none;
+}
+
 .pagination{
     /* border: 3px solid brown; */
     width: 350px;

@@ -41,7 +41,7 @@
         <div class="container-fluid flex-grow-1 d-flex flex-column h-auto" style="padding: 0px !important; margin-top: 80px; gap: 100px;">
             <div class="capa container-fluid" style="padding: 0px !important;">
                 @if ((int)$game['rating'] <= 2)
-                    <div class="cima" style="background-color: #CC697B;" id="cima">
+                    {{-- <div class="cima" style="background-color: #CC697B;" id="cima"> --}}
                         <div class="img_capa">
                             <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}" style="border: 10px solid #CC697B;">
                         </div>
@@ -89,7 +89,7 @@
                                     <button id="add_review" onclick="redirectToLogin()">Adicionar Review</button>
                                 @endif
                                 <div id="review_form" style="display: none;">
-                                    <form id="reviewForm">
+                                    {{-- <form id="reviewForm">
                                         <label for="review">Sua Review:</label>
                                         <input type="hidden" name="id_game" value="{{$game['id']}}">
                                         <input type="hidden" name="rating" value="10">
@@ -97,7 +97,99 @@
                                         <textarea id="review" name="content" rows="4" cols="50" placeholder="Escreva sua review aqui..."></textarea>
                                         <button type="submit" id="enviar_review">Enviar</button>
                                         <button type="button" id="cancel_review">Cancelar</button>
-                                    </form>
+                                    </form> --}}
+                                    <div id="review_form" style="display: none;">
+    <form id="reviewForm">
+        <label for="review">Sua Review:</label>
+        <input type="hidden" name="id_game" value="{{$game['id']}}">
+        <input type="hidden" name="rating" id="rating"> <!-- Campo oculto para armazenar a nota -->
+        <input type="hidden" name="finalizado" value="pc">
+
+        <!-- Quadrados de avaliação -->
+        <div class="quadrados_nota">
+            <div class="quadrado ruim" data-value="1"></div>
+            <div class="quadrado ruim" data-value="2"></div>
+            <div class="quadrado ruim" data-value="3"></div>
+            <div class="quadrado ruim" data-value="4"></div>
+            <div class="quadrado mid" data-value="5"></div>
+            <div class="quadrado mid" data-value="6"></div>
+            <div class="quadrado mid" data-value="7"></div>
+            <div class="quadrado bom" data-value="8"></div>
+            <div class="quadrado bom" data-value="9"></div>
+            <div class="quadrado bom" data-value="10"></div>
+        </div>
+
+        <!-- Área de texto para a review -->
+        <textarea id="review" name="content" rows="4" cols="50" placeholder="Escreva sua review aqui..."></textarea>
+
+        <!-- Botões -->
+        <button type="submit" id="enviar_review">Enviar</button>
+        <button type="button" id="cancel_review">Cancelar</button>
+    </form>
+</div>
+
+<script>
+    // Seleciona todos os quadrados de avaliação
+    const quadrados = document.querySelectorAll('.quadrado');
+
+    // Para cada quadrado, adiciona um evento de clique
+    quadrados.forEach(function(quadrado) {
+        quadrado.addEventListener('click', function() {
+            // Obtém o valor de nota do quadrado clicado
+            const nota = quadrado.getAttribute('data-value');
+            
+            // Atualiza o campo hidden de "rating" com o valor da nota
+            document.getElementById('rating').value = nota;
+
+            // Altera a aparência dos quadrados (destaca o quadrado selecionado)
+            quadrados.forEach(function(q) {
+                q.classList.remove('selecionado'); // Remove a classe de seleção de todos os quadrados
+            });
+            quadrado.classList.add('selecionado'); // Adiciona a classe de seleção ao quadrado clicado
+        });
+    });
+
+    // Envio do formulário de review
+    document.getElementById('reviewForm').addEventListener('submit', function (e) {
+        e.preventDefault(); // Evita o comportamento padrão de enviar o formulário e recarregar a página
+
+        const formData = new FormData(this);
+
+        // Adiciona o CSRF Token
+        formData.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+
+        // Envia os dados para o servidor usando fetch
+        fetch('/jogo/storeReview', {
+            method: 'POST',
+            body: formData, // Envia os dados do formulário
+        })
+        .then(response => response.json()) // Converte a resposta para JSON
+        .then(data => {
+            if (data.success) {
+                alert('Review enviada com sucesso!');
+            } else {
+                alert('Erro ao enviar a review.');
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro na requisição.');
+        });
+    });
+
+    // Cancelar a review
+    document.getElementById('cancel_review').addEventListener('click', function() {
+        document.getElementById('reviewForm').reset(); // Reseta o formulário
+        document.getElementById('review_form').style.display = 'none'; // Esconde o formulário
+    });
+</script>
+
+<style>
+    /* Adicionando estilos para destacar a seleção do quadrado */
+    .quadrado.selecionado {
+        border: 2px solid #4CAF50; /* Cor verde para destacar o quadrado */
+    }
+</style>
                                 </div>
                                 <div id="show_list" style="display: none;">
                                     <div class="menu_listas">
@@ -135,9 +227,9 @@
                                 @endforeach
                             </div>
                         </div>
-                    </div>
+                    {{-- </div> --}}
                 @elseif ((float)$game['rating'] > 2 && (float)$game['rating'] <= 3.7)
-                    <div class="cima" style="background-color: #96D9E0;" id="cima">
+                    {{-- <div class="cima" style="background-color: #96D9E0;" id="cima"> --}}
                         <div class="img_capa">
                             <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}" style="border: 10px solid #96D9E0">
                         </div>
@@ -220,7 +312,7 @@
                                 @endforeach
                             </div>
                         </div>
-                    </div>
+                    {{-- </div> --}}
                 @elseif ((int)$game['rating'] > 3.7)
                     {{-- <div class="cima" style="background-color: #53e584;" id="cima"> --}}
                         <div class="img_capa">
@@ -308,7 +400,7 @@
                         </div>
                     {{-- </div> --}}
                 @else
-                    <div class="cima" style="background-color: #BCBCBC;" id="cima">
+                    {{-- <div class="cima" style="background-color: #BCBCBC;" id="cima"> --}}
                         <div class="img_capa">
                             <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}" style="border: 10px solid #BCBCBC;">
                         </div>
@@ -348,7 +440,7 @@
                                     <form id="reviewForm">
                                         <label for="review">Sua Review:</label>
                                         <input type="hidden" name="id_game" value="{{$game['id']}}">
-                                        <input type="hidden" name="rating" value="10">
+                                        {{-- <input type="hidden" name="rating" value="10"> --}}
                                         <input type="hidden" name="finalizado" value="pc">
                                         <textarea id="review" name="content" rows="4" cols="50" placeholder="Escreva sua review aqui..."></textarea>
                                         <button type="submit" id="enviar_review">Enviar</button>
@@ -405,23 +497,58 @@
                             </div>
                             <div class="informações_comentario">
                                 <span>{{$comentario->user->name}}</span>
-                                @if ($comentario->rating >= 8)
+                                @if ($comentario->rating = 10)
                                 <div class="rating">
                                     <div class="quadrado_rating" style="background-color: #6ECC8E;"></div>
                                     <div class="quadrado_rating" style="background-color: #6ECC8E;"></div>
                                     <div class="quadrado_rating" style="background-color: #6ECC8E;"></div>
                                     <span><span class="finalizado">finalizado</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
                                 </div>
-                                @elseif ($comentario->rating >= 5)
+                                @elseif ($comentario->rating = 9)
+                                <div class="rating">
+                                    <div class="quadrado_rating" style="background-color: #6ECC8E;"></div>
+                                    <div class="quadrado_rating" style="background-color: #6ECC8E;"></div>
+                                    <span><span class="finalizado">finalizado</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
+                                </div>
+                                @elseif ($comentario->rating = 8)
+                                <div class="rating">
+                                    <div class="quadrado_rating" style="background-color: #6ECC8E;"></div>
+                                    <span><span class="finalizado">finalizado</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
+                                </div>
+                                @elseif ($comentario->rating = 7)
                                 <div class="rating">
                                     <div class="quadrado_rating" style="background-color:#96D9E0;"></div>
                                     <div class="quadrado_rating" style="background-color:#96D9E0;"></div>
                                     <div class="quadrado_rating" style="background-color:#96D9E0;"></div>
                                     <span><span class="finalizado">finalizado</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
                                 </div>
-                                @elseif ($comentario->rating >= 1)
+                                @elseif ($comentario->rating = 6)
+                                <div class="rating">
+                                    <div class="quadrado_rating" style="background-color:#96D9E0;"></div>
+                                    <div class="quadrado_rating" style="background-color:#96D9E0;"></div>
+                                    <span><span class="finalizado">finalizado</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
+                                </div>
+                                @elseif ($comentario->rating = 5)
+                                <div class="rating">
+                                    <div class="quadrado_rating" style="background-color:#96D9E0;"></div>
+                                    <span><span class="finalizado">finalizado</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
+                                </div>
+                                @elseif ($comentario->rating = 4)
                                     <div class="quadrado_rating" style="background-color:#CC697B;"></div>
                                     <div class="quadrado_rating" style="background-color:#CC697B;"></div>
+                                    <div class="quadrado_rating" style="background-color:#CC697B;"></div>
+                                    <div class="quadrado_rating" style="background-color:#CC697B;"></div>
+                                    <span><span class="finalizado">finalizado</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
+                                @elseif ($comentario->rating = 3)
+                                    <div class="quadrado_rating" style="background-color:#CC697B;"></div>
+                                    <div class="quadrado_rating" style="background-color:#CC697B;"></div>
+                                    <div class="quadrado_rating" style="background-color:#CC697B;"></div>
+                                    <span><span class="finalizado">finalizado</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
+                                @elseif ($comentario->rating = 2)
+                                    <div class="quadrado_rating" style="background-color:#CC697B;"></div>
+                                    <div class="quadrado_rating" style="background-color:#CC697B;"></div>
+                                    <span><span class="finalizado">finalizado</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
+                                @elseif ($comentario->rating = 1)
                                     <div class="quadrado_rating" style="background-color:#CC697B;"></div>
                                     <span><span class="finalizado">finalizado</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
                                 @else

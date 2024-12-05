@@ -114,6 +114,7 @@
                         @foreach ($dataAcessados['results'] as $jogo)
                             @if (intval($jogo['rating'] == 0))
                                 <div class="card" style="background-color: #BCBCBC;">
+                                    <a href="{{route('jogo', ['id' => $jogo['id']])}}">
                                         <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento">
                                         <div class="nome_nota">
                                             <p class="nm_lancamento">{{ $jogo['name'] }}</p>
@@ -123,42 +124,49 @@
                                                 <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
                                             @endif
                                         </div>
+                                    </a>
                                 </div>
                             @elseif (floatval($jogo['rating']) > 0 && floatval($jogo['rating'] <= 2 ))
                                 <div class="card" style="background-color: #CC697B;">
-                                    <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento">
-                                    <div class="nome_nota">
-                                        <p class="nm_lancamento">{{ $jogo['name'] }}</p>
-                                        @if ($jogo['rating'] == 0)
-                                            <p class="nt_lancamento">-</p>
-                                        @else
-                                            <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
-                                        @endif
-                                    </div>
+                                    <a href="{{route('jogo', ['id' => $jogo['id']])}}">
+                                        <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento">
+                                        <div class="nome_nota">
+                                            <p class="nm_lancamento">{{ $jogo['name'] }}</p>
+                                            @if ($jogo['rating'] == 0)
+                                                <p class="nt_lancamento">-</p>
+                                            @else
+                                                <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
+                                            @endif
+                                        </div>
+                                    </a>
                                 </div>
                                 @elseif (floatval($jogo['rating']) > 2 && floatval($jogo['rating'] <= 3.7 ))
                                 <div class="card" style="background-color: #96D9E0;">
-                                    <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento">
-                                    <div class="nome_nota">
-                                        <p class="nm_lancamento">{{ $jogo['name'] }}</p>
-                                        @if ($jogo['rating'] == 0)
-                                            <p class="nt_lancamento">-</p>
-                                        @else
-                                            <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
-                                        @endif
-                                    </div>
+                                    <a href="{{route('jogo', ['id' => $jogo['id']])}}">
+                                        <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento">
+                                        <div class="nome_nota">
+                                            <p class="nm_lancamento">{{ $jogo['name'] }}</p>
+                                            @if ($jogo['rating'] == 0)
+                                                <p class="nt_lancamento">-</p>
+                                            @else
+                                                <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
+                                            @endif
+                                        </div>
+                                    </a>
                                 </div>
                             @else
                                 <div class="card" style="background-color: #53e584;">
-                                    <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento">
-                                    <div class="nome_nota">
-                                        <p class="nm_lancamento">{{ $jogo['name'] }}</p>
-                                        @if ($jogo['rating'] == 0)
-                                            <p class="nt_lancamento">-</p>
-                                        @else
-                                            <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
-                                        @endif
-                                    </div>
+                                    <a href="{{route('jogo', ['id' => $jogo['id']])}}">
+                                        <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento">
+                                        <div class="nome_nota">
+                                            <p class="nm_lancamento">{{ $jogo['name'] }}</p>
+                                            @if ($jogo['rating'] == 0)
+                                                <p class="nt_lancamento">-</p>
+                                            @else
+                                                <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
+                                            @endif
+                                        </div>
+                                    </a>
                                 </div>
                             @endif
                         @endforeach
@@ -180,6 +188,7 @@
                         @foreach ($dataEmBreve['results'] as $jogo)
                             @if (intval($jogo['rating'] == 0))
                                 <div class="card" style="background-color: #BCBCBC;">
+                                    <a href="{{route('jogo', ['id' => $jogo['id']])}}">
                                         <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento">
                                         <div class="nome_nota">
                                             <p class="nm_lancamento">{{ $jogo['name'] }}</p>
@@ -189,42 +198,49 @@
                                                 <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
                                             @endif
                                         </div>
+                                    </a>
                                 </div>
                             @elseif (floatval($jogo['rating']) > 0 && floatval($jogo['rating'] <= 2 ))
                                 <div class="card" style="background-color: #CC697B;">
-                                    <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento">
-                                    <div class="nome_nota">
-                                        <p class="nm_lancamento">{{ $jogo['name'] }}</p>
-                                        @if ($jogo['rating'] == 0)
-                                            <p class="nt_lancamento">-</p>
-                                        @else
-                                            <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
-                                        @endif
-                                    </div>
+                                    <a href="{{route('jogo', ['id' => $jogo['id']])}}">
+                                        <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento">
+                                        <div class="nome_nota">
+                                            <p class="nm_lancamento">{{ $jogo['name'] }}</p>
+                                            @if ($jogo['rating'] == 0)
+                                                <p class="nt_lancamento">-</p>
+                                            @else
+                                                <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
+                                            @endif
+                                        </div>
+                                    </a>
                                 </div>
                             @elseif (floatval($jogo['rating']) > 2 && floatval($jogo['rating'] <= 3.7 ))
                                 <div class="card" style="background-color: #96D9E0;">
-                                    <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento">
-                                    <div class="nome_nota">
-                                        <p class="nm_lancamento">{{ $jogo['name'] }}</p>
-                                        @if ($jogo['rating'] == 0)
-                                            <p class="nt_lancamento">-</p>
-                                        @else
-                                            <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
-                                        @endif
-                                    </div>
+                                    <a href="{{route('jogo', ['id' => $jogo['id']])}}">
+                                        <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento">
+                                        <div class="nome_nota">
+                                            <p class="nm_lancamento">{{ $jogo['name'] }}</p>
+                                            @if ($jogo['rating'] == 0)
+                                                <p class="nt_lancamento">-</p>
+                                            @else
+                                                <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
+                                            @endif
+                                        </div>
+                                    </a>
                                 </div>
                             @else
                                 <div class="card" style="background-color: #53e584;">
+                                    <a href="{{route('jogo', ['id' => $jogo['id']])}}">
                                     <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento">
-                                    <div class="nome_nota">
-                                        <p class="nm_lancamento">{{ $jogo['name'] }}</p>
-                                        @if ($jogo['rating'] == 0)
-                                            <p class="nt_lancamento">-</p>
-                                        @else
-                                            <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
-                                        @endif
-                                    </div>
+                                        <div class="nome_nota">
+                                            <p class="nm_lancamento">{{ $jogo['name'] }}</p>
+                                            @if ($jogo['rating'] == 0)
+                                               <p class="nt_lancamento">-</p>
+                                            @else
+                                                <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
+                                             @endif
+                                        </div>
+                                    </a>
                                 </div>
                             @endif
                         @endforeach
@@ -246,7 +262,7 @@
                         @foreach ($dataAvaliados['results'] as $jogo)
                             @if (intval($jogo['rating'] == 0))
                                 <div class="card" style="background-color: #BCBCBC;">
-                                        <a href="">
+                                        <a href="{{route('jogo', ['id' => $jogo['id']])}}">
                                             <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento">
                                             <div class="nome_nota">
                                                 <p class="nm_lancamento">{{ $jogo['name'] }}</p>
@@ -260,7 +276,7 @@
                                 </div>
                             @elseif (floatval($jogo['rating']) > 0 && floatval($jogo['rating'] <= 2 ))
                                 <div class="card" style="background-color: #CC697B;">
-                                    <a href="">
+                                    <a href="{{route('jogo', ['id' => $jogo['id']])}}">
                                         <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento">
                                         <div class="nome_nota">
                                             <p class="nm_lancamento">{{ $jogo['name'] }}</p>
@@ -274,7 +290,7 @@
                                 </div>
                                 @elseif (floatval($jogo['rating']) > 2 && floatval($jogo['rating'] <= 3.7 ))
                                 <div class="card" style="background-color: #96D9E0;">
-                                    <a href="">
+                                    <a href="{{route('jogo', ['id' => $jogo['id']])}}">
                                         <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento">
                                         <div class="nome_nota">
                                             <p class="nm_lancamento">{{ $jogo['name'] }}</p>
