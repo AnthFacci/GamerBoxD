@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JogosController;
 use App\Http\Controllers\AllGames;
 use App\Http\Controllers\JogoController;
+use App\Http\Controllers\listGames;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,9 @@ Route::prefix('filtros')->group(function (){
 Route::prefix('jogo')->group(function () {
     Route::get('{id}', [JogoController::class, 'index'])->name('jogo');
     Route::post('storeReview', [JogoController::class, 'storeReview'])->name('store.review');
+    Route::post('like', [JogoController::class, 'like'])->name('store.like');
+    Route::post('favoriteGame', [JogoController::class, 'favorite'])->name('store.game');
+    Route::post('/storeGameOnList/{id_playlist}/{id_game}', [JogoController::class, 'store_list'])->name('store.game');
 });
 
 
@@ -37,7 +41,11 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [listGames::class, 'sessao'])->name('dashboard');
+    Route::get('/favorites', [listGames::class, 'index'])->name('favorites');
+    Route::get('/lista/{id}', [listGames::class, 'lista'])->name('listas');
+    Route::post('/storeList', [listGames::class, 'store_list'])->name('store.lista');
+    Route::delete('/removeGameFromList/{id_playlist}/{id_game}', [listGames::class, 'remove_game'])->name('delete.game');
+    Route::delete('/removeList/{id_playlist}/{user_id}', [listGames::class, 'remove_list'])->name('delete.list');
+
 });

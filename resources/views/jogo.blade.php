@@ -9,34 +9,43 @@
         const loginRoute = "{{ route('login') }}";
     </script>
     <div class="text-white min-vh-100 d-flex flex-column">
-        <nav class="navbar navbar-custom">
-            <div class="container-fluid d-flex align-items-center justify-content-between px-5">
-              <a class="navbar-brand text-white">Navbar</a>
-              <div class="d-flex align-items-center g-3 form-ancor">
-                <form class="d-flex" role="search">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success" type="submit">
-                    <i class="fa fa-search"></i>
-                  </button>
-                </form>
-                <div class="ancor-link">
-                  <a href="{{route('login')}}">Login</a>
-                  <a href="{{route('register')}}">Criar Conta</a>
-                  <a href="#">Jogos</a>
-                  <a href="#">Listas</a>
+        <nav class="navbar navbar-expand-lg fixed-top navbar-css">
+            <div class="container-fluid justify-content-evenly">
+                <a class="navbar-brand ps-5 logo-site" href="{{route('home')}}">
+                    <img src="{{asset('svg/logo.png')}}" alt="logo gamerboxd" width="auto" height="auto" loading="lazy">
+                </a>
+
+                <button class="navbar-toggler text-white border-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse pe-5 justify-content-end" id="navbarNav">
+                    <div class="navbar-nav ms-auto ancor-nav nav-custom">
+                        @if (auth()->check())
+                        <a href="{{route('home')}}" class="nav-link_real">página inicial</a>
+                        <a href="{{route('jogos')}}" class="nav-link_real">home</a>
+                        <a href="{{route('catalogo')}}" class="nav-link_real">jogos</a>
+                        <a href="{{route('dashboard')}}" class="nav-link_real"><img src="{{$informacoes_user->profile_photo_url}}" alt=""></a>
+                        @else
+                        <a href="{{route('login')}}" class="nav-link_real">login</a>
+                        <a href="{{route('register')}}" class="nav-link_real">criar conta</a>
+                        <a href="{{route('home')}}" class="nav-link_real">página inicial</a>
+                        <a href="{{route('jogos')}}" class="nav-link_real">home</a>
+                        <a href="{{route('catalogo')}}" class="nav-link_real">jogos</a>
+                        @endif
+                    </div>
                 </div>
-              </div>
             </div>
         </nav>
         {{-- Main Section --}}
-        <div class="container-fluid flex-grow-1 d-flex flex-column h-auto border border-danger" style="padding: 0px !important;">
+        <div class="container-fluid flex-grow-1 d-flex flex-column h-auto" style="padding: 0px !important; margin-top: 80px; gap: 100px;">
             <div class="capa container-fluid" style="padding: 0px !important;">
                 @if ((int)$game['rating'] <= 2)
-                    <div class="cima" style="background-color: #CC697B;">
+                    <div class="cima" style="background-color: #CC697B;" id="cima">
                         <div class="img_capa">
-                            <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}">
+                            <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}" style="border: 10px solid #CC697B;">
                         </div>
-                        <div class="text">
+                        <div class="text" id="text">
                             {{-- <div class="nome_desc">
                                 <h3>{{$game['name']}}</h3>
                                 <p>{{$game['description_raw']}}</p>
@@ -48,14 +57,19 @@
                                     <img src="{{asset('svg/game/joystick-svgrepo-com.svg')}}" alt="Link para loja" id="store_game">
                                 </div>
                             </div> --}}
-                            <h3>{{$game['name']}}</h3>
-                            <p>{{$game['description_raw']}}</p>
-                            <div class="acoes">
-                                <img src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="Adicionar Jogo a lista" id="add_game">
-                                <img src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
+                            <h3 id="h3_text">{{$game['name']}}</h3>
+                            <p id="p_text">{{$game['description_raw']}}</p>
+                            <div class="acoes" id="acoes">
+                                @if (auth()->check())
+                                    <img onclick="showMenuList()" src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="Adicionar Jogo a lista" id="add_game">
+                                    <img style="cursor: pointer;" onclick="favoriteGame({{$game['id']}})" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
+                                @else
+                                    <img onclick="redirectToLogin()" src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="Adicionar Jogo a lista" id="add_game">
+                                    <img style="cursor: pointer;" onclick="redirectToLogin()" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
+                                @endif
                                 <img src="{{asset('svg/game/joystick-svgrepo-com.svg')}}" alt="Link para loja" id="store_game">
                             </div>
-                            <div class="ranking">
+                            <div class="ranking" id="ranking">
                                 <span>minha nota:</span>
                                 <div class="quadrados_nota">
                                     <div class="quadrado ruim" data-value="1"></div>
@@ -84,6 +98,23 @@
                                         <button type="submit" id="enviar_review">Enviar</button>
                                         <button type="button" id="cancel_review">Cancelar</button>
                                     </form>
+                                </div>
+                                <div id="show_list" style="display: none;">
+                                    <div class="menu_listas">
+                                        <ul>
+                                            @foreach ($playlists as $playlist )
+                                                <li>
+                                                    <form action="{{ route('store.game', ['id_playlist' => $playlist->id, 'id_game' => $game['id']]) }}" method="POST">
+                                                        @csrf
+                                                         {{-- <input type="hidden" value="{{$playlist->id}}" id="id_playlist" name="id_playlist">
+                                                         <input type="hidden" value="{{$game['id']}}" id="id_game" name="id_game"> --}}
+                                                        <button type="submit" onclick="storeGame({{$playlist->id}}, {{$game['id']}}, event)">{{$playlist->name}}</button>
+                                                    </form>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                        <button type="button" id="cancel_list">Cancelar</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -106,19 +137,24 @@
                         </div>
                     </div>
                 @elseif ((float)$game['rating'] > 2 && (float)$game['rating'] <= 3.7)
-                    <div class="cima" style="background-color: #96D9E0;">
+                    <div class="cima" style="background-color: #96D9E0;" id="cima">
                         <div class="img_capa">
-                            <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}">
+                            <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}" style="border: 10px solid #96D9E0">
                         </div>
-                        <div class="text">
-                            <h3>{{$game['name']}}</h3>
-                            <p>{{$game['description_raw']}}</p>
-                            <div class="acoes">
-                                <img src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="Adicionar Jogo a lista" id="add_game">
-                                <img src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
+                        <div class="text" id="text">
+                            <h3 id="h3_text">{{$game['name']}}</h3>
+                            <p id="p_text">{{$game['description_raw']}}</p>
+                            <div class="acoes" id="acoes">
+                                @if (auth()->check())
+                                    <img onclick="showMenuList()" src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="Adicionar Jogo a lista" id="add_game">
+                                    <img style="cursor: pointer;" onclick="favoriteGame({{$game['id']}})" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
+                                @else
+                                    <img onclick="redirectToLogin()" src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="Adicionar Jogo a lista" id="add_game">
+                                    <img style="cursor: pointer;" onclick="redirectToLogin()" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
+                                @endif
                                 <img src="{{asset('svg/game/joystick-svgrepo-com.svg')}}" alt="Link para loja" id="store_game">
                             </div>
-                            <div class="ranking">
+                            <div class="ranking" id="ranking">
                                 <span>minha nota:</span>
                                 <div class="quadrados_nota">
                                     <div class="quadrado ruim" data-value="1"></div>
@@ -148,6 +184,23 @@
                                         <button type="button" id="cancel_review">Cancelar</button>
                                     </form>
                                 </div>
+                                <div id="show_list" style="display: none;">
+                                    <div class="menu_listas">
+                                        <ul>
+                                            @foreach ($playlists as $playlist )
+                                                <li>
+                                                    <form action="{{ route('store.game', ['id_playlist' => $playlist->id, 'id_game' => $game['id']]) }}" method="POST">
+                                                        @csrf
+                                                         {{-- <input type="hidden" value="{{$playlist->id}}" id="id_playlist" name="id_playlist">
+                                                         <input type="hidden" value="{{$game['id']}}" id="id_game" name="id_game"> --}}
+                                                         <button type="submit" onclick="storeGame({{$playlist->id}}, {{$game['id']}}, event)">{{$playlist->name}}</button>
+                                                        </form>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                        <button type="button" id="cancel_list">Cancelar</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="metricas">
@@ -169,19 +222,24 @@
                         </div>
                     </div>
                 @elseif ((int)$game['rating'] > 3.7)
-                    <div class="cima" style="background-color: #53e584;">
+                    {{-- <div class="cima" style="background-color: #53e584;" id="cima"> --}}
                         <div class="img_capa">
-                            <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}">
+                            <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}" style="border: 10px solid #53e584;">
                         </div>
-                        <div class="text">
-                            <h3>{{$game['name']}}</h3>
-                            <p>{{$game['description_raw']}}</p>
-                            <div class="acoes">
-                                <img src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="Adicionar Jogo a lista" id="add_game">
-                                <img src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
+                        <div class="text" id="text">
+                            <h3 id="h3_text">{{$game['name']}}</h3>
+                            <p id="p_text">{{$game['description_raw']}}</p>
+                            <div class="acoes" id="acoes">
+                                @if (auth()->check())
+                                    <img onclick="showMenuList()" src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="Adicionar Jogo a lista" id="add_game">
+                                    <img style="cursor: pointer;" onclick="favoriteGame({{$game['id']}})" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
+                                @else
+                                    <img onclick="redirectToLogin()" src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="Adicionar Jogo a lista" id="add_game">
+                                    <img style="cursor: pointer;" onclick="redirectToLogin()" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
+                                @endif
                                 <img src="{{asset('svg/game/joystick-svgrepo-com.svg')}}" alt="Link para loja" id="store_game">
                             </div>
-                            <div class="ranking">
+                            <div class="ranking" id="ranking">
                                 <span>minha nota:</span>
                                 <div class="quadrados_nota">
                                     <div class="quadrado ruim" data-value="1"></div>
@@ -212,6 +270,23 @@
                                         <button type="button" id="cancel_review">Cancelar</button>
                                     </form>
                                 </div>
+                                <div id="show_list" style="display: none;">
+                                    <div class="menu_listas">
+                                        <ul>
+                                            @foreach ($playlists as $playlist )
+                                                <li>
+                                                    <form action="{{ route('store.game', ['id_playlist' => $playlist->id, 'id_game' => $game['id']]) }}" method="POST">
+                                                        @csrf
+                                                         {{-- <input type="hidden" value="{{$playlist->id}}" id="id_playlist" name="id_playlist">
+                                                         <input type="hidden" value="{{$game['id']}}" id="id_game" name="id_game"> --}}
+                                                         <button type="submit" onclick="storeGame({{$playlist->id}}, {{$game['id']}}, event)">{{$playlist->name}}</button>
+                                                        </form>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                        <button type="button" id="cancel_list">Cancelar</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="metricas">
@@ -231,21 +306,26 @@
                                 @endforeach
                             </div>
                         </div>
-                    </div>
+                    {{-- </div> --}}
                 @else
-                    <div class="cima" style="background-color: #BCBCBC;">
+                    <div class="cima" style="background-color: #BCBCBC;" id="cima">
                         <div class="img_capa">
-                            <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}">
+                            <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}" style="border: 10px solid #BCBCBC;">
                         </div>
-                        <div class="text">
-                            <h3>{{$game['name']}}</h3>
-                            <p>{{$game['description_raw']}}</p>
-                            <div class="acoes">
-                                <img src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="Adicionar Jogo a lista" id="add_game">
-                                <img src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
+                        <div class="text" id="text">
+                            <h3 id="h3_text">{{$game['name']}}</h3>
+                            <p id="p_text">{{$game['description_raw']}}</p>
+                            <div class="acoes" id="acoes">
+                                @if (auth()->check())
+                                    <img onclick="showMenuList()" src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="Adicionar Jogo a lista" id="add_game">
+                                    <img style="cursor: pointer;" onclick="favoriteGame({{$game['id']}})" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
+                                @else
+                                    <img onclick="redirectToLogin()" src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="Adicionar Jogo a lista" id="add_game">
+                                    <img style="cursor: pointer;" onclick="redirectToLogin()" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
+                                @endif
                                 <img src="{{asset('svg/game/joystick-svgrepo-com.svg')}}" alt="Link para loja" id="store_game">
                             </div>
-                            <div class="ranking">
+                            <div class="ranking" id="ranking">
                                 <span>minha nota:</span>
                                 <div class="quadrados_nota">
                                    <div class="quadrado ruim" data-value="1"></div>
@@ -275,6 +355,23 @@
                                         <button type="button" id="cancel_review">Cancelar</button>
                                     </form>
                                 </div>
+                                <div id="show_list" style="display: none;">
+                                    <div class="menu_listas">
+                                            <ul>
+                                                @foreach ($playlists as $playlist )
+                                                <li>
+                                                    <form action="{{ route('store.game', ['id_playlist' => $playlist->id, 'id_game' => $game['id']]) }}" method="POST">
+                                                        @csrf
+                                                         {{-- <input type="hidden" value="{{$playlist->id}}" id="id_playlist" name="id_playlist">
+                                                         <input type="hidden" value="{{$game['id']}}" id="id_game" name="id_game"> --}}
+                                                         <button type="submit" onclick="storeGame({{$playlist->id}}, {{$game['id']}}, event)">{{$playlist->name}}</button>
+                                                        </form>
+                                                </li>
+                                            @endforeach
+                                            </ul>
+                                            <button type="button" id="cancel_list">Cancelar</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="metricas">
@@ -298,11 +395,8 @@
                 @endif
             </div>
             <div class="comentarios container-fluid">
-                <div class="outras_imagens">
-                    {{-- @foreach ( $game as $)
-
-                    @endforeach --}}
-                </div>
+                {{-- <div class="outras_imagens">
+                </div> --}}
                 <div class="user_comentarios">
                     @foreach ( $comments as $comentario )
                         <div class="comentario">
@@ -338,8 +432,12 @@
                                 @endif
                                 <span style="color: white;">{{$comentario->content}}</span>
                                 <div class="like">
-                                    <img src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar comentário" id="like_comment">
-                                    <span id="number_like">{{$comentario->likes_count}}</span>
+                                    @if (auth()->check())
+                                        <img style="cursor: pointer;" onclick="likeComment({{$comentario->id}}, {{$comentario->user_id}})" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar comentário" id="like_comment">
+                                    @else
+                                        <img style="cursor: pointer;" onclick="redirectToLogin()" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar comentário" id="like_comment">
+                                    @endif
+                                        <span>{{$comentario->likes_count}}</span>
                                 </div>
                             </div>
                         </div>

@@ -1,0 +1,289 @@
+.container{
+    padding-top: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+
+.logo-site > img{
+    width: 364px;
+    height: 50px;
+}
+
+.navbar-css{
+    background: #000000;
+    color: #f5f5f5;
+}
+
+.nav-custom > a{
+    color: #f5f5f5;
+    text-decoration: none !important;
+}
+
+.listas{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+/* .card{
+    transition: .4s;
+}
+
+.card:hover{
+    transform: scale(1.1);
+} */
+
+.favoritos{
+    position: relative;
+    display: inline-block;
+    width: 300px;
+    height: 300px;
+    border: 1px solid #f5f5f5;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    transition: .4s;
+}
+
+.trash-icon {
+    position: absolute;
+    bottom: -10px;
+    left: -10px;
+    cursor: pointer;
+    width: 50px;
+    padding: 5px;
+    height: 50px;
+    border: 1px solid #CC697B;
+    border-radius: 50%;
+    background-color: #CC697B;
+    transition: .5s;
+    z-index: 5000;
+}
+
+.trash-icon:hover {
+    transform: scale(1.2);
+}
+
+.trash-icon-lista {
+    position: absolute;
+    bottom: -30px;
+    left: -15px;
+    cursor: pointer;
+    width: 50px;
+    padding: 5px;
+    height: 50px;
+    border: 1px solid #CC697B;
+    border-radius: 50%;
+    background-color: #CC697B;
+    transition: .5s;
+    z-index: 5000;
+}
+
+.trash-icon-lista:hover {
+    transform: scale(1.2);
+}
+
+.favoritos:hover{
+    transform: scale(1.1);
+}
+
+.nav-custom{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-link_real{
+    font-size: 18px;
+    transition: .5s;
+}
+
+.nav-link_real:hover{
+    transform: scale(1.1);
+}
+
+.fix-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-link_real > img{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.foto_nome{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    color: #f5f5f5;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.foto_nome > .infos >  img{
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+}
+
+.adicionar_lista{
+    width: 300px;
+    height: 300px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.adicionar_lista > img{
+    width: 20%;
+    height: 20%;
+    cursor: pointer;
+    transition: .4s;
+}
+
+.adicionar_lista > img:hover{
+    transform: scale(1.1);
+}
+
+.title-custom{
+    color: #f5f5f5;
+    font-weight: bold;
+}
+
+
+.menu_listas {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 18%;
+    background-color: #000;
+    border: 1px solid #444;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    z-index: 1000;
+    width: 200px;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    text-align: left;
+}
+
+.listas > a{
+    text-decoration: none;
+    color: #f5f5f5;
+    font-size: 20px;
+}
+
+.input_menuListas {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background-color: #222;
+    color: #fff;
+}
+
+.menu_listas button {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    background-color: #444;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.menu_listas ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu_listas ul li {
+    padding: 8px;
+    border-bottom: 1px solid #555;
+    cursor: pointer;
+}
+
+.menu_listas ul li:hover {
+    background-color: #333;
+}
+
+.menu_listas ul > li > a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.hide_custom{
+    display: none;
+}
+
+.btn-excluir {
+    background-color: #FF6B6B; /* Cor vermelha suave */
+    color: #FFFFFF;           /* Texto branco */
+    border: none;             /* Remove bordas */
+    padding: 8px 16px;        /* Espaçamento interno */
+    border-radius: 4px;       /* Bordas arredondadas */
+    font-size: 14px;          /* Tamanho da fonte */
+    font-weight: bold;        /* Texto em negrito */
+    cursor: pointer;          /* Mostra o cursor de clique */
+    margin-top: 10px;         /* Espaçamento acima do botão */
+    transition: background-color 0.3s ease; /* Animação suave na mudança de cor */
+}
+
+/* Alteração na cor ao passar o mouse */
+.btn-excluir:hover {
+    background-color: #FF4C4C; /* Vermelho mais intenso */
+}
+
+/* Efeito ao pressionar o botão */
+.btn-excluir:active {
+    background-color: #D94040; /* Tom mais escuro ao pressionar */
+}
+
+/* Responsivo: botão ajustado para dispositivos menores */
+@media (max-width: 768px) {
+    .btn-excluir {
+        font-size: 12px;      /* Reduz o tamanho da fonte */
+        padding: 6px 12px;    /* Ajusta o espaçamento interno */
+    }
+}
+
+.h1-custom-list{
+    align-self: center;
+    min-height: 100%;
+}
+
+.foto_nome > form > button > .img_deslogar{
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transition: .4s;
+}
+
+.foto_nome > form > button > .img_deslogar:hover{
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transform: scale(1.1);
+}

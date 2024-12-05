@@ -49,10 +49,8 @@
                     </div>
 
                     <div class="d-flex justify-content-center align-items-center mt-4">
-                        <a href="{{ route('register') }}" class="small text-decoration-none" style="color: white">
-                            <x-button class="btn btn-primary custom-button-login-criar">
+                        <a href="{{ route('register') }}" class="small text-decoration-none btn btn-primary custom-button-login-criar" style="color: white">
                                 {{ __('criar conta') }}
-                            </x-button>
                         </a>
                     </div>
                 </form>

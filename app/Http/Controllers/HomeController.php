@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Services\RAWG;
+use DateTime;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -12,19 +15,24 @@ class HomeController extends Controller
 
     public function __construct(RAWG $RAWG)
     {
-        $this->RAWG = $RAWG; 
+        $this->RAWG = $RAWG;
     }
 
     public function index(){
+        $dataParamsLanc = (new DateTime())->format('Y-m-d');
+        $dataLancPassado = (new DateTime())->modify('-7 days')->format('Y-m-d');
+        $userId = auth()->id();
+        $informacoes_user = User::where('id', $userId)->first();
+        Log::info($informacoes_user);
         $params = [
             'page' => 1,
             'page_size' => 5,
             'ordering' => '-added',
-            'dates' => '2024-09-01,2024-10-31'
+            'dates' => $dataLancPassado . ',' . $dataParamsLanc,
         ];
         $data = $this->RAWG->makeRequest('games', $params);
         $data = $data['results'];
         // dd($data);
-        return view('home', compact('data'));
+        return view('home', compact('data', 'informacoes_user'));
     }
 }
