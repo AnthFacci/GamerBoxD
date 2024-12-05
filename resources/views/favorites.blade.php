@@ -24,7 +24,7 @@
     </nav>
 
     <main class="container my-5">
-        <h1 class="text-center mb-4">favoritos</h1>
+        <h1 class="text-center mb-4" style="color: white;">favoritos</h1>
         <div class="listas">
             @foreach ($games as $jogo)
             @if (intval($jogo['rating'] == 0))
@@ -36,7 +36,7 @@
                             @if ($jogo['rating'] == 0)
                                 <p class="nt_lancamento">-</p>
                             @else
-                                <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']), 1) }}</p>
+                                <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
                             @endif
                         </div>
                     </a>
@@ -50,7 +50,7 @@
                             @if ($jogo['rating'] == 0)
                                 <p class="nt_lancamento">-</p>
                             @else
-                                <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']), 1) }}</p>
+                                <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
                             @endif
                         </div>
                     </a>
@@ -64,7 +64,7 @@
                             @if ($jogo['rating'] == 0)
                                 <p class="nt_lancamento">-</p>
                             @else
-                                <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']), 1) }}</p>
+                                <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
                             @endif
                         </div>
                     </a>
@@ -78,7 +78,7 @@
                             @if ($jogo['rating'] == 0)
                                 <p class="nt_lancamento">-</p>
                             @else
-                                <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']), 1) }}</p>
+                                <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
                             @endif
                         </div>
                     </a>

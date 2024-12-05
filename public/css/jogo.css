@@ -361,7 +361,8 @@ form > .superior> select{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.7);
+    opacity: 1;
+    background-color: black;
     padding: 20px;
     border-radius: 10px;
     color: white;
@@ -384,7 +385,7 @@ form > .superior> select{
 
 #review_form button {
     padding: 10px;
-    background-color: #4CAF50;
+    background-color: #6ECC8E;
     color: white;
     border: none;
     border-radius: 5px;
@@ -392,7 +393,7 @@ form > .superior> select{
 }
 
 #review_form button[type="button"] {
-    background-color: #f44336;
+    background-color: #CC697B;
 }
 
 #show_list{
@@ -408,7 +409,7 @@ form > .superior> select{
     z-index: 1000;
     width: 200px;
     color: #fff;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 14px;
     text-align: left;
 }

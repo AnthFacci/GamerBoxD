@@ -375,6 +375,7 @@ h1 > small > a{
     overflow: hidden;
     overflow-x: scroll;
     scroll-behavior: smooth;
+    padding-left: 500px;
 }
 
 .cards_acessados::-webkit-scrollbar {
@@ -382,6 +383,7 @@ h1 > small > a{
 }
 
 .cards_breve{
+    padding-left: 500px;
     width: 100%;
     height: fit-content;
     display: flex;
@@ -398,6 +400,7 @@ h1 > small > a{
 }
 
 .cards_avaliados{
+    padding-left: 500px;
     width: 100%;
     height: fit-content;
     display: flex;
@@ -414,6 +417,7 @@ h1 > small > a{
 }
 
 .cards_lancamentos{
+    padding-left: 500px;
     width: 100%;
     height: fit-content;
     display: flex;
@@ -491,6 +495,6 @@ h1 > small > a{
     align-self: flex-end;
     font-size: 45px;
     font-weight: bold;
-    
+
     font-family: 'Poppins'
 }
