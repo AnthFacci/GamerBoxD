@@ -97,4 +97,19 @@ class listGames extends Controller
         ]);
         }
     }
+    public function remove_list($playlist_id, $user_id){
+        $playlist = playlist::where('user_id', $user_id)
+        ->where('id', $playlist_id)
+        ->first();
+
+        Log::info($playlist . 'PLAYLIST GAME');
+        if ($playlist) {
+        // Se o favorito existir, deleta
+        $playlist->delete();
+        return response()->json([
+        'success' => true,
+        'message' => 'Favorito removido com sucesso!',
+        ]);
+        }
+    }
 }

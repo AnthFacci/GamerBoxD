@@ -18,16 +18,16 @@
             <div class="collapse navbar-collapse pe-5 justify-content-end" id="navbarNav">
                 <div class="navbar-nav ms-auto ancor-nav nav-custom">
                     @if (auth()->check())
-                    <a href="{{route('home')}}" class="nav-link_real">home</a>
-                    <a href="{{route('jogos')}}" class="nav-link_real">jogos</a>
-                    <a href="{{route('catalogo')}}" class="nav-link_real">filtros</a>
+                    <a href="{{route('home')}}" class="nav-link_real">página inicial</a>
+                    <a href="{{route('jogos')}}" class="nav-link_real">home</a>
+                    <a href="{{route('catalogo')}}" class="nav-link_real">jogos</a>
                     <a href="{{route('dashboard')}}" class="nav-link_real"><img src="{{$informacoes_user->profile_photo_url}}" alt=""></a>
                     @else
                         <a href="{{route('login')}}" class="nav-link_real">login</a>
                         <a href="{{route('register')}}" class="nav-link_real">criar conta</a>
-                        <a href="{{route('home')}}" class="nav-link_real">home</a>
-                        <a href="{{route('jogos')}}" class="nav-link_real">jogos</a>
-                        <a href="{{route('catalogo')}}" class="nav-link_real">filtros</a>
+                        <a href="{{route('home')}}" class="nav-link_real">página inicial</a>
+                        <a href="{{route('jogos')}}" class="nav-link_real">home</a>
+                        <a href="{{route('catalogo')}}" class="nav-link_real">jogos</a>
                     @endif
                 </div>
             </div>
@@ -36,9 +36,16 @@
 
     <main class="container my-5">
         <div class="foto_nome">
-            <img src="{{$informacoes_user->profile_photo_url}}" alt="">
-            <span>{{$informacoes_user->name}}</span>
-        </div>
+            <div class="infos">
+                <img src="{{$informacoes_user->profile_photo_url}}" alt="">
+                <span>{{$informacoes_user->name}}</span>
+            </div>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="dropdown-item">
+                    <img src="{{ asset('svg/exit-svgrepo-com.svg') }}" alt="deslogar" class="img_deslogar">
+                </button>
+            </form>        </div>
         <div class="listas">
             <a href="{{route('favorites')}}">
                 <div class="favoritos fix-box">
@@ -46,11 +53,12 @@
                 </div>
             </a>
             @foreach ($playlists as $playlist)
-                <a href="{{route('listas', ['id' => $playlist->id])}}">
-                    <div class="favoritos fix-box">
-                        <span>{{$playlist->name}}</span>
-                    </div>
-                </a>
+            <a href="{{route('listas', ['id' => $playlist->id])}}" class="ancor_lista">
+                <div class="favoritos fix-box">
+                    <span>{{$playlist->name}}</span>
+                    <img src="{{asset('svg/bin-svgrepo-com.svg')}}" onclick="excluirJogo(event, {{ $informacoes_user->id }}, {{$playlist->id}})" alt="excluir lista" class="trash-icon">
+                </div>
+            </a>
             @endforeach
             <div class="adicionar_lista">
                 <img onclick="addPlaylist()" src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="adicionar nova lista">

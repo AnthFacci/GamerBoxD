@@ -46,5 +46,6 @@ Route::middleware([
     Route::get('/lista/{id}', [listGames::class, 'lista'])->name('listas');
     Route::post('/storeList', [listGames::class, 'store_list'])->name('store.lista');
     Route::delete('/removeGameFromList/{id_playlist}/{id_game}', [listGames::class, 'remove_game'])->name('delete.game');
+    Route::delete('/removeList/{id_playlist}/{user_id}', [listGames::class, 'remove_list'])->name('delete.list');
 
 });

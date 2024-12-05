@@ -22,30 +22,30 @@
                 <div class="collapse navbar-collapse pe-5 justify-content-end" id="navbarNav">
                     <div class="navbar-nav ms-auto ancor-nav nav-custom">
                         @if (auth()->check())
-                        <a href="{{route('home')}}" class="nav-link_real">home</a>
-                        <a href="{{route('jogos')}}" class="nav-link_real">jogos</a>
-                        <a href="{{route('catalogo')}}" class="nav-link_real">filtros</a>
+                        <a href="{{route('home')}}" class="nav-link_real">página inicial</a>
+                        <a href="{{route('jogos')}}" class="nav-link_real">home</a>
+                        <a href="{{route('catalogo')}}" class="nav-link_real">jogos</a>
                         <a href="{{route('dashboard')}}" class="nav-link_real"><img src="{{$informacoes_user->profile_photo_url}}" alt=""></a>
                         @else
-                            <a href="{{route('login')}}" class="nav-link_real">login</a>
-                            <a href="{{route('register')}}" class="nav-link_real">criar conta</a>
-                            <a href="{{route('home')}}" class="nav-link_real">home</a>
-                            <a href="{{route('jogos')}}" class="nav-link_real">jogos</a>
-                            <a href="{{route('catalogo')}}" class="nav-link_real">filtros</a>
+                        <a href="{{route('login')}}" class="nav-link_real">login</a>
+                        <a href="{{route('register')}}" class="nav-link_real">criar conta</a>
+                        <a href="{{route('home')}}" class="nav-link_real">página inicial</a>
+                        <a href="{{route('jogos')}}" class="nav-link_real">home</a>
+                        <a href="{{route('catalogo')}}" class="nav-link_real">jogos</a>
                         @endif
                     </div>
                 </div>
             </div>
         </nav>
         {{-- Main Section --}}
-        <div class="container-fluid flex-grow-1 d-flex flex-column h-auto border border-danger" style="padding: 0px !important; margin-top: 80px;">
+        <div class="container-fluid flex-grow-1 d-flex flex-column h-auto" style="padding: 0px !important; margin-top: 80px; gap: 100px;">
             <div class="capa container-fluid" style="padding: 0px !important;">
                 @if ((int)$game['rating'] <= 2)
-                    <div class="cima" style="background-color: #CC697B;">
+                    <div class="cima" style="background-color: #CC697B;" id="cima">
                         <div class="img_capa">
-                            <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}">
+                            <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}" style="border: 10px solid #CC697B;">
                         </div>
-                        <div class="text">
+                        <div class="text" id="text">
                             {{-- <div class="nome_desc">
                                 <h3>{{$game['name']}}</h3>
                                 <p>{{$game['description_raw']}}</p>
@@ -57,9 +57,9 @@
                                     <img src="{{asset('svg/game/joystick-svgrepo-com.svg')}}" alt="Link para loja" id="store_game">
                                 </div>
                             </div> --}}
-                            <h3>{{$game['name']}}</h3>
-                            <p>{{$game['description_raw']}}</p>
-                            <div class="acoes">
+                            <h3 id="h3_text">{{$game['name']}}</h3>
+                            <p id="p_text">{{$game['description_raw']}}</p>
+                            <div class="acoes" id="acoes">
                                 @if (auth()->check())
                                     <img onclick="showMenuList()" src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="Adicionar Jogo a lista" id="add_game">
                                     <img style="cursor: pointer;" onclick="favoriteGame({{$game['id']}})" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
@@ -69,7 +69,7 @@
                                 @endif
                                 <img src="{{asset('svg/game/joystick-svgrepo-com.svg')}}" alt="Link para loja" id="store_game">
                             </div>
-                            <div class="ranking">
+                            <div class="ranking" id="ranking">
                                 <span>minha nota:</span>
                                 <div class="quadrados_nota">
                                     <div class="quadrado ruim" data-value="1"></div>
@@ -137,14 +137,14 @@
                         </div>
                     </div>
                 @elseif ((float)$game['rating'] > 2 && (float)$game['rating'] <= 3.7)
-                    <div class="cima" style="background-color: #96D9E0;">
+                    <div class="cima" style="background-color: #96D9E0;" id="cima">
                         <div class="img_capa">
-                            <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}">
+                            <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}" style="border: 10px solid #96D9E0">
                         </div>
-                        <div class="text">
-                            <h3>{{$game['name']}}</h3>
-                            <p>{{$game['description_raw']}}</p>
-                            <div class="acoes">
+                        <div class="text" id="text">
+                            <h3 id="h3_text">{{$game['name']}}</h3>
+                            <p id="p_text">{{$game['description_raw']}}</p>
+                            <div class="acoes" id="acoes">
                                 @if (auth()->check())
                                     <img onclick="showMenuList()" src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="Adicionar Jogo a lista" id="add_game">
                                     <img style="cursor: pointer;" onclick="favoriteGame({{$game['id']}})" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
@@ -154,7 +154,7 @@
                                 @endif
                                 <img src="{{asset('svg/game/joystick-svgrepo-com.svg')}}" alt="Link para loja" id="store_game">
                             </div>
-                            <div class="ranking">
+                            <div class="ranking" id="ranking">
                                 <span>minha nota:</span>
                                 <div class="quadrados_nota">
                                     <div class="quadrado ruim" data-value="1"></div>
@@ -222,14 +222,14 @@
                         </div>
                     </div>
                 @elseif ((int)$game['rating'] > 3.7)
-                    <div class="cima" style="background-color: #53e584;">
+                    {{-- <div class="cima" style="background-color: #53e584;" id="cima"> --}}
                         <div class="img_capa">
-                            <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}">
+                            <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}" style="border: 10px solid #53e584;">
                         </div>
-                        <div class="text">
-                            <h3>{{$game['name']}}</h3>
-                            <p>{{$game['description_raw']}}</p>
-                            <div class="acoes">
+                        <div class="text" id="text">
+                            <h3 id="h3_text">{{$game['name']}}</h3>
+                            <p id="p_text">{{$game['description_raw']}}</p>
+                            <div class="acoes" id="acoes">
                                 @if (auth()->check())
                                     <img onclick="showMenuList()" src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="Adicionar Jogo a lista" id="add_game">
                                     <img style="cursor: pointer;" onclick="favoriteGame({{$game['id']}})" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
@@ -239,7 +239,7 @@
                                 @endif
                                 <img src="{{asset('svg/game/joystick-svgrepo-com.svg')}}" alt="Link para loja" id="store_game">
                             </div>
-                            <div class="ranking">
+                            <div class="ranking" id="ranking">
                                 <span>minha nota:</span>
                                 <div class="quadrados_nota">
                                     <div class="quadrado ruim" data-value="1"></div>
@@ -306,16 +306,16 @@
                                 @endforeach
                             </div>
                         </div>
-                    </div>
+                    {{-- </div> --}}
                 @else
-                    <div class="cima" style="background-color: #BCBCBC;">
+                    <div class="cima" style="background-color: #BCBCBC;" id="cima">
                         <div class="img_capa">
-                            <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}">
+                            <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}" style="border: 10px solid #BCBCBC;">
                         </div>
-                        <div class="text">
-                            <h3>{{$game['name']}}</h3>
-                            <p>{{$game['description_raw']}}</p>
-                            <div class="acoes">
+                        <div class="text" id="text">
+                            <h3 id="h3_text">{{$game['name']}}</h3>
+                            <p id="p_text">{{$game['description_raw']}}</p>
+                            <div class="acoes" id="acoes">
                                 @if (auth()->check())
                                     <img onclick="showMenuList()" src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="Adicionar Jogo a lista" id="add_game">
                                     <img style="cursor: pointer;" onclick="favoriteGame({{$game['id']}})" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
@@ -325,7 +325,7 @@
                                 @endif
                                 <img src="{{asset('svg/game/joystick-svgrepo-com.svg')}}" alt="Link para loja" id="store_game">
                             </div>
-                            <div class="ranking">
+                            <div class="ranking" id="ranking">
                                 <span>minha nota:</span>
                                 <div class="quadrados_nota">
                                    <div class="quadrado ruim" data-value="1"></div>

@@ -10,6 +10,34 @@ function addPlaylist(){
     }
 }
 
+function excluirJogo(event, user_id ,playlist_id) {
+    event.preventDefault();
+
+    const confirmacao = confirm("Tem certeza que deseja excluir este jogo?");
+    if (!confirmacao) return;
+    console.log(user_id);
+    console.log(playlist_id);
+
+    fetch(`/removeList/${playlist_id}/${user_id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Jogo excluído com sucesso!');
+            // Remover o card da interface
+            event.target.closest('.ancor_lista').remove();
+        } else {
+            alert('Erro ao excluir o jogo.');
+        }
+    })
+    .catch(error => console.error('Erro:', error));
+}
+
+
 document.addEventListener('click', function (event) {
     const menuListas = document.getElementById('menuListas');
     const adicionarLista = document.querySelector('.adicionar_lista img');

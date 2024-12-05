@@ -16,16 +16,16 @@
                 <div class="collapse navbar-collapse pe-5 justify-content-end" id="navbarNav">
                     <div class="navbar-nav ms-auto ancor-nav nav-custom">
                         @if (auth()->check())
-                        <a href="{{route('home')}}" class="nav-link_real">home</a>
-                        <a href="{{route('jogos')}}" class="nav-link_real">jogos</a>
-                        <a href="{{route('catalogo')}}" class="nav-link_real">filtros</a>
+                        <a href="{{route('home')}}" class="nav-link_real">página inicial</a>
+                        <a href="{{route('jogos')}}" class="nav-link_real">home</a>
+                        <a href="{{route('catalogo')}}" class="nav-link_real">jogos</a>
                         <a href="{{route('dashboard')}}" class="nav-link_real"><img src="{{$informacoes_user->profile_photo_url}}" alt=""></a>
                         @else
-                            <a href="{{route('login')}}" class="nav-link_real">login</a>
-                            <a href="{{route('register')}}" class="nav-link_real">criar conta</a>
-                            <a href="{{route('home')}}" class="nav-link_real">home</a>
-                            <a href="{{route('jogos')}}" class="nav-link_real">jogos</a>
-                            <a href="{{route('catalogo')}}" class="nav-link_real">filtros</a>
+                        <a href="{{route('login')}}" class="nav-link_real">login</a>
+                        <a href="{{route('register')}}" class="nav-link_real">criar conta</a>
+                        <a href="{{route('home')}}" class="nav-link_real">página inicial</a>
+                        <a href="{{route('jogos')}}" class="nav-link_real">home</a>
+                        <a href="{{route('catalogo')}}" class="nav-link_real">jogos</a>
                         @endif
                     </div>
                 </div>

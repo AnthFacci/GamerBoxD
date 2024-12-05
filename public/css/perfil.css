@@ -31,7 +31,17 @@
     flex-wrap: wrap;
 }
 
+/* .card{
+    transition: .4s;
+}
+
+.card:hover{
+    transform: scale(1.1);
+} */
+
 .favoritos{
+    position: relative;
+    display: inline-block;
     width: 300px;
     height: 300px;
     border: 1px solid #f5f5f5;
@@ -39,6 +49,44 @@
     cursor: pointer;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     transition: .4s;
+}
+
+.trash-icon {
+    position: absolute;
+    bottom: -10px;
+    left: -10px;
+    cursor: pointer;
+    width: 50px;
+    padding: 5px;
+    height: 50px;
+    border: 1px solid #CC697B;
+    border-radius: 50%;
+    background-color: #CC697B;
+    transition: .5s;
+    z-index: 5000;
+}
+
+.trash-icon:hover {
+    transform: scale(1.2);
+}
+
+.trash-icon-lista {
+    position: absolute;
+    bottom: -30px;
+    left: -15px;
+    cursor: pointer;
+    width: 50px;
+    padding: 5px;
+    height: 50px;
+    border: 1px solid #CC697B;
+    border-radius: 50%;
+    background-color: #CC697B;
+    transition: .5s;
+    z-index: 5000;
+}
+
+.trash-icon-lista:hover {
+    transform: scale(1.2);
 }
 
 .favoritos:hover{
@@ -77,7 +125,7 @@
     width: 100%;
     height: fit-content;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     gap: 10px;
     color: #f5f5f5;
@@ -85,7 +133,7 @@
     font-size: 25px;
 }
 
-.foto_nome > img{
+.foto_nome > .infos >  img{
     width: 65px;
     height: 65px;
     border-radius: 50%;
@@ -219,4 +267,23 @@
         font-size: 12px;      /* Reduz o tamanho da fonte */
         padding: 6px 12px;    /* Ajusta o espaçamento interno */
     }
+}
+
+.h1-custom-list{
+    align-self: center;
+    min-height: 100%;
+}
+
+.foto_nome > form > button > .img_deslogar{
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transition: .4s;
+}
+
+.foto_nome > form > button > .img_deslogar:hover{
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transform: scale(1.1);
 }

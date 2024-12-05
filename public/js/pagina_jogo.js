@@ -17,6 +17,23 @@ quadrados.forEach(quadrado => {
     });
 });
 
+// document.addEventListener('DOMContentLoaded', () =>{
+//     const cima = document.getElementById('cima');
+//     const text = document.getElementById('text');
+//     const acoes = document.getElementById('acoes');
+
+//     // Pegar alturas reais dos elementos
+//     const textHeight = text.offsetHeight; // Altura do elemento, incluindo padding e border
+//     const acoesHeight = acoes.offsetHeight;
+
+//     const total = textHeight - acoesHeight;
+//     console.log(textHeight);
+//     console.log(acoesHeight);
+//     console.log(total);
+
+//     cima.style.height = `${total}px`;
+// });
+
 
 // Exibe o formulário quando o botão "adicionar review" é clicado
 function showReviewForm() {

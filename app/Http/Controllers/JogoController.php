@@ -26,6 +26,7 @@ class JogoController extends Controller
         $game = $this->RAWG->makeRequestById('games', $id);
         $comments = Comment::with('user')->withCount('likes')->where('game_id', $id)->orderBy('created_at')->get();
         Log::info('Esse é o primeiro comentário: '. $comments);
+        Log::info($game);
         return view('jogo', compact('game', 'comments', 'playlists', 'informacoes_user'));
     }
     public function storeReview(Request $request)
