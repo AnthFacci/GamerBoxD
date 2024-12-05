@@ -1,7 +1,7 @@
 // CAROUSEL LANCAMENTOS
-const cards_lancamentos = document.getElementById('cards_lancamentos');
-const lancamento_left = document.getElementById('left_lancamento');
-const lancamento_right = document.getElementById('right_lancamento');
+// const cards_lancamentos = document.getElementById('cards_lancamentos');
+// const lancamento_left = document.getElementById('left_lancamento');
+// const lancamento_right = document.getElementById('right_lancamento');
 // CAROUSEL MAIS ACESSADOS
 const cards_acessados = document.getElementById('cards_acessados');
 const acessados_left = document.getElementById('left_acessados');
@@ -16,15 +16,15 @@ const avaliados_left = document.getElementById('left_avaliados');
 const avaliados_right = document.getElementById('right_avaliados');
 
 // Evento do carousel lancamento
-lancamento_left.addEventListener('click', () => {
-    cards_lancamentos.scrollLeft += 205
-    console.log(cards_lancamentos.scrollLeft);
-});
+// lancamento_left.addEventListener('click', () => {
+//     cards_lancamentos.scrollLeft += 205
+//     console.log(cards_lancamentos.scrollLeft);
+// });
 
-lancamento_right.addEventListener('click', () => {
-    cards_lancamentos.scrollLeft -= 205;
-    console.log(cards_lancamentos.scrollLeft);
-});
+// lancamento_right.addEventListener('click', () => {
+//     cards_lancamentos.scrollLeft -= 205;
+//     console.log(cards_lancamentos.scrollLeft);
+// });
 
 // Evento do carousel mais acessados
 acessados_left.addEventListener('click', () => {
