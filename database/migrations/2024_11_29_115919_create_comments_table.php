@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('content');
             $table->unsignedBigInteger('rating');
             $table->text('finalizado');
+            $table->text('status');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

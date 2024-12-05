@@ -1,4 +1,3 @@
-console.log('ola');
 // Variáveis
 const quadrados = document.querySelectorAll('.quadrado');
 const addReviewButton = document.getElementById('add_review');
@@ -8,6 +7,9 @@ const cancel_list = document.getElementById('cancel_list');
 const submitForm = document.getElementById('enviar_review');
 const list = document.getElementById('show_list');
 const enviar_list = document.getElementById('enviar_list');
+const quadrados2 = document.querySelectorAll('.quadrado_review');
+const ratingInput2 = document.getElementById('ratingInput');
+
 // Adiciona o event listener para cada quadrado
 quadrados.forEach(quadrado => {
     quadrado.addEventListener('click', function() {
@@ -46,8 +48,19 @@ function showMenuList() {
     // Exibe o formulário de review
     const list = document.getElementById('show_list');
     list.style.display = 'block';
-}
 
+}
+function closeMenuList() {
+    // Exibe o formulário de review
+    const list = document.getElementById('show_list');
+    list.style.display = 'none';
+
+}
+function closeReview() {
+    // Exibe o formulário de review
+    reviewForm.style.display = 'none';
+
+}
 // document.addEventListener('click', function (event) {
 //     const menuListas = document.getElementById('show_list');
 //     if (!menuListas.contains(event.target) && event.target !== adicionarLista) {
@@ -61,11 +74,30 @@ function showMenuList() {
 //     }
 // });
 
+quadrados2.forEach((quadrado, index) => {
+    // Evento para destacar os quadrados no hover
+
+    // Evento de clique para selecionar o quadrado
+    quadrado.addEventListener('click', function () {
+        // Atualizar o valor do input escondido
+        ratingInput2.value = this.dataset.value;
+        console.log(ratingInput2.value);
+
+        // Remover destaque de outros quadrados (caso necessário)
+        quadrados2.forEach(q => q.classList.remove('selecionado'));
+
+        // Adicionar destaque ao quadrado clicado (caso necessário)
+        this.classList.add('selecionado');
+    });
+});
+
 document.getElementById('reviewForm').addEventListener('submit', function (e) {
     e.preventDefault(); // Evita o comportamento padrão de enviar o formulário e recarregar a página
 
     const formData = new FormData(this);
-
+    console.log(ratingInput2);
+    console.log(ratingInput2.value);
+    // Adicionar evento de clique
     formData.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
     console.log(formData);
     fetch('/jogo/storeReview', {
@@ -74,13 +106,16 @@ document.getElementById('reviewForm').addEventListener('submit', function (e) {
     })
     .then(response => response.json()) // Converte a resposta para JSON
     .then(data => {
+        closeReview();
         if (data.success) {
             alert('Review enviada com sucesso!');
+            window.location.reload();
         } else {
             alert('Erro ao enviar a review.');
         }
     })
     .catch(error => {
+        closeReview();
         console.error('Erro:', error);
         alert('Erro na requisição.');
     });
@@ -104,12 +139,15 @@ function storeGame(id_playlist,id_game, event){
     .then(response => response.json()) // Converte a resposta para JSON
     .then(data => {
         if (data.success) {
-            console.log('Review enviada com sucesso!');
+            closeMenuList();
+            alert(data.message);
         } else {
-            console.log('Erro ao enviar a review.');
+            closeMenuList();
+            alert(data.message);
         }
     })
     .catch(error => {
+        closeMenuList();
         console.error('Erro:', error);
         console.log('Erro na requisição.');
     });
@@ -131,9 +169,22 @@ function likeComment(id, user_id) {
     .then(response => response.json()) // Converte a resposta para JSON
     .then(data => {
         if (data.success) {
-            alert('Review enviada com sucesso!');
+            const like_comment = document.getElementById('like_comment');
+            const comment_count = document.getElementById('comment_count');
+            if (data.delete == true) {
+                // let valor = parseInt(comment_count.textContent, 10) - 1;
+                // comment_count.textContent = valor;
+                // like_comment.src = like_comment.dataset.semCurtida; // Atualiza a imagem
+                window.location.reload();
+            } else {
+                // let valor = parseInt(comment_count.textContent, 10) + 1;
+                // comment_count.textContent = valor;
+                // like_comment.src = like_comment.dataset.reviewCurtido;
+                window.location.reload();
+            }
+            alert(data.message);
         } else {
-            alert('Erro ao enviar a review.');
+            alert(data.message);
         }
     })
     .catch(error => {
@@ -154,7 +205,18 @@ function favoriteGame(game_id) {
     .then(response => response.json()) // Converte a resposta para JSON
     .then(data => {
         if (data.success) {
-            alert('Review enviada com sucesso!');
+            alert(data.message);
+            if(data.message == 'Favorito adicionado com sucesso!'){
+                const favoritar_game = document.getElementById('favoritar_game');
+                const imgLiked = favoritar_game.dataset.imgLiked;
+                console.log(imgLiked);
+                favoritar_game.src = imgLiked;
+            }else if(data.message == 'Favorito removido com sucesso!'){
+                const favoritar_game = document.getElementById('favoritar_game');
+                const imgnolike = favoritar_game.dataset.imgnolike;
+                console.log(imgnolike);
+                favoritar_game.src = imgnolike;
+            }
         } else {
             alert('Erro ao enviar a review.');
         }

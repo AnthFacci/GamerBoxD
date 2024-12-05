@@ -21,13 +21,29 @@ class JogoController extends Controller
     }
     public function index($id){
         $userId = auth()->id();
+        $favorite = Favorite::where('game_id', $id)
+        ->where('user_id', $userId)
+        ->first();
+        if(isset($favorite->id)){
+            $favorite = true;
+        }else{
+            $favorite = false;
+        }
+        Log::info($favorite . 'faovorito');
+        $userId = auth()->id();
         $informacoes_user = User::where('id', $userId)->first();
         $playlists = playlist::where('user_id', $userId)->get();
         $game = $this->RAWG->makeRequestById('games', $id);
+        $stores = $this->RAWG->makeRequestTwoBar('games', 'stores', $id);
         $comments = Comment::with('user')->withCount('likes')->where('game_id', $id)->orderBy('created_at')->get();
         Log::info('Esse é o primeiro comentário: '. $comments);
-        Log::info($game);
-        return view('jogo', compact('game', 'comments', 'playlists', 'informacoes_user'));
+        // Log::info($game);
+        Log::info($stores);
+        // if($stores != null){
+        //     $store = $stores[0]['url'];
+        //     Log::info($store . 'eiittaa');
+        // }
+        return view('jogo', compact('game', 'comments', 'playlists', 'informacoes_user', 'favorite', 'stores'));
     }
     public function storeReview(Request $request)
     {
@@ -43,6 +59,7 @@ class JogoController extends Controller
 
         // Lógica de armazenamento (exemplo)
         // Suponha que você tenha um modelo Review
+        Log::info('Requisição feita: ' . json_encode($request->all()));
         try {
             Comment::create([
                 'user_id' => $userId,
@@ -50,6 +67,7 @@ class JogoController extends Controller
                 'content' => $validated['content'],
                 'finalizado' => $request->finalizado,
                 'rating' => $validated['rating'],
+                'status' => $request->status,
             ]);
 
             return response()->json([
@@ -67,21 +85,35 @@ class JogoController extends Controller
     public function like(Request $request){
         Log::info($request);
         try {
-            commentsreaction::create([
-                'reaction_type' => $request->reaction_type,
-                'comment_id' => $request->comment_id,
-                'user_id' => $request->user_id
-            ]);
+            $like = commentsreaction::where('comment_id', $request->comment_id)
+            ->where('user_id', $request->user_id)->first();
+            Log::info($like);
+            if($like){
+                Log::info($like);
+                $like->delete();
+                return response()->json([
+                    'success' => true,
+                    'delete' => true,
+                    'message' => 'Review descurtida!',
+                ]);
+            }else{
+                commentsreaction::create([
+                    'reaction_type' => $request->reaction_type,
+                    'comment_id' => $request->comment_id,
+                    'user_id' => $request->user_id
+                ]);
 
-            return response()->json([
-                'success' => true,
-                'message' => 'Review enviada com sucesso!',
-            ]);
+                return response()->json([
+                    'success' => true,
+                    'delete' => false,
+                    'message' => 'Review curtida com sucesso!',
+                ]);
+            }
         } catch (\Exception $e) {
             Log::error('Erro ao salvar a review: ' . $e->getMessage());
             return response()->json([
                 'success' => false,
-                'message' => 'Erro ao salvar a review. Tente novamente mais tarde.',
+                'message' => 'Erro ao curtir a review. Tente novamente mais tarde.',
             ], 500);
         }
     }

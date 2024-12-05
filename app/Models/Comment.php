@@ -15,7 +15,8 @@ class Comment extends Model
         'game_id',
         'content',
         'rating',
-        'finalizado'
+        'finalizado',
+        'status'
     ];
 
     public function user()

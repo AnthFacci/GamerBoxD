@@ -43,17 +43,17 @@
         {{-- </div> --}}
         <div class="normal_three">
           <div class="d-flex justify-content-center align-items-center rounded-circle overflow-hidden custom-round-image" style="width: 180px; height: 180px;">
-            <a href="{{route('jogo', ['id' => $data[0]['id']])}}" class="w-100 h-100" style="object-fit: cover; object-position: center;">
+            <a href="{{route('jogo', ['id' => $data[1]['id']])}}" class="w-100 h-100" style="object-fit: cover; object-position: center;">
               <img src="{{$data[1]['background_image']}}" alt="Imagem dentro da div" class="w-100 h-100" style="object-fit: cover; object-position: center;" />
             </a>
           </div>
           <div class="d-flex justify-content-center align-items-center rounded-circle overflow-hidden custom-round-image2" style="width: 180px; height: 180px;">
-            <a href="{{route('jogo', ['id' => $data[0]['id']])}}" class="w-100 h-100" style="object-fit: cover; object-position: center;">
+            <a href="{{route('jogo', ['id' => $data[2]['id']])}}" class="w-100 h-100" style="object-fit: cover; object-position: center;">
               <img src="{{$data[2]['background_image']}}" alt="Imagem dentro da div" class="w-100 h-100" style="object-fit: cover; object-position: center;" />
             </a>
           </div>
           <div class="d-flex justify-content-center align-items-center rounded-circle overflow-hidden custom-round-image" style="width: 180px; height: 180px;">
-            <a href="{{route('jogo', ['id' => $data[0]['id']])}}" class="w-100 h-100" style="object-fit: cover; object-position: center;">
+            <a href="{{route('jogo', ['id' => $data[3]['id']])}}" class="w-100 h-100" style="object-fit: cover; object-position: center;">
               <img src="{{$data[3]['background_image']}}" alt="Imagem dentro da div" class="w-100 h-100" style="object-fit: cover; object-position: center;" />
             </a>
           </div>

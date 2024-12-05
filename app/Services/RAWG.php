@@ -57,4 +57,16 @@ class RAWG
         return $response->json();
     }
 
+    public function makeRequestTwoBar($endpoint1, $endpoint2, $id){
+        $url = "{$this->baseUri}{$endpoint1}/{$id}/{$endpoint2}?key={$this->apiKey}";
+        Log::info($url);
+        $response = Http::withHeaders([])->get($url);
+
+        if ($response->failed()) {
+            throw new \Exception("Erro ao fazer requisição: " . $response->body());
+        }
+
+        return $response->json();
+    }
+
 }

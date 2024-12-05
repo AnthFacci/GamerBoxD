@@ -46,28 +46,21 @@
                             <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}" style="border: 10px solid #CC697B;">
                         </div>
                         <div class="text" id="text">
-                            {{-- <div class="nome_desc">
-                                <h3>{{$game['name']}}</h3>
-                                <p>{{$game['description_raw']}}</p>
-                            </div>
-                            <div class="funcoes">
-                                <div class="acoes2">
-                                     <img src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="Adicionar Jogo a lista" id="add_game">
-                                    <img src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
-                                    <img src="{{asset('svg/game/joystick-svgrepo-com.svg')}}" alt="Link para loja" id="store_game">
-                                </div>
-                            </div> --}}
                             <h3 id="h3_text">{{$game['name']}}</h3>
                             <p id="p_text">{{$game['description_raw']}}</p>
                             <div class="acoes" id="acoes">
                                 @if (auth()->check())
                                     <img onclick="showMenuList()" src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="Adicionar Jogo a lista" id="add_game">
-                                    <img style="cursor: pointer;" onclick="favoriteGame({{$game['id']}})" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
+                                   @if ($favorite == true)
+                                    <img style="cursor: pointer;" onclick="favoriteGame({{$game['id']}})" data-img-liked="{{asset('svg/game/heart-svgrepo-com-red.svg')}}" data-imgnolike="{{asset('svg/game/heart-svgrepo-com.svg')}}" src="{{asset('svg/game/heart-svgrepo-com-red.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
+                                   @else
+                                    <img style="cursor: pointer;" onclick="favoriteGame({{$game['id']}})" data-img-liked="{{asset('svg/game/heart-svgrepo-com-red.svg')}}" data-imgnolike="{{asset('svg/game/heart-svgrepo-com.svg')}}" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
+                                   @endif
                                 @else
                                     <img onclick="redirectToLogin()" src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="Adicionar Jogo a lista" id="add_game">
                                     <img style="cursor: pointer;" onclick="redirectToLogin()" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
                                 @endif
-                                <img src="{{asset('svg/game/joystick-svgrepo-com.svg')}}" alt="Link para loja" id="store_game">
+                                <a href="{{$stores['results']['0']['url']}}"><img src="{{asset('svg/game/joystick-svgrepo-com.svg')}}" alt="Link para loja" id="store_game"></a>
                             </div>
                             <div class="ranking" id="ranking">
                                 <span>minha nota:</span>
@@ -89,110 +82,44 @@
                                     <button id="add_review" onclick="redirectToLogin()">Adicionar Review</button>
                                 @endif
                                 <div id="review_form" style="display: none;">
-                                    {{-- <form id="reviewForm">
+                                    <form id="reviewForm">
                                         <label for="review">Sua Review:</label>
                                         <input type="hidden" name="id_game" value="{{$game['id']}}">
-                                        <input type="hidden" name="rating" value="10">
-                                        <input type="hidden" name="finalizado" value="pc">
-                                        <textarea id="review" name="content" rows="4" cols="50" placeholder="Escreva sua review aqui..."></textarea>
+                                        <div class="superior">
+                                            <input type="hidden" name="rating" value="10" id="ratingInput">
+                                            <div class="quadrados_nota_review">
+                                                <div class="quadrado_review ruim" data-value="1"></div>
+                                                <div class="quadrado_review ruim" data-value="2"></div>
+                                                <div class="quadrado_review ruim" data-value="3"></div>
+                                                <div class="quadrado_review ruim" data-value="4"></div>
+                                                <div class="quadrado_review mid" data-value="5"></div>
+                                                <div class="quadrado_review mid" data-value="6"></div>
+                                                <div class="quadrado_review mid" data-value="7"></div>
+                                                <div class="quadrado_review bom" data-value="8"></div>
+                                                <div class="quadrado_review bom" data-value="9"></div>
+                                                <div class="quadrado_review bom" data-value="10"></div>
+                                            </div>
+                                            {{-- <input type="hidden" name="finalizado" value="pc"> --}}
+                                            <select id="status" name="status">
+                                                <option value="finalizado">finalizado</option>
+                                                <option value="metade do jogo">metade do game</option>
+                                                <option value="começo do jogo">começo do game</option>
+                                            </select>
+                                            <select id="finalizado" name="finalizado">
+                                                <option value="pc">pc</option>
+                                                <option value="switch">switch</option>
+                                                <option value="playstation 4">playstation 4</option>
+                                                <option value="playstation 5">playstation 5</option>
+                                                <option value="xbox one">xbox one</option>
+                                            </select>
+                                        </div>
+                                        <textarea id="review" required name="content" rows="4" cols="50" placeholder="Escreva sua review aqui..."></textarea>
                                         <button type="submit" id="enviar_review">Enviar</button>
                                         <button type="button" id="cancel_review">Cancelar</button>
-                                    </form> --}}
-                                    <div id="review_form" style="display: none;">
-    <form id="reviewForm">
-        <label for="review">Sua Review:</label>
-        <input type="hidden" name="id_game" value="{{$game['id']}}">
-        <input type="hidden" name="rating" id="rating"> <!-- Campo oculto para armazenar a nota -->
-        <input type="hidden" name="finalizado" value="pc">
-
-        <!-- Quadrados de avaliação -->
-        <div class="quadrados_nota">
-            <div class="quadrado ruim" data-value="1"></div>
-            <div class="quadrado ruim" data-value="2"></div>
-            <div class="quadrado ruim" data-value="3"></div>
-            <div class="quadrado ruim" data-value="4"></div>
-            <div class="quadrado mid" data-value="5"></div>
-            <div class="quadrado mid" data-value="6"></div>
-            <div class="quadrado mid" data-value="7"></div>
-            <div class="quadrado bom" data-value="8"></div>
-            <div class="quadrado bom" data-value="9"></div>
-            <div class="quadrado bom" data-value="10"></div>
-        </div>
-
-        <!-- Área de texto para a review -->
-        <textarea id="review" name="content" rows="4" cols="50" placeholder="Escreva sua review aqui..."></textarea>
-
-        <!-- Botões -->
-        <button type="submit" id="enviar_review">Enviar</button>
-        <button type="button" id="cancel_review">Cancelar</button>
-    </form>
-</div>
-
-<script>
-    // Seleciona todos os quadrados de avaliação
-    const quadrados = document.querySelectorAll('.quadrado');
-
-    // Para cada quadrado, adiciona um evento de clique
-    quadrados.forEach(function(quadrado) {
-        quadrado.addEventListener('click', function() {
-            // Obtém o valor de nota do quadrado clicado
-            const nota = quadrado.getAttribute('data-value');
-            
-            // Atualiza o campo hidden de "rating" com o valor da nota
-            document.getElementById('rating').value = nota;
-
-            // Altera a aparência dos quadrados (destaca o quadrado selecionado)
-            quadrados.forEach(function(q) {
-                q.classList.remove('selecionado'); // Remove a classe de seleção de todos os quadrados
-            });
-            quadrado.classList.add('selecionado'); // Adiciona a classe de seleção ao quadrado clicado
-        });
-    });
-
-    // Envio do formulário de review
-    document.getElementById('reviewForm').addEventListener('submit', function (e) {
-        e.preventDefault(); // Evita o comportamento padrão de enviar o formulário e recarregar a página
-
-        const formData = new FormData(this);
-
-        // Adiciona o CSRF Token
-        formData.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
-
-        // Envia os dados para o servidor usando fetch
-        fetch('/jogo/storeReview', {
-            method: 'POST',
-            body: formData, // Envia os dados do formulário
-        })
-        .then(response => response.json()) // Converte a resposta para JSON
-        .then(data => {
-            if (data.success) {
-                alert('Review enviada com sucesso!');
-            } else {
-                alert('Erro ao enviar a review.');
-            }
-        })
-        .catch(error => {
-            console.error('Erro:', error);
-            alert('Erro na requisição.');
-        });
-    });
-
-    // Cancelar a review
-    document.getElementById('cancel_review').addEventListener('click', function() {
-        document.getElementById('reviewForm').reset(); // Reseta o formulário
-        document.getElementById('review_form').style.display = 'none'; // Esconde o formulário
-    });
-</script>
-
-<style>
-    /* Adicionando estilos para destacar a seleção do quadrado */
-    .quadrado.selecionado {
-        border: 2px solid #4CAF50; /* Cor verde para destacar o quadrado */
-    }
-</style>
+                                    </form>
                                 </div>
-                                <div id="show_list" style="display: none;">
-                                    <div class="menu_listas">
+                                {{-- <div id="show_list" style="display: none;"> --}}
+                                    <div class="menu_listas" id="show_list">
                                         <ul>
                                             @foreach ($playlists as $playlist )
                                                 <li>
@@ -200,14 +127,14 @@
                                                         @csrf
                                                          {{-- <input type="hidden" value="{{$playlist->id}}" id="id_playlist" name="id_playlist">
                                                          <input type="hidden" value="{{$game['id']}}" id="id_game" name="id_game"> --}}
-                                                        <button type="submit" onclick="storeGame({{$playlist->id}}, {{$game['id']}}, event)">{{$playlist->name}}</button>
-                                                    </form>
+                                                         <button type="submit" onclick="storeGame({{$playlist->id}}, {{$game['id']}}, event)">{{$playlist->name}}</button>
+                                                        </form>
                                                 </li>
                                             @endforeach
                                         </ul>
                                         <button type="button" id="cancel_list">Cancelar</button>
                                     </div>
-                                </div>
+                                {{-- </div> --}}
                             </div>
                         </div>
                         <div class="metricas">
@@ -239,12 +166,16 @@
                             <div class="acoes" id="acoes">
                                 @if (auth()->check())
                                     <img onclick="showMenuList()" src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="Adicionar Jogo a lista" id="add_game">
-                                    <img style="cursor: pointer;" onclick="favoriteGame({{$game['id']}})" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
+                                   @if ($favorite == true)
+                                    <img style="cursor: pointer;" onclick="favoriteGame({{$game['id']}})" data-img-liked="{{asset('svg/game/heart-svgrepo-com-red.svg')}}" data-imgnolike="{{asset('svg/game/heart-svgrepo-com.svg')}}" src="{{asset('svg/game/heart-svgrepo-com-red.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
+                                   @else
+                                    <img style="cursor: pointer;" onclick="favoriteGame({{$game['id']}})" data-img-liked="{{asset('svg/game/heart-svgrepo-com-red.svg')}}" data-imgnolike="{{asset('svg/game/heart-svgrepo-com.svg')}}" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
+                                   @endif
                                 @else
                                     <img onclick="redirectToLogin()" src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="Adicionar Jogo a lista" id="add_game">
                                     <img style="cursor: pointer;" onclick="redirectToLogin()" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
                                 @endif
-                                <img src="{{asset('svg/game/joystick-svgrepo-com.svg')}}" alt="Link para loja" id="store_game">
+                                <a href="{{$stores['results']['0']['url']}}"><img src="{{asset('svg/game/joystick-svgrepo-com.svg')}}" alt="Link para loja" id="store_game"></a>
                             </div>
                             <div class="ranking" id="ranking">
                                 <span>minha nota:</span>
@@ -269,15 +200,41 @@
                                     <form id="reviewForm">
                                         <label for="review">Sua Review:</label>
                                         <input type="hidden" name="id_game" value="{{$game['id']}}">
-                                        <input type="hidden" name="rating" value="10">
-                                        <input type="hidden" name="finalizado" value="pc">
-                                        <textarea id="review" name="content" rows="4" cols="50" placeholder="Escreva sua review aqui..."></textarea>
+                                        <div class="superior">
+                                            <input type="hidden" name="rating" value="10" id="ratingInput">
+                                            <div class="quadrados_nota_review">
+                                                <div class="quadrado_review ruim" data-value="1"></div>
+                                                <div class="quadrado_review ruim" data-value="2"></div>
+                                                <div class="quadrado_review ruim" data-value="3"></div>
+                                                <div class="quadrado_review ruim" data-value="4"></div>
+                                                <div class="quadrado_review mid" data-value="5"></div>
+                                                <div class="quadrado_review mid" data-value="6"></div>
+                                                <div class="quadrado_review mid" data-value="7"></div>
+                                                <div class="quadrado_review bom" data-value="8"></div>
+                                                <div class="quadrado_review bom" data-value="9"></div>
+                                                <div class="quadrado_review bom" data-value="10"></div>
+                                            </div>
+                                            {{-- <input type="hidden" name="finalizado" value="pc"> --}}
+                                            <select id="status" name="status">
+                                                <option value="finalizado">finalizado</option>
+                                                <option value="metade do jogo">metade do game</option>
+                                                <option value="comeco do jogo">começo do game</option>
+                                            </select>
+                                            <select id="finalizado" name="finalizado">
+                                                <option value="pc">pc</option>
+                                                <option value="switch">switch</option>
+                                                <option value="playstation 4">playstation 4</option>
+                                                <option value="playstation 5">playstation 5</option>
+                                                <option value="xbox one">xbox one</option>
+                                            </select>
+                                        </div>
+                                        <textarea id="review" required name="content" rows="4" cols="50" placeholder="Escreva sua review aqui..."></textarea>
                                         <button type="submit" id="enviar_review">Enviar</button>
                                         <button type="button" id="cancel_review">Cancelar</button>
                                     </form>
                                 </div>
-                                <div id="show_list" style="display: none;">
-                                    <div class="menu_listas">
+                                {{-- <div id="show_list" style="display: none;"> --}}
+                                    <div class="menu_listas" id="show_list">
                                         <ul>
                                             @foreach ($playlists as $playlist )
                                                 <li>
@@ -292,7 +249,7 @@
                                         </ul>
                                         <button type="button" id="cancel_list">Cancelar</button>
                                     </div>
-                                </div>
+                                {{-- </div> --}}
                             </div>
                         </div>
                         <div class="metricas">
@@ -324,12 +281,31 @@
                             <div class="acoes" id="acoes">
                                 @if (auth()->check())
                                     <img onclick="showMenuList()" src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="Adicionar Jogo a lista" id="add_game">
-                                    <img style="cursor: pointer;" onclick="favoriteGame({{$game['id']}})" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
+                                        <div class="menu_listas" id="show_list" style="display: none;">
+                                            <ul>
+                                                @foreach ($playlists as $playlist )
+                                                    <li>
+                                                        <form action="{{ route('store.game', ['id_playlist' => $playlist->id, 'id_game' => $game['id']]) }}" method="POST">
+                                                            @csrf
+                                                             <input type="hidden" value="{{$playlist->id}}" id="id_playlist" name="id_playlist">
+                                                             <input type="hidden" value="{{$game['id']}}" id="id_game" name="id_game">
+                                                             <button type="submit" onclick="storeGame({{$playlist->id}}, {{$game['id']}}, event)">{{$playlist->name}}</button>
+                                                            </form>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                            <button type="button" id="cancel_list">Cancelar</button>
+                                        </div>
+                                   @if ($favorite == true)
+                                    <img style="cursor: pointer;" onclick="favoriteGame({{$game['id']}})" data-img-liked="{{asset('svg/game/heart-svgrepo-com-red.svg')}}" data-imgnolike="{{asset('svg/game/heart-svgrepo-com.svg')}}" src="{{asset('svg/game/heart-svgrepo-com-red.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
+                                   @else
+                                    <img style="cursor: pointer;" onclick="favoriteGame({{$game['id']}})" data-img-liked="{{asset('svg/game/heart-svgrepo-com-red.svg')}}" data-imgnolike="{{asset('svg/game/heart-svgrepo-com.svg')}}" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
+                                   @endif
                                 @else
                                     <img onclick="redirectToLogin()" src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="Adicionar Jogo a lista" id="add_game">
                                     <img style="cursor: pointer;" onclick="redirectToLogin()" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
                                 @endif
-                                <img src="{{asset('svg/game/joystick-svgrepo-com.svg')}}" alt="Link para loja" id="store_game">
+                                <a href="{{$stores['results']['0']['url']}}"><img src="{{asset('svg/game/joystick-svgrepo-com.svg')}}" alt="Link para loja" id="store_game"></a>
                             </div>
                             <div class="ranking" id="ranking">
                                 <span>minha nota:</span>
@@ -355,29 +331,38 @@
                                     <form id="reviewForm">
                                         <label for="review">Sua Review:</label>
                                         <input type="hidden" name="id_game" value="{{$game['id']}}">
-                                        <input type="hidden" name="rating" value="10">
-                                        <input type="hidden" name="finalizado" value="pc">
-                                        <textarea id="review" name="content" rows="4" cols="50" placeholder="Escreva sua review aqui..."></textarea>
+                                        <div class="superior">
+                                            <input type="hidden" name="rating" value="10" id="ratingInput">
+                                            <div class="quadrados_nota_review">
+                                                <div class="quadrado_review ruim" data-value="1"></div>
+                                                <div class="quadrado_review ruim" data-value="2"></div>
+                                                <div class="quadrado_review ruim" data-value="3"></div>
+                                                <div class="quadrado_review ruim" data-value="4"></div>
+                                                <div class="quadrado_review mid" data-value="5"></div>
+                                                <div class="quadrado_review mid" data-value="6"></div>
+                                                <div class="quadrado_review mid" data-value="7"></div>
+                                                <div class="quadrado_review bom" data-value="8"></div>
+                                                <div class="quadrado_review bom" data-value="9"></div>
+                                                <div class="quadrado_review bom" data-value="10"></div>
+                                            </div>
+                                            {{-- <input type="hidden" name="finalizado" value="pc"> --}}
+                                            <select id="status" name="status">
+                                                <option value="finalizado">finalizado</option>
+                                                <option value="metade do jogo">metade do game</option>
+                                                <option value="começo do jogo">começo do game</option>
+                                            </select>
+                                            <select id="finalizado" name="finalizado">
+                                                <option value="pc">pc</option>
+                                                <option value="switch">switch</option>
+                                                <option value="playstation 4">playstation 4</option>
+                                                <option value="playstation 5">playstation 5</option>
+                                                <option value="xbox one">xbox one</option>
+                                            </select>
+                                        </div>
+                                        <textarea id="review" required name="content" rows="4" cols="50" placeholder="Escreva sua review aqui..."></textarea>
                                         <button type="submit" id="enviar_review">Enviar</button>
                                         <button type="button" id="cancel_review">Cancelar</button>
                                     </form>
-                                </div>
-                                <div id="show_list" style="display: none;">
-                                    <div class="menu_listas">
-                                        <ul>
-                                            @foreach ($playlists as $playlist )
-                                                <li>
-                                                    <form action="{{ route('store.game', ['id_playlist' => $playlist->id, 'id_game' => $game['id']]) }}" method="POST">
-                                                        @csrf
-                                                         {{-- <input type="hidden" value="{{$playlist->id}}" id="id_playlist" name="id_playlist">
-                                                         <input type="hidden" value="{{$game['id']}}" id="id_game" name="id_game"> --}}
-                                                         <button type="submit" onclick="storeGame({{$playlist->id}}, {{$game['id']}}, event)">{{$playlist->name}}</button>
-                                                        </form>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                        <button type="button" id="cancel_list">Cancelar</button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -410,12 +395,16 @@
                             <div class="acoes" id="acoes">
                                 @if (auth()->check())
                                     <img onclick="showMenuList()" src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="Adicionar Jogo a lista" id="add_game">
-                                    <img style="cursor: pointer;" onclick="favoriteGame({{$game['id']}})" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
+                                   @if ($favorite == true)
+                                    <img style="cursor: pointer;" onclick="favoriteGame({{$game['id']}})" data-img-liked="{{asset('svg/game/heart-svgrepo-com-red.svg')}}" data-imgnolike="{{asset('svg/game/heart-svgrepo-com.svg')}}" src="{{asset('svg/game/heart-svgrepo-com-red.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
+                                   @else
+                                    <img style="cursor: pointer;" onclick="favoriteGame({{$game['id']}})" data-img-liked="{{asset('svg/game/heart-svgrepo-com-red.svg')}}" data-imgnolike="{{asset('svg/game/heart-svgrepo-com.svg')}}" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
+                                   @endif
                                 @else
                                     <img onclick="redirectToLogin()" src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="Adicionar Jogo a lista" id="add_game">
                                     <img style="cursor: pointer;" onclick="redirectToLogin()" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
                                 @endif
-                                <img src="{{asset('svg/game/joystick-svgrepo-com.svg')}}" alt="Link para loja" id="store_game">
+                                    <a href="{{$stores['results']['0']['url']}}"><img src="{{asset('svg/game/joystick-svgrepo-com.svg')}}" alt="Link para loja" id="store_game"></a>
                             </div>
                             <div class="ranking" id="ranking">
                                 <span>minha nota:</span>
@@ -440,9 +429,35 @@
                                     <form id="reviewForm">
                                         <label for="review">Sua Review:</label>
                                         <input type="hidden" name="id_game" value="{{$game['id']}}">
-                                        {{-- <input type="hidden" name="rating" value="10"> --}}
-                                        <input type="hidden" name="finalizado" value="pc">
-                                        <textarea id="review" name="content" rows="4" cols="50" placeholder="Escreva sua review aqui..."></textarea>
+                                        <div class="superior">
+                                            <input type="hidden" name="rating" value="10" id="ratingInput">
+                                            <div class="quadrados_nota_review">
+                                                <div class="quadrado_review ruim" data-value="1"></div>
+                                                <div class="quadrado_review ruim" data-value="2"></div>
+                                                <div class="quadrado_review ruim" data-value="3"></div>
+                                                <div class="quadrado_review ruim" data-value="4"></div>
+                                                <div class="quadrado_review mid" data-value="5"></div>
+                                                <div class="quadrado_review mid" data-value="6"></div>
+                                                <div class="quadrado_review mid" data-value="7"></div>
+                                                <div class="quadrado_review bom" data-value="8"></div>
+                                                <div class="quadrado_review bom" data-value="9"></div>
+                                                <div class="quadrado_review bom" data-value="10"></div>
+                                            </div>
+                                            {{-- <input type="hidden" name="finalizado" value="pc"> --}}
+                                            <select id="status" name="status">
+                                                <option value="finalizado">finalizado</option>
+                                                <option value="metade do jogo">metade do game</option>
+                                                <option value="começo do jogo">começo do game</option>
+                                            </select>
+                                            <select id="finalizado" name="finalizado">
+                                                <option value="pc">pc</option>
+                                                <option value="switch">switch</option>
+                                                <option value="playstation 4">playstation 4</option>
+                                                <option value="playstation 5">playstation 5</option>
+                                                <option value="xbox one">xbox one</option>
+                                            </select>
+                                        </div>
+                                        <textarea id="review" required name="content" rows="4" cols="50" placeholder="Escreva sua review aqui..."></textarea>
                                         <button type="submit" id="enviar_review">Enviar</button>
                                         <button type="button" id="cancel_review">Cancelar</button>
                                     </form>
@@ -497,74 +512,84 @@
                             </div>
                             <div class="informações_comentario">
                                 <span>{{$comentario->user->name}}</span>
-                                @if ($comentario->rating = 10)
+                                @if ($comentario->rating == 10)
                                 <div class="rating">
                                     <div class="quadrado_rating" style="background-color: #6ECC8E;"></div>
                                     <div class="quadrado_rating" style="background-color: #6ECC8E;"></div>
                                     <div class="quadrado_rating" style="background-color: #6ECC8E;"></div>
-                                    <span><span class="finalizado">finalizado</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
+                                    <span><span class="finalizado">{{$comentario->status}}</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
                                 </div>
-                                @elseif ($comentario->rating = 9)
+                                @elseif ($comentario->rating == 9)
                                 <div class="rating">
                                     <div class="quadrado_rating" style="background-color: #6ECC8E;"></div>
                                     <div class="quadrado_rating" style="background-color: #6ECC8E;"></div>
-                                    <span><span class="finalizado">finalizado</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
+                                    <span><span class="finalizado">{{$comentario->status}}</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
                                 </div>
-                                @elseif ($comentario->rating = 8)
+                                @elseif ($comentario->rating == 8)
                                 <div class="rating">
                                     <div class="quadrado_rating" style="background-color: #6ECC8E;"></div>
-                                    <span><span class="finalizado">finalizado</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
+                                    <span><span class="finalizado">{{$comentario->status}}</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
                                 </div>
-                                @elseif ($comentario->rating = 7)
+                                @elseif ($comentario->rating == 7)
                                 <div class="rating">
                                     <div class="quadrado_rating" style="background-color:#96D9E0;"></div>
                                     <div class="quadrado_rating" style="background-color:#96D9E0;"></div>
                                     <div class="quadrado_rating" style="background-color:#96D9E0;"></div>
-                                    <span><span class="finalizado">finalizado</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
+                                    <span><span class="finalizado">{{$comentario->status}}</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
                                 </div>
-                                @elseif ($comentario->rating = 6)
+                                @elseif ($comentario->rating == 6)
                                 <div class="rating">
                                     <div class="quadrado_rating" style="background-color:#96D9E0;"></div>
                                     <div class="quadrado_rating" style="background-color:#96D9E0;"></div>
-                                    <span><span class="finalizado">finalizado</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
+                                    <span><span class="finalizado">{{$comentario->status}}</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
                                 </div>
-                                @elseif ($comentario->rating = 5)
+                                @elseif ($comentario->rating == 5)
                                 <div class="rating">
                                     <div class="quadrado_rating" style="background-color:#96D9E0;"></div>
-                                    <span><span class="finalizado">finalizado</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
+                                    <span><span class="finalizado">{{$comentario->status}}</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
                                 </div>
-                                @elseif ($comentario->rating = 4)
-                                    <div class="quadrado_rating" style="background-color:#CC697B;"></div>
-                                    <div class="quadrado_rating" style="background-color:#CC697B;"></div>
-                                    <div class="quadrado_rating" style="background-color:#CC697B;"></div>
-                                    <div class="quadrado_rating" style="background-color:#CC697B;"></div>
-                                    <span><span class="finalizado">finalizado</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
-                                @elseif ($comentario->rating = 3)
-                                    <div class="quadrado_rating" style="background-color:#CC697B;"></div>
-                                    <div class="quadrado_rating" style="background-color:#CC697B;"></div>
-                                    <div class="quadrado_rating" style="background-color:#CC697B;"></div>
-                                    <span><span class="finalizado">finalizado</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
-                                @elseif ($comentario->rating = 2)
-                                    <div class="quadrado_rating" style="background-color:#CC697B;"></div>
-                                    <div class="quadrado_rating" style="background-color:#CC697B;"></div>
-                                    <span><span class="finalizado">finalizado</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
-                                @elseif ($comentario->rating = 1)
-                                    <div class="quadrado_rating" style="background-color:#CC697B;"></div>
-                                    <span><span class="finalizado">finalizado</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
+                                @elseif ($comentario->rating == 4)
+                                    <div class="rating">
+                                        <div class="quadrado_rating" style="background-color:#CC697B;"></div>
+                                        <div class="quadrado_rating" style="background-color:#CC697B;"></div>
+                                        <div class="quadrado_rating" style="background-color:#CC697B;"></div>
+                                        <div class="quadrado_rating" style="background-color:#CC697B;"></div>
+                                        <span><span class="finalizado">{{$comentario->status}}</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
+                                    </div>
+                                @elseif ($comentario->rating == 3)
+                                    <div class="rating">
+                                        <div class="quadrado_rating" style="background-color:#CC697B;"></div>
+                                        <div class="quadrado_rating" style="background-color:#CC697B;"></div>
+                                        <div class="quadrado_rating" style="background-color:#CC697B;"></div>
+                                        <span><span class="finalizado">{{$comentario->status}}</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
+                                    </div>
+                                @elseif ($comentario->rating == 2)
+                                    <div class="rating">
+                                        <div class="quadrado_rating" style="background-color:#CC697B;"></div>
+                                        <div class="quadrado_rating" style="background-color:#CC697B;"></div>
+                                        <span><span class="finalizado">{{$comentario->status}}</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
+                                    </div>
+                                @elseif ($comentario->rating == 1)
+                                    <div class="rating">
+                                        <div class="quadrado_rating" style="background-color:#CC697B;"></div>
+                                        <span><span class="finalizado">{{$comentario->status}}</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
+                                    </div>
                                 @else
+                                <div class="rating">
                                     <div class="quadrado_rating"></div>
                                     <div class="quadrado_rating"></div>
                                     <div class="quadrado_rating"></div>
-                                    <span><span class="finalizado">finalizado</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
+                                    <span><span class="finalizado">{{$comentario->status}}</span> em <span class="finalizado">{{$comentario->finalizado}}</span></span>
+                                </div>
                                 @endif
                                 <span style="color: white;">{{$comentario->content}}</span>
                                 <div class="like">
                                     @if (auth()->check())
-                                        <img style="cursor: pointer;" onclick="likeComment({{$comentario->id}}, {{$comentario->user_id}})" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar comentário" id="like_comment">
+                                        <img style="cursor: pointer;" onclick="likeComment({{$comentario->id}}, {{$comentario->user_id}})" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" data-reviewCurtido="{{asset('svg/game/heart-svgrepo-com-red.svg')}}" data-semCurtida="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar comentário" id="like_comment">
                                     @else
                                         <img style="cursor: pointer;" onclick="redirectToLogin()" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar comentário" id="like_comment">
                                     @endif
-                                        <span>{{$comentario->likes_count}}</span>
+                                        <span id="comment_count">{{$comentario->likes_count}}</span>
                                 </div>
                             </div>
                         </div>
