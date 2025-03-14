@@ -199,7 +199,6 @@ body{
     border-radius: 30px !important;
     margin: 0px !important;
     font-family: 'Poppins';
-    text-transform: lowercase;
 }
 
 /* Div principal para comportar a login form e a logo no topo */
@@ -223,7 +222,6 @@ body{
     border-radius: 20px;
     width: 90%;
     height: auto;
-    text-transform: lowercase;
     font-family: 'Poppins'
 }
 
@@ -257,7 +255,6 @@ body{
     width: 100%;
     border-radius: 15px;
     transition: .4s;
-    text-transform: lowercase;
     font-family: 'Poppins'
 }
 
@@ -278,7 +275,6 @@ body{
     font-weight: bold;
     color: #DA85DD !important;
     transition: .4s;
-    text-transform: lowercase;
     font-family: 'Poppins'
 }
 
@@ -315,7 +311,6 @@ h1 > small > a{
     text-decoration: none;
     font-size: 16px;
     color: #5e5d5d;
-    text-transform: lowercase;
     font-family: 'Poppins'
 }
 
@@ -483,7 +478,6 @@ h1 > small > a{
     width: 70%;
     font-weight: bold;
     font-size: 14px;
-    text-transform: lowercase;
     font-family: 'Poppins'
 }
 
