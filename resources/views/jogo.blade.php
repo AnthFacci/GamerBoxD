@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-guest-layout :informacoes_user="$informacoes_user">
     @push('style')
         <link rel="stylesheet" href="{{asset('css/jogo.css')}}">
     @endpush
@@ -9,7 +9,7 @@
         const loginRoute = "{{ route('login') }}";
     </script>
     <div class="text-white min-vh-100 d-flex flex-column">
-        <nav class="navbar navbar-expand-lg fixed-top navbar-css">
+        {{-- <nav class="navbar navbar-expand-lg fixed-top navbar-css">
             <div class="container-fluid justify-content-evenly">
                 <a class="navbar-brand ps-5 logo-site" href="{{route('home')}}">
                     <img src="{{asset('svg/logo.png')}}" alt="logo gamerboxd" width="auto" height="auto" loading="lazy">
@@ -36,7 +36,7 @@
                     </div>
                 </div>
             </div>
-        </nav>
+        </nav> --}}
         {{-- Main Section --}}
         <div class="container-fluid flex-grow-1 d-flex flex-column h-auto" style="padding: 0px !important; margin-top: 80px; gap: 100px;">
             <div class="capa container-fluid" style="padding: 0px !important;">

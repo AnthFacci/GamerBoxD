@@ -11,34 +11,85 @@ use App\Models\playlist;
 use Illuminate\Support\Facades\Log;
 use App\Models\playlist_games;
 use App\Models\User;
+use Illuminate\Support\Facades\Cache;
 
 class JogoController extends Controller
 {
     protected $RAWG;
+    protected $cacheTime = 3600;
 
     public function __construct(RAWG $rawg) {
         $this->RAWG = $rawg;
     }
+
     public function index($id){
         $userId = auth()->id();
-        $favorite = Favorite::where('game_id', $id)
-        ->where('user_id', $userId)
-        ->first();
-        if(isset($favorite->id)){
-            $favorite = true;
+        $cacheKeyUser = 'user_infos' . $userId;
+        $cacheIsFavorite = 'IsFavorit'. $userId;
+        $cachePlaylists = 'PlaylistsInsideGame' . $userId;
+        $cacheGame = 'game_infos' . $id;
+        $CacheStores = 'games_stores_infos' . $id;
+        $CacheCommentOnGame = 'commentsOnGame' . $id;
+
+        if(Cache::has($cacheKeyUser)){
+            $informacoes_user = Cache::get($cacheKeyUser);
+            Log::info('Cache entregou os user info no games');
         }else{
-            $favorite = false;
+            $informacoes_user = User::where('id', $userId)->first();
+            Cache::put($cacheKeyUser, $informacoes_user, $this->cacheTime);
         }
-        Log::info($favorite . 'faovorito');
-        $userId = auth()->id();
-        $informacoes_user = User::where('id', $userId)->first();
-        $playlists = playlist::where('user_id', $userId)->get();
-        $game = $this->RAWG->makeRequestById('games', $id);
-        $stores = $this->RAWG->makeRequestTwoBar('games', 'stores', $id);
-        $comments = Comment::with('user')->withCount('likes')->where('game_id', $id)->orderBy('created_at')->get();
-        Log::info('Esse é o primeiro comentário: '. $comments);
+
+        if(Cache::has($cacheIsFavorite)){
+            $favorite = Cache::get($cacheIsFavorite);
+            Log::info('O cache entregou o favorito!');
+        }else{
+            $favorite = Favorite::where('game_id', $id)
+            ->where('user_id', $userId)
+            ->first();
+            if(isset($favorite->id)){
+                $favorite = true;
+            }else{
+                $favorite = false;
+            }
+
+            Cache::put($cacheIsFavorite, $favorite, $this->cacheTime);
+        }
+
+        if(Cache::has($cachePlaylists)){
+            $playlists = Cache::get($cachePlaylists);
+            Log::info('Cache entregou a playlist dentro da pag jogo');
+        }else{
+            $playlists = playlist::where('user_id', $userId)->get();
+            Cache::put($cachePlaylists, $playlists, $this->cacheTime);
+        }
+
+        if(Cache::has($cacheGame)){
+            $game = Cache::get($cacheGame);
+            Log::info('Cache entregou os dados do game');
+        }else{
+            $game = $this->RAWG->makeRequestById('games', $id);
+            Cache::put($cacheGame, $game, $this->cacheTime);
+        }
+
+        if(Cache::has($CacheStores)){
+            $stores = Cache::get($CacheStores);
+            Log::info('Cache entregou as infos stores do game!');
+        }else{
+            $stores = $this->RAWG->makeRequestTwoBar('games', 'stores', $id);
+            Cache::put($CacheStores, $stores, $this->cacheTime);
+        }
+
+        if(Cache::has($CacheCommentOnGame)){
+            $comments = Cache::get($CacheCommentOnGame);
+            Log::info('Log entregou os comentários feitos no game!');
+        }else{
+            $comments = Comment::with('user')->withCount('likes')->where('game_id', $id)->orderBy('created_at')->get();
+            Cache::put($CacheCommentOnGame, $comments, $this->cacheTime);
+        }
+
+        // Log::info('Esse é o primeiro comentário: '. $comments);
         // Log::info($game);
-        Log::info($stores);
+        // Log::info($stores);
         // if($stores != null){
         //     $store = $stores[0]['url'];
         //     Log::info($store . 'eiittaa');
@@ -130,6 +181,8 @@ class JogoController extends Controller
             if ($favorite) {
                 // Se o favorito existir, deleta
                 $favorite->delete();
+                Cache::forget("favoritos_infos{$userId}");
+                Cache::forget("IsFavorit{$userId}");
                 return response()->json([
                     'success' => true,
                     'message' => 'Favorito removido com sucesso!',
@@ -140,6 +193,8 @@ class JogoController extends Controller
                     'game_id' => $request->game_id,
                     'user_id' => $userId
                 ]);
+                Cache::forget("favoritos_infos{$userId}");
+                Cache::forget("IsFavorit{$userId}");
                 return response()->json([
                     'success' => true,
                     'message' => 'Favorito adicionado com sucesso!',
@@ -172,6 +227,7 @@ class JogoController extends Controller
                     'playlist_id' => $request->id_playlist,
                     'game_id' => $request->id_game
                 ]);
+                Cache::forget("playlist_games_info{$request->id_playlist}");
                 return response()->json([
                     'success' => true,
                     'message' => 'Game adicionado com sucesso!',

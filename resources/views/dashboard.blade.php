@@ -1,11 +1,11 @@
-<x-app-layout>
+<x-app-layout :informacoes_user="$informacoes_user">
     @push('style')
         <link rel="stylesheet" href="{{asset('css/perfil.css')}}">
     @endpush
     @push('scripts')
         <script src="{{ asset('js/dashboard.js') }}" defer></script>
     @endpush
-    <nav class="navbar navbar-expand-lg fixed-top navbar-css">
+    {{-- <nav class="navbar navbar-expand-lg fixed-top navbar-css">
         <div class="container-fluid justify-content-evenly">
             <a class="navbar-brand ps-5 logo-site" href="{{route('home')}}">
                 <img src="{{asset('svg/logo.png')}}" alt="logo gamerboxd" width="auto" height="auto" loading="lazy">
@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-    </nav>
+    </nav> --}}
 
     <main class="container my-5">
         <div class="foto_nome">

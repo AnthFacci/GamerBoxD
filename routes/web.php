@@ -6,6 +6,9 @@ use App\Http\Controllers\JogosController;
 use App\Http\Controllers\AllGames;
 use App\Http\Controllers\JogoController;
 use App\Http\Controllers\listGames;
+use App\Http\Controllers\RecomendationController;
+use App\Http\Controllers\GiftController;
+use App\Http\Controllers\SearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +38,13 @@ Route::prefix('jogo')->group(function () {
     Route::post('/storeGameOnList/{id_playlist}/{id_game}', [JogoController::class, 'store_list'])->name('store.game');
 });
 
+Route::prefix('search')->group(function(){
+    Route::get('/', [SearchController::class, 'index'])->name('search.users');
+});
+
+Route::prefix('premios')->group(function (){
+    Route::get('/{id}', [GiftController::class, 'index'])->name('premios');
+});
 
 Route::middleware([
     'auth:sanctum',
@@ -47,5 +57,5 @@ Route::middleware([
     Route::post('/storeList', [listGames::class, 'store_list'])->name('store.lista');
     Route::delete('/removeGameFromList/{id_playlist}/{id_game}', [listGames::class, 'remove_game'])->name('delete.game');
     Route::delete('/removeList/{id_playlist}/{user_id}', [listGames::class, 'remove_list'])->name('delete.list');
-
+    Route::get('/recomendation', [RecomendationController::class, 'index'])->name('recomendation');
 });

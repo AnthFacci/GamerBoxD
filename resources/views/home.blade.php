@@ -1,64 +1,96 @@
-<x-guest-layout>
+<x-guest-layout :informacoes_user="$informacoes_user">
     @push('scripts')
         <script src="{{ asset('js/home.js') }}" defer></script>
     @endpush
-  <div class="text-white min-vh-100 d-flex flex-column">
-    <nav class="navbar navbar-expand-lg fixed-top navbar-css">
-        <div class="container-fluid justify-content-evenly">
-            <a class="navbar-brand ps-5 logo-site" href="{{route('home')}}">
-                <img src="{{asset('svg/logo.png')}}" alt="logo gamerboxd" width="auto" height="auto" loading="lazy">
+    @push('style')
+        <link rel="stylesheet" href="{{asset('css/pagina_inicial.css')}}">
+    @endpush
+    <div class="Container--images">
+        <div class="Container--images--card">
+            <a href="{{route('jogo', ['id' => $data[0]['id']])}}">
+                <img src="{{$data[0]['background_image']}}" alt="Imagem dentro da div">
             </a>
-
-            <button class="navbar-toggler text-white border-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse pe-5 justify-content-end" id="navbarNav">
-                <div class="navbar-nav ms-auto ancor-nav nav-custom">
-                    @if (auth()->check())
-                    <a href="{{route('home')}}" class="nav-link_real">página inicial</a>
-                    <a href="{{route('jogos')}}" class="nav-link_real">home</a>
-                    <a href="{{route('catalogo')}}" class="nav-link_real">jogos</a>
-                    <a href="{{route('dashboard')}}" class="nav-link_real"><img src="{{$informacoes_user->profile_photo_url}}" alt=""></a>
-                    @else
-                    <a href="{{route('login')}}" class="nav-link_real">login</a>
-                    <a href="{{route('register')}}" class="nav-link_real">criar conta</a>
-                    <a href="{{route('home')}}" class="nav-link_real">página inicial</a>
-                    <a href="{{route('jogos')}}" class="nav-link_real">home</a>
-                    <a href="{{route('catalogo')}}" class="nav-link_real">jogos</a>
-                    @endif
-                </div>
-            </div>
         </div>
-    </nav>
-    {{-- MAIN SECTION --}}
-    <div class="container-fluid flex-grow-1 d-flex h-auto">
-      <div class="flex-grow-1 d-flex justify-content-center align-items-center class-custom">
-        {{-- <div class="normal"> --}}
-            <div class="img">
-              <a href="{{route('jogo', ['id' => $data[0]['id']])}}">
-                <img src="{{$data[0]['background_image']}}" alt="Imagem dentro da div" class="masked-image" id="imagemCruz">
-              </a>
-            </div>
-        {{-- </div> --}}
-        <div class="normal_three">
-          <div class="d-flex justify-content-center align-items-center rounded-circle overflow-hidden custom-round-image" style="width: 180px; height: 180px;">
-            <a href="{{route('jogo', ['id' => $data[1]['id']])}}" class="w-100 h-100" style="object-fit: cover; object-position: center;">
-              <img src="{{$data[1]['background_image']}}" alt="Imagem dentro da div" class="w-100 h-100" style="object-fit: cover; object-position: center;" />
+        <div class="Container--images--card">
+            <a href="{{route('jogo', ['id' => $data[1]['id']])}}">
+                <img src="{{$data[1]['background_image']}}" alt="Imagem dentro da div">
             </a>
-          </div>
-          <div class="d-flex justify-content-center align-items-center rounded-circle overflow-hidden custom-round-image2" style="width: 180px; height: 180px;">
-            <a href="{{route('jogo', ['id' => $data[2]['id']])}}" class="w-100 h-100" style="object-fit: cover; object-position: center;">
-              <img src="{{$data[2]['background_image']}}" alt="Imagem dentro da div" class="w-100 h-100" style="object-fit: cover; object-position: center;" />
-            </a>
-          </div>
-          <div class="d-flex justify-content-center align-items-center rounded-circle overflow-hidden custom-round-image" style="width: 180px; height: 180px;">
-            <a href="{{route('jogo', ['id' => $data[3]['id']])}}" class="w-100 h-100" style="object-fit: cover; object-position: center;">
-              <img src="{{$data[3]['background_image']}}" alt="Imagem dentro da div" class="w-100 h-100" style="object-fit: cover; object-position: center;" />
-            </a>
-          </div>
         </div>
-      </div>
+        <div class="Container--images--card">
+            <a href="{{route('jogo', ['id' => $data[2]['id']])}}">
+                <img src="{{$data[2]['background_image']}}" alt="Imagem dentro da div">
+            </a>
+        </div>
+        <div class="Container--images--card">
+            <a href="{{route('jogo', ['id' => $data[3]['id']])}}">
+                <img src="{{$data[3]['background_image']}}" alt="Imagem dentro da div">
+            </a>
+        </div>
+        <div class="Container--images--card">
+            <a href="{{route('jogo', ['id' => $data[4]['id']])}}">
+                <img src="{{$data[4]['background_image']}}" alt="Imagem dentro da div">
+            </a>
+        </div>
+        <div class="Container--images--card">
+            <a href="{{route('jogo', ['id' => $data[5]['id']])}}">
+                <img src="{{$data[5]['background_image']}}" alt="Imagem dentro da div">
+            </a>
+        </div>
+        <div class="Container--images--card">
+            <a href="{{route('jogo', ['id' => $data[6]['id']])}}">
+                <img src="{{$data[6]['background_image']}}" alt="Imagem dentro da div">
+            </a>
+        </div>
     </div>
-  </div>
+    <div class="Container--Ancor--Noticias">
+        <a href="#giveways" class="Container--Ancor--Noticias--Ancor">
+            <img src="{{asset('svg/down.svg')}}" alt="">
+        </a>
+    </div>
+    <div class="Container--Main--Giveway" id="giveways">
+        <div class="Container--Main--Giveway--Title">
+            <h1>Ganhe jogos grátis e Brindes!</h1>
+        </div>
+        <div class="Container--Giveways">
+            @foreach (array_slice($data_giveways, 0, 9) as $data)
+                <div class="Container--Giveways--items">
+                    <a href="{{route('premios', ['id' => $data['id']])}}" target="_blank">
+                        <div class="Container--Giveways--items--ancor-img">
+                            <img src="{{$data['image']}}" alt="">
+                        </div>
+                        <div class="Container--Giveways--items--ancor-infos">
+                            <div class="Container--Giveways--items-ancor--infos-span">
+                                <span>{{$data['title']}}</span>
+                            </div>
+                            <div class="Container--Giveways--items--ancor--infos--images">
+                                @foreach (array_map('trim', explode(',', $data['platforms'])) as $platform)
+                                    @if (Str::startsWith($platform, 'Playstation'))
+                                        <img src="{{asset('svg/playstation.svg')}}" alt="">
+                                    @elseif(Str::startsWith($platform, 'Xbox'))
+                                        <img src="{{asset('svg/xbox.svg')}}" alt="">
+                                    @elseif(Str::startsWith($platform, 'Nintendo'))
+                                        <img src="{{asset('svg/nintendo-switch.svg')}}" alt="">
+                                    @elseif ($platform == 'Steam')
+                                        <img src="{{asset('svg/steam.svg')}}" alt="">
+                                    @elseif ($platform == 'Android')
+                                        <img src="{{asset('svg/android.svg')}}" alt="">
+                                    @elseif ($platform == 'iOS')
+                                        <img src="{{asset('svg/apple.svg')}}" alt="">
+                                    @elseif (Str::startsWith($platform, 'Epic'))
+                                        <img src="{{asset('svg/epic.svg')}}" alt="">
+                                    @elseif($platform == 'Itch.io')
+                                        <img src="{{asset('svg/itch-dot-io.svg')}}" alt="">
+                                    @elseif($platform == 'PC')
+                                        <img src="{{asset('svg/pc.svg')}}" alt="">
+                                    @else
+                                        <img src="{{asset('svg/broken-chain.svg')}}" alt="">
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+    </div>
 </x-guest-layout>

@@ -1,9 +1,9 @@
-<x-guest-layout>
+<x-guest-layout :informacoes_user="$informacoes_user">
     @push('scripts')
         <script src="{{ asset('js/jogos.js') }}" defer></script>
     @endpush
     <div class="text-white min-vh-100 d-flex flex-column">
-        <nav class="navbar navbar-expand-lg fixed-top navbar-css">
+        {{-- <nav class="navbar navbar-expand-lg fixed-top navbar-css">
             <div class="container-fluid justify-content-evenly">
                 <a class="navbar-brand ps-5 logo-site" href="{{route('home')}}">
                     <img src="{{asset('svg/logo.png')}}" alt="logo gamerboxd" width="auto" height="auto" loading="lazy">
@@ -30,7 +30,7 @@
                     </div>
                 </div>
             </div>
-        </nav>
+        </nav> --}}
       {{-- MAIN SECTION --}}
         <div class="container-fluid flex-grow-1 d-flex flex-column h-auto mb-5" style="margin-top: 60px;">
             {{-- CAROUSEL DE LANÇAMENTOS --}}
