@@ -69,7 +69,7 @@
 
                 </div>
                 <div class="main--search--full--page">
-                    <a href="#">Acesse a página de pesquisa completa</a>
+                    <a href="{{route('search.screen')}}">Acesse a página de pesquisa completa</a>
                     <span>Máximo: Quatro resultados</span>
                 </div>
             </div>

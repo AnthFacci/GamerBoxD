@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use App\Models\playlist_games;
 
 class playlist extends Model
 {
@@ -25,5 +27,10 @@ class playlist extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function jogos()
+    {
+        return $this->hasMany(playlist_games::class);
     }
 }

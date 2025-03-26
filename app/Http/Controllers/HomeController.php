@@ -43,7 +43,7 @@ class HomeController extends Controller
             Log::info($informacoes_user);
         }
 
-        $informacoes_user = User::where('id', $userId)->first();
+        // $informacoes_user = User::where('id', $userId)->first();
 
         $params = [
             'page' => 1,

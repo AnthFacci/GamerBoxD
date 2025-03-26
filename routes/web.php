@@ -9,6 +9,7 @@ use App\Http\Controllers\listGames;
 use App\Http\Controllers\RecomendationController;
 use App\Http\Controllers\GiftController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,11 @@ Route::prefix('jogo')->group(function () {
 
 Route::prefix('search')->group(function(){
     Route::get('/', [SearchController::class, 'index'])->name('search.users');
+    Route::get('/usuarios', [SearchController::class, 'searchScreen'])->name('search.screen');
+});
+
+Route::prefix('perfil')->group(function(){
+    Route::get('/{id}', [UserController::class, 'index'])->name('perfil.user');
 });
 
 Route::prefix('premios')->group(function (){
