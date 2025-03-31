@@ -1,10 +1,147 @@
 .main--content--perfil{
     width: 100%;
-    height: 88vh;
+    min-height: 88vh;
+    /* height: auto; */
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     padding: 10px;
     gap: 5px;
     border: 2px solid blue;
+}
+
+.main--content--perfil--fotos--titulos{
+    width: 100%;
+    height: auto;
+    border: 2px solid green;
+    padding: 10px;
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.main--content--perfil--fotos--titulos > h1{
+    font-size: 18px;
+    font-weight: bold;
+    color: #f5f5f5;
+}
+
+.main--content--perfil--fotos--titulos > img{
+    border-radius: 50%;
+}
+
+
+/* main--content--perfil--playlist-reviews-likes */
+
+.main--content--perfil--playlist-reviews-likes{
+    width: 100%;
+    height: auto;
+    border: 2px solid green;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 50;
+    /* justify-content: center;
+    align-items: center; */
+}
+
+.main--content--perfil--playlist-reviews-likes-tabsTitle{
+    width: 100%;
+    padding: 10px;
+    height: 10%;
+    display: flex;
+    gap: 40px;
+    border: 1px solid blue;
+    align-items: center;
+    justify-content: center;
+}
+
+.tabsTitle--tablinks{
+    all: unset;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.tabsTitle--tablinks > img{
+    /* height: 80%; */
+    width: 40px;
+}
+
+/* .main--content--perfil--playlist-reviews-likes{
+    width: 100%;
+    border: 1px solid blueviolet;
+    height: 90%;
+    padding: 5px;
+    display: flex;
+} */
+
+
+.main--content--perfil--playlist-reviews-likes--tabsContent{
+    width: 100%;
+    border: 1px solid blueviolet;
+    flex-grow: 100;
+    padding: 5px;
+    display: flex;
+}
+
+/* .main--content--perfil--playlist-reviews-likes-tabsTitle button {
+    transform: scale(1);
+}
+.main--content--perfil--playlist-reviews-likes-tabsTitle button.active {
+    transform: scale(1.1);
+} */
+
+  /* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    flex-grow: 100;
+    border-top: none;
+    color: #f5f5f5;
+    /* height: 100%; */
+    width: 100%;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: start;
+    align-items: start;
+}
+
+.tabcontent--playlist{
+    height: 150px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    border: 1px solid blueviolet;
+}
+
+.tabcontent--playlist > span{
+    font-weight: bold;
+    color: #f5f5f5;
+    font-size: 16px;
+}
+
+
+.tabcontent--review{
+    width: 100%;
+    height: 80px;
+    padding: 5px;
+    border: 1px solid green;
+    border-radius: 20px;
+    display: flex;
+}
+
+.tabcontent--review--img{
+    width: 15%;
+    height: 100%;
+    border: 1px solid red;
+}
+
+.tabcontent--review--content{
+    width: 85%;
+    height: 100%;
+    border: 1px solid blue;
 }

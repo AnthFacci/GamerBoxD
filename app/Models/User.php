@@ -10,6 +10,8 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\playlist;
+use App\Models\Comment;
+use App\Models\commentsreaction;
 
 class User extends Authenticatable
 {
@@ -63,5 +65,15 @@ class User extends Authenticatable
     public function playlists()
     {
         return $this->hasMany(playlist::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(commentsreaction::class);
     }
 }
