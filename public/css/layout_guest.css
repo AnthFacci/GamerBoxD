@@ -33,6 +33,7 @@ html {
     /* border: 1px solid blue; */
     position: fixed;
     background-color: #000000;
+    z-index: 99999;
 }
 
 .Main--container > .main--content{
@@ -42,6 +43,7 @@ html {
     /* border: 5px solid red; */
     display: flex;
     flex-direction: column;
+    border: 1px solid red;
 }
 
 /* ESTILIZAÇÃO DA MAIN SEARCH */
