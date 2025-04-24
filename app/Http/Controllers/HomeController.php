@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Services\RAWG;
+use App\Services\ApiNews;
 use App\Services\GamerPower;
 use DateTime;
 use Illuminate\Support\Facades\Log;
@@ -14,16 +15,18 @@ class HomeController extends Controller
 {
 
     protected $RAWG;
+    protected $ApiNews;
     protected $GamerPower;
     protected $userId;
     protected $cacheTime = 3600;
     protected $cacheKeyGames = 'games_infos';
     protected $cacheKeyGiveways = 'giveways_infos';
 
-    public function __construct(RAWG $RAWG, GamerPower $GamerPower)
+    public function __construct(RAWG $RAWG, GamerPower $GamerPower, ApiNews $ApiNews)
     {
-        $this->RAWG = $RAWG;
-        $this->GamerPower = $GamerPower;
+        $this->RAWG         = $RAWG;
+        $this->ApiNews      = $ApiNews;
+        $this->GamerPower   = $GamerPower;
     }
 
     public function index(){
@@ -70,6 +73,9 @@ class HomeController extends Controller
             Cache::put($this->cacheKeyGiveways, $data_giveways, $this->cacheTime);
         }
 
-        return view('home', compact('data', 'informacoes_user', 'data_giveways'));
+
+        $news = $this->ApiNews->makeRequest();
+
+        return view('home', compact('data', 'informacoes_user', 'data_giveways', 'news'));
     }
 }

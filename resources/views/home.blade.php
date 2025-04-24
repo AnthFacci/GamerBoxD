@@ -49,7 +49,8 @@
     </div>
     <div class="Container--Main--Giveway" id="giveways">
         <div class="Container--Main--Giveway--Title">
-            <h1>Ganhe jogos grátis e Brindes!</h1>
+            <button onclick="openTab(event, 'playlist')"><img src="{{asset('svg/gift.svg')}}" alt=""></button>
+            <button onclick="openTab(event, 'reviews')"><img src="{{asset('svg/news.svg')}}" alt=""></button>
         </div>
         <div class="Container--Giveways">
             @foreach (array_slice($data_giveways, 0, 9) as $data)

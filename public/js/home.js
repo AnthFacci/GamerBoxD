@@ -1,15 +1,13 @@
-// console.log('hello world!')
-
-// function atualizarImagemDeFundo(urlDaImagem) {
-//     const elemento = document.getElementById('imagemCruz');
-//     elemento.style.backgroundImage = `url(${urlDaImagem})`;
-// }
-
-// fetch('https://api.rawg.io/api/games?page=1&page_size=5&ordering=-added&dates=2024-09-01%2C2024-10-31&key=3cc8f416354945f58afdff92aac1f6c8')
-//     .then(response => response.json())
-//     .then(data => {
-//         console.log(data)
-//         const urlDaImagem = data.results[0].background_image;
-//         atualizarImagemDeFundo(urlDaImagem);
-//     })
-//     .catch(error => console.error('Erro ao carregar a imagem:', error));
+function openTab(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "flex";
+    evt.currentTarget.className += " active";
+  }
