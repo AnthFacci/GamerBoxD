@@ -49,10 +49,10 @@
     </div>
     <div class="Container--Main--Giveway" id="giveways">
         <div class="Container--Main--Giveway--Title">
-            <button onclick="openTab(event, 'playlist')"><img src="{{asset('svg/gift.svg')}}" alt=""></button>
-            <button onclick="openTab(event, 'reviews')"><img src="{{asset('svg/news.svg')}}" alt=""></button>
+            <button onclick="openTab(event, 'Container--Giveways')"><img src="{{asset('svg/gift.svg')}}" alt=""></button>
+            <button onclick="openTab(event, 'Container-news')"><img src="{{asset('svg/news.svg')}}" alt=""></button>
         </div>
-        <div class="Container--Giveways">
+        <div class="Container--Giveways" id="Container--Giveways">
             @foreach (array_slice($data_giveways, 0, 9) as $data)
                 <div class="Container--Giveways--items">
                     <a href="{{route('premios', ['id' => $data['id']])}}" target="_blank">
@@ -91,6 +91,26 @@
                         </div>
                     </a>
                 </div>
+            @endforeach
+        </div>
+        <div class="Container-news" id="Container-news">
+            @foreach ($news['data'] as $new)
+            <div class="Container-news--items">
+                <a href="{{$new['link_news']}}" target="_blank">
+                    <div class="Container-news--items--ancor-img">
+                        <img src="{{$new['link_thumb']}}" alt="">
+                    </div>
+                    <div class="Container--news--item--ancor-infos">
+                        <div class="Container--news--item--ancor-infos--title">
+                            <span>{{$new['title']}}</span>
+                        </div>
+                        <div class="Container--news--item--ancor-infos--date">
+                            <img src="{{asset('svg/date.svg')}}" alt="data notícia">
+                            <span>{{$new['date']}}</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
             @endforeach
         </div>
     </div>

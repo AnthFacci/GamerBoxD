@@ -1,13 +1,14 @@
-function openTab(evt, cityName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].style.display = "none";
+function openTab(evt, target) {
+    tabGiveways = document.getElementById('Container--Giveways');
+    tabNews     = document.getElementById('Container-news');
+
+    if(target === 'Container--Giveways'){
+        tabGiveways.style.display = "flex";
+        tabNews.style.display     = "none";
     }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" active", "");
+
+    if(target === 'Container-news'){
+        tabNews.style.display     = "flex";
+        tabGiveways.style.display = "none";
     }
-    document.getElementById(cityName).style.display = "flex";
-    evt.currentTarget.className += " active";
   }
