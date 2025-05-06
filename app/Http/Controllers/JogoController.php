@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\LibreTranslate;
 use App\Services\RAWG;
 use App\Models\Comment;
 use App\Models\commentsreaction;
@@ -15,11 +16,13 @@ use Illuminate\Support\Facades\Cache;
 
 class JogoController extends Controller
 {
+    private $Translate;
     protected $RAWG;
     protected $cacheTime = 3600;
 
-    public function __construct(RAWG $rawg) {
-        $this->RAWG = $rawg;
+    public function __construct(RAWG $rawg, LibreTranslate $Translate) {
+        $this->RAWG      = $rawg;
+        $this->Translate = $Translate;
     }
 
     public function index($id){
@@ -68,6 +71,9 @@ class JogoController extends Controller
             Log::info('Cache entregou os dados do game');
         }else{
             $game = $this->RAWG->makeRequestById('games', $id);
+            if($game['description_raw'] != null){
+                $game['description_raw'] = $this->Translate->makeRequest($game['description_raw']);
+            }
             Cache::put($cacheGame, $game, $this->cacheTime);
         }
 
@@ -87,6 +93,7 @@ class JogoController extends Controller
             Cache::put($CacheCommentOnGame, $comments, $this->cacheTime);
         }
 
+        Log::info($game);
         // Log::info('Esse é o primeiro comentário: '. $comments);
         // Log::info($game);
         // Log::info($stores);

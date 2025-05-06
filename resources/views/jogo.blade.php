@@ -60,8 +60,11 @@
                                     <img onclick="redirectToLogin()" src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="Adicionar Jogo a lista" id="add_game">
                                     <img style="cursor: pointer;" onclick="redirectToLogin()" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
                                 @endif
-                                <a href="{{$stores['results']['0']['url']}}"><img src="{{asset('svg/game/joystick-svgrepo-com.svg')}}" alt="Link para loja" id="store_game"></a>
-                            </div>
+                                @if (!empty($stores['results']['0']['url']))
+                                    <a href="{{$stores['results']['0']['url']}}"><img src="{{asset('svg/game/joystick-svgrepo-com.svg')}}" alt="Link para loja" id="store_game"></a>
+                                @else
+                                    <a href="#"><img src="{{asset('svg/game/joystick-svgrepo-com.svg')}}" alt="Link para loja" id="store_game"></a>
+                                @endif                            </div>
                             <div class="ranking" id="ranking">
                                 <span>minha nota:</span>
                                 <div class="quadrados_nota">
@@ -175,7 +178,11 @@
                                     <img onclick="redirectToLogin()" src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="Adicionar Jogo a lista" id="add_game">
                                     <img style="cursor: pointer;" onclick="redirectToLogin()" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
                                 @endif
-                                <a href="{{$stores['results']['0']['url']}}"><img src="{{asset('svg/game/joystick-svgrepo-com.svg')}}" alt="Link para loja" id="store_game"></a>
+                                @if (!empty($stores['results']['0']['url']))
+                                    <a href="{{$stores['results']['0']['url']}}"><img src="{{asset('svg/game/joystick-svgrepo-com.svg')}}" alt="Link para loja" id="store_game"></a>
+                                @else
+                                    <a href="#"><img src="{{asset('svg/game/joystick-svgrepo-com.svg')}}" alt="Link para loja" id="store_game"></a>
+                                @endif
                             </div>
                             <div class="ranking" id="ranking">
                                 <span>minha nota:</span>
@@ -305,8 +312,11 @@
                                     <img onclick="redirectToLogin()" src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="Adicionar Jogo a lista" id="add_game">
                                     <img style="cursor: pointer;" onclick="redirectToLogin()" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
                                 @endif
-                                <a href="{{$stores['results']['0']['url']}}"><img src="{{asset('svg/game/joystick-svgrepo-com.svg')}}" alt="Link para loja" id="store_game"></a>
-                            </div>
+                                @if (!empty($stores['results']['0']['url']))
+                                    <a href="{{$stores['results']['0']['url']}}"><img src="{{asset('svg/game/joystick-svgrepo-com.svg')}}" alt="Link para loja" id="store_game"></a>
+                                @else
+                                    <a href="#"><img src="{{asset('svg/game/joystick-svgrepo-com.svg')}}" alt="Link para loja" id="store_game"></a>
+                                @endif                            </div>
                             <div class="ranking" id="ranking">
                                 <span>minha nota:</span>
                                 <div class="quadrados_nota">
@@ -404,8 +414,11 @@
                                     <img onclick="redirectToLogin()" src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="Adicionar Jogo a lista" id="add_game">
                                     <img style="cursor: pointer;" onclick="redirectToLogin()" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
                                 @endif
+                                @if (!empty($stores['results']['0']['url']))
                                     <a href="{{$stores['results']['0']['url']}}"><img src="{{asset('svg/game/joystick-svgrepo-com.svg')}}" alt="Link para loja" id="store_game"></a>
-                            </div>
+                                @else
+                                    <a href="#"><img src="{{asset('svg/game/joystick-svgrepo-com.svg')}}" alt="Link para loja" id="store_game"></a>
+                                @endif                            </div>
                             <div class="ranking" id="ranking">
                                 <span>minha nota:</span>
                                 <div class="quadrados_nota">

@@ -35,5 +35,8 @@ return [
         'key' => env('API_KEY'),
         'base_uri' => 'https://api.rawg.io/api/',
     ],
+    'translate' => [
+       'base_uri'  => 'http://localhost:5000/translate'
+    ]
 
 ];
