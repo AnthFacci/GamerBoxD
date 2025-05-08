@@ -1,5 +1,6 @@
-console.log('ola');
-
+const form_image = document.getElementById('form_image');
+const form_picture = document.getElementById('form_picture');
+const add_picture = document.getElementById('add_picture');
 
 function addPlaylist(){
     const menuListas = document.getElementById('menuListas');
@@ -37,6 +38,36 @@ function excluirJogo(event, user_id ,playlist_id) {
     .catch(error => console.error('Erro:', error));
 }
 
+form_image.addEventListener('click', () => {
+    const isExpanded = form_image.getAttribute('aria-expanded');
+    if(isExpanded === 'false'){
+        console.log('teste2');
+        document.querySelector('.add_picture').classList.add('add_picture--active');
+        form_image.setAttribute('aria-expanded', 'true');
+    }else{
+        console.log('teste3');
+        document.querySelector('.add_picture').classList.remove('add_picture--active');
+        form_image.setAttribute('aria-expanded', 'false');
+    }
+});
+
+form_picture.addEventListener('submit', (e) => {
+    e.preventDefault();
+    var formData = new FormData(form_picture);
+
+    // Envia os dados via AJAX
+    fetch('/updatePicture', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Sucesso:', data);
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+    });
+});
 
 document.addEventListener('click', function (event) {
     const menuListas = document.getElementById('menuListas');
@@ -44,6 +75,7 @@ document.addEventListener('click', function (event) {
     const btn_criar = document.getElementById('btn-criar');
     const nm_lista = document.getElementById('nm_lista');
     const pesquisar = document.getElementById('pesquisar');
+
     if (!menuListas.contains(event.target) && event.target !== adicionarLista) {
         menuListas.style.display = 'none';
         pesquisar.classList.add('input_menuListas');

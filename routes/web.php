@@ -61,6 +61,7 @@ Route::middleware([
     Route::get('/favorites', [listGames::class, 'index'])->name('favorites');
     Route::get('/lista/{id}', [listGames::class, 'lista'])->name('listas');
     Route::post('/storeList', [listGames::class, 'store_list'])->name('store.lista');
+    Route::post('/updatePicture', [listGames::class, 'store_picture'])->name('store.picture');
     Route::delete('/removeGameFromList/{id_playlist}/{id_game}', [listGames::class, 'remove_game'])->name('delete.game');
     Route::delete('/removeList/{id_playlist}/{user_id}', [listGames::class, 'remove_list'])->name('delete.list');
     Route::get('/recomendation', [RecomendationController::class, 'index'])->name('recomendation');

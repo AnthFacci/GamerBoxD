@@ -95,6 +95,8 @@ class listGames extends Controller
         // $playlists = playlist::where('user_id', $this->userId)->get();
 
         session(['informacoes_user' => $informacoes_user]);
+        // Log::info($informacoes_user);
+        // dd($informacoes_user);
         return view('dashboard', compact('informacoes_user', 'playlists'));
     }
 
@@ -154,6 +156,30 @@ class listGames extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Erro ao salvar a review. Tente novamente mais tarde.',
+            ], 500);
+        }
+    }
+
+    public function store_picture (Request $request)
+    {
+        try {
+            $userId = auth()->id();
+
+            if ($request->hasFile('imagem')) {
+                $arquivo = $request->file('imagem');
+                $conteudo = file_get_contents($arquivo);
+                User::where('id', $userId)->update(['picture' => $conteudo]);
+            }
+
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Imagem atualizada com sucesso',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e,
             ], 500);
         }
     }

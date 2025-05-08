@@ -37,15 +37,22 @@
     <main class="container my-5">
         <div class="foto_nome">
             <div class="infos">
-                <img src="{{$informacoes_user->profile_photo_url}}" alt="">
+                {{-- <img src="{{$informacoes_user->profile_photo_url}}" alt=""> --}}
+                <img
+                 src="data:image/jpeg;base64,{{ base64_encode($informacoes_user->picture) }}"
+                 alt="Foto do usuário">
                 <span>{{$informacoes_user->name}}</span>
             </div>
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="dropdown-item">
-                    <img src="{{ asset('svg/exit-svgrepo-com.svg') }}" alt="deslogar" class="img_deslogar">
-                </button>
-            </form>        </div>
+            <div class="actions">
+                <a href="#" id="form_image" aria-expanded="false"><img src="{{asset('svg/edit.svg')}}" alt=""></a>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="dropdown-item">
+                        <img src="{{ asset('svg/exit-svgrepo-com.svg') }}" alt="deslogar" class="img_deslogar">
+                    </button>
+                </form>
+            </div>
+        </div>
         <div class="listas">
             <a href="{{route('favorites')}}">
                 <div class="favoritos fix-box">
@@ -74,6 +81,14 @@
                     </ul>
                 </div>
             </div>
+        </div>
+
+        <div class="add_picture" id="add_picture">
+            <form action="{{route('store.picture')}}" method="post" id="form_picture">
+                @csrf
+                <input type="file" name="imagem">
+                <button type="submit">Enviar</button>
+            </form>
         </div>
       </main>
 

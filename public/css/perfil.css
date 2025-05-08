@@ -133,9 +133,16 @@
     font-size: 25px;
 }
 
+.infos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
 .foto_nome > .infos >  img{
-    width: 65px;
-    height: 65px;
+    width: 110px;
+    height: 110px;
     border-radius: 50%;
 }
 
@@ -274,16 +281,84 @@
     min-height: 100%;
 }
 
-.foto_nome > form > button > .img_deslogar{
+.actions{
+    display: flex;
+    gap: 10px;
+}
+
+.foto_nome > .actions >  form > button > .img_deslogar{
     width: 50px;
     height: 50px;
     cursor: pointer;
     transition: .4s;
 }
 
-.foto_nome > form > button > .img_deslogar:hover{
+.foto_nome > .actions > form > button > .img_deslogar:hover{
     width: 50px;
     height: 50px;
     cursor: pointer;
     transform: scale(1.1);
+}
+
+.foto_nome > .actions >  a > img{
+    width: 45px;
+    height: 50px;
+    cursor: pointer;
+    transition: .4s;
+}
+
+.foto_nome > .actions > a > img:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.add_picture{
+    display: none;
+    position: fixed;
+    top: 53%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    height: 40%;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.95);
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+
+.add_picture--active{
+    display: flex;
+    flex-direction: column;
+}
+
+.add_picture > form{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.add_picture > form > input{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+}
+
+.add_picture > form > button{
+    width: 70%;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #16141f;
+    color: #fff;
+    transition: .5s;
+}
+
+.add_picture > form > button:hover{
+    transform: scale(1.090);
 }
