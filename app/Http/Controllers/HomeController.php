@@ -39,11 +39,11 @@ class HomeController extends Controller
         if(Cache::has($cacheKeyUser)){
             $informacoes_user = Cache::get($cacheKeyUser);
             Log::info('Cache entregou os dados do usuário!');
-            Log::info($informacoes_user);
+            // Log::info($informacoes_user);
         }else{
             $informacoes_user = User::where('id', $userId)->first();
             Cache::put($cacheKeyUser, $informacoes_user, $this->cacheTime);
-            Log::info($informacoes_user);
+            // Log::info($informacoes_user);
         }
 
         // $informacoes_user = User::where('id', $userId)->first();

@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="{{asset('css/pagina_inicial.css')}}">
     @endpush
     <div class="Container--images">
+        <h1>Populares Agora ⭐</h1>
         <div class="Container--images--card">
             <a href="{{route('jogo', ['id' => $data[0]['id']])}}">
                 <img src="{{$data[0]['background_image']}}" alt="Imagem dentro da div">
@@ -49,8 +50,8 @@
     </div>
     <div class="Container--Main--Giveway" id="giveways">
         <div class="Container--Main--Giveway--Title">
-            <button onclick="openTab(event, 'Container--Giveways')"><img src="{{asset('svg/gift.svg')}}" alt=""></button>
-            <button onclick="openTab(event, 'Container-news')"><img src="{{asset('svg/news.svg')}}" alt=""></button>
+            <button onclick="openTab(event, 'Container--Giveways')" data-active="true" id="gift" class="button_target"><img src="{{asset('svg/gift.svg')}}" alt=""></button>
+            <button onclick="openTab(event, 'Container-news')" data-active="false" id="news"><img src="{{asset('svg/news.svg')}}" alt=""></button>
         </div>
         <div class="Container--Giveways" id="Container--Giveways">
             @foreach (array_slice($data_giveways, 0, 9) as $data)

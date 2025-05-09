@@ -63,7 +63,11 @@ function UpdateData(){
 
          // Atribuição de valores
          span.innerHTML = user.name;
-         img.src = user.profile_photo_url;
+        if(user.picture != null){
+            img.src = user.picture;
+        }else{
+            img.src = user.profile_photo_url;
+        }
          ancor.href = `/perfil/${user.id}`;
 
          // Adição de classes

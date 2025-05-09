@@ -30,6 +30,9 @@ class UserController extends Controller
             Log::info($informacoes_user->likes);
         }else{
             $informacoes_user = User::with('playlists.jogos', 'reviews.likes', 'likes.comment', 'likes.user')->where('id', $id)->first();
+            if ($informacoes_user->picture) {
+                $informacoes_user->picture = 'data:image/jpeg;base64,' . base64_encode($informacoes_user->picture);
+            }
             foreach ($informacoes_user->reviews as $reviews) {
                 $cacheKeyImage = 'game_screenshots_' . $reviews->game_id;
 
@@ -57,6 +60,7 @@ class UserController extends Controller
             Cache::put($cacheKeyUser, $informacoes_user, $this->cacheTime);
         }
 
+        // dd($informacoes_user->reviews);
         return view('perfil', compact('informacoes_user'));
     }
 }

@@ -27,6 +27,12 @@ class SearchController extends Controller
             $result = User::where('name', 'LIKE', "%". $query . "%")->orderBy('name', 'asc')->get();
         }
 
+        $result->transform(function ($user) {
+            if ($user->picture) {
+                $user->picture = 'data:image/jpeg;base64,' . base64_encode($user->picture);
+            }
+            return $user;
+        });
         return response()->json($result);
     }
 

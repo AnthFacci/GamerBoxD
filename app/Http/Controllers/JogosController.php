@@ -50,7 +50,7 @@ class JogosController extends Controller
         ];
 
         $paramsMaisAvaliados = [
-            'ordering' => '-rating',
+            'ordering' => '-metacritic',
             'page_size' => '20',
         ];
 
@@ -86,7 +86,7 @@ class JogosController extends Controller
             Cache::put($this->cacheKeyAvaliados, $dataAvaliados, $this->cacheTime);
         }
 
-
+        Log::info($dataAvaliados);
         return view('jogos', compact('dataLancamentos', 'dataAcessados', 'dataEmBreve', 'dataAvaliados', 'informacoes_user'));
     }
 }

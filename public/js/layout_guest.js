@@ -72,7 +72,13 @@ search_user.addEventListener('input', async (value) =>{
 
              // Atribuição de valores
              span.innerHTML = user.name;
-             img.src = user.profile_photo_url;
+             ancor.href = `/perfil/${user.id}`;
+
+             if(user.picture != null){
+                 img.src = user.picture;
+             }else{
+                img.src = user.profile_photo_url;
+             }
 
              // Adição de classes
              div.classList.add('main--search--result--div');

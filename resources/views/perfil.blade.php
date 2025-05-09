@@ -8,7 +8,11 @@
     <div class="main--content--perfil">
         <div class="main--content--perfil--fotos--titulos">
             <h1>{{$informacoes_user['name']}}</h1>
-            <img src="{{$informacoes_user['profile_photo_url']}}" alt="">
+            @if (isset($informacoes_user['picture']))
+                <img src="{{$informacoes_user['picture']}}" alt="">
+            @else
+                <img src="{{$informacoes_user['profile_photo_url']}}" alt="">
+            @endif
         </div>
         <div class="main--content--perfil--playlist-reviews-likes">
             <div class="main--content--perfil--playlist-reviews-likes-tabsTitle">
@@ -32,7 +36,7 @@
                   <div id="reviews" class="tabcontent">
                     @if(isset($informacoes_user->reviews) && count($informacoes_user->reviews) > 0)
                         @foreach ($informacoes_user->reviews as $review )
-                            <div class="tabcontent--review">
+                            <a href="{{route('jogo', ['id' => $review->game_id])}}" class="tabcontent--review">
                                 <div class="tabcontent--review--img">
                                     <img src="{{$review->info_games['results'][0]['image'] ?? null}}" alt="">
                                 </div>
@@ -74,7 +78,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         @endforeach
                     @else
                         <p>Nenhuma review escrita :\</p>

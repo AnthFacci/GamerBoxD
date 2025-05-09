@@ -15,6 +15,7 @@
         <link href="{{asset('css/layout_guest.css')}}" rel="stylesheet" />
         {{-- Script JS --}}
         <script src="{{asset('js/layout_guest.js')}}" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
@@ -40,18 +41,22 @@
                         <div class="navbar--ancors" id="navbarNav">
                             <div class="navbar--ancors-limit" id="navbarNavLimit">
                                 @if (auth()->check())
-                                <a href="#" id="btn-show-search" class="navbar--ancors--limite--children" aria-expanded="false"><img src="{{asset('svg/search.svg')}}" alt="" class="navbar--ancors--limite--children-img"></a>
-                                <a href="{{route('home')}}" class="navbar--ancors--limite--children">Página inicial</a>
-                                <a href="{{route('jogos')}}" class="navbar--ancors--limite--children">Home</a>
-                                <a href="{{route('catalogo')}}" class="navbar--ancors--limite--children">Jogos</a>
-                                <a href="{{route('dashboard')}}" class="navbar--ancors--limite--children"><img src="{{$informacoes_user->profile_photo_url}}" alt=""></a>
+                                    <a href="#" id="btn-show-search" class="navbar--ancors--limite--children" aria-expanded="false"><img src="{{asset('svg/search.svg')}}" alt="" class="navbar--ancors--limite--children-img"></a>
+                                    <a href="{{route('home')}}" class="navbar--ancors--limite--children">Página Inicial</a>
+                                    <a href="{{route('jogos')}}" class="navbar--ancors--limite--children">Home</a>
+                                    <a href="{{route('catalogo')}}" class="navbar--ancors--limite--children">Jogos</a>
+                                    @if (isset($informacoes_user->picture))
+                                        <a href="{{route('dashboard')}}" class="navbar--ancors--limite--children"><img src="{{$informacoes_user->picture}}" alt=""></a>
+                                    @else
+                                        <a href="{{route('dashboard')}}" class="navbar--ancors--limite--children"><img src="{{$informacoes_user->profile_photo_url}}" alt=""></a>
+                                    @endif
                                 @else
-                                <a href="#" id="btn-show-search" class="navbar--ancors--limite--children" aria-expanded="false"><img src="{{asset('svg/search.svg')}}" alt="" class="navbar--ancors--limite--children-img"></a>
-                                <a href="{{route('login')}}" class="navbar--ancors--limite--children">Login</a>
-                                <a href="{{route('register')}}" class="navbar--ancors--limite--children">Criar conta</a>
-                                <a href="{{route('home')}}" class="navbar--ancors--limite--children" >Página inicial</a>
-                                <a href="{{route('jogos')}}" class="navbar--ancors--limite--children">Home</a>
-                                <a href="{{route('catalogo')}}" class="navbar--ancors--limite--children">Jogos</a>
+                                    <a href="#" id="btn-show-search" class="navbar--ancors--limite--children" aria-expanded="false"><img src="{{asset('svg/search.svg')}}" alt="" class="navbar--ancors--limite--children-img"></a>
+                                    <a href="{{route('home')}}" class="navbar--ancors--limite--children" >Página Inicial</a>
+                                    <a href="{{route('jogos')}}" class="navbar--ancors--limite--children">Home</a>
+                                    <a href="{{route('catalogo')}}" class="navbar--ancors--limite--children">Jogos</a>
+                                    <a href="{{route('login')}}" class="navbar--ancors--limite--children">Login</a>
+                                    <a href="{{route('register')}}" class="navbar--ancors--limite--children">Criar Conta</a>
                                 @endif
                             </div>
                         </div>
