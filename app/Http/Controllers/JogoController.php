@@ -127,7 +127,7 @@ class JogoController extends Controller
                 'rating' => $validated['rating'],
                 'status' => $request->status,
             ]);
-
+            Cache::forget('commentsOnGame' . $request->id_game);
             return response()->json([
                 'success' => true,
                 'message' => 'Review enviada com sucesso!',
@@ -149,6 +149,9 @@ class JogoController extends Controller
             if($like){
                 Log::info($like);
                 $like->delete();
+                Log::info('teste');
+                Log::info($request->id_game);
+                Cache::forget('commentsOnGame' . $request->id_game);
                 return response()->json([
                     'success' => true,
                     'delete' => true,
@@ -160,7 +163,8 @@ class JogoController extends Controller
                     'comment_id' => $request->comment_id,
                     'user_id' => $request->user_id
                 ]);
-
+                Log::info('teste triste');
+                Cache::forget('commentsOnGame' . $request->id_game);
                 return response()->json([
                     'success' => true,
                     'delete' => false,

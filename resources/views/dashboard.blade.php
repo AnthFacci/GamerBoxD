@@ -69,9 +69,18 @@
             @endforeach
             <div class="adicionar_lista">
                 <img onclick="addPlaylist()" src="{{asset('svg/game/plus-svgrepo-com.svg')}}" alt="adicionar nova lista">
-                <div class="menu_listas" id="menuListas">
-                    <input class="input_menuListas" type="text" placeholder="pesquisar listas" id="pesquisar">
-                    <input class="hide_custom" type="text" placeholder="adicione uma nova lista" name="nm_lista" id="nm_lista">
+         </div>
+
+        <div class="add_picture" id="add_picture">
+            <form action="{{route('store.picture')}}" method="post" id="form_picture">
+                @csrf
+                <input type="file" name="imagem">
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+        <div class="menu_listas" id="menuListas">
+                    {{-- <input class="input_menuListas" type="text" placeholder="pesquisar listas" id="pesquisar"> --}}
+                    <input class="input_menuListas" type="text" placeholder="adicione uma nova lista" name="nm_lista" id="nm_lista">
                     <button class="btn-criar" id="btn-criar">+ criar nova lista</button>
                     <hr>
                     <ul>
@@ -80,15 +89,6 @@
                         @endforeach
                     </ul>
                 </div>
-            </div>
-        </div>
-
-        <div class="add_picture" id="add_picture">
-            <form action="{{route('store.picture')}}" method="post" id="form_picture">
-                @csrf
-                <input type="file" name="imagem">
-                <button type="submit">Enviar</button>
-            </form>
         </div>
       </main>
 

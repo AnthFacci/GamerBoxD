@@ -598,7 +598,7 @@
                                 <span style="color: white;">{{$comentario->content}}</span>
                                 <div class="like">
                                     @if (auth()->check())
-                                        <img style="cursor: pointer;" onclick="likeComment({{$comentario->id}}, {{$comentario->user_id}})" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" data-reviewCurtido="{{asset('svg/game/heart-svgrepo-com-red.svg')}}" data-semCurtida="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar comentário" id="like_comment">
+                                        <img style="cursor: pointer;" onclick="likeComment({{$comentario->id}}, {{$comentario->user_id}}, {{$game['id']}})" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" data-reviewCurtido="{{asset('svg/game/heart-svgrepo-com-red.svg')}}" data-semCurtida="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar comentário" id="like_comment">
                                     @else
                                         <img style="cursor: pointer;" onclick="redirectToLogin()" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar comentário" id="like_comment">
                                     @endif

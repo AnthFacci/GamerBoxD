@@ -108,16 +108,32 @@ document.getElementById('reviewForm').addEventListener('submit', function (e) {
     .then(data => {
         closeReview();
         if (data.success) {
-            alert('Review enviada com sucesso!');
-            window.location.reload();
+        Swal.fire({
+                icon: 'success',
+                title: 'Enviado!',
+                text: 'Review enviada com sucesso!',
+                timer: 2000,
+                showConfirmButton: false
+        }).then(() => {
+                window.location.reload();
+        });
         } else {
-            alert('Erro ao enviar a review.');
+            Swal.fire({
+            icon: 'error',
+            title: 'Erro!',
+            text: 'Erro ao enviar a review.',
+            confirmButtonText: 'OK'
+        });
         }
     })
     .catch(error => {
         closeReview();
-        console.error('Erro:', error);
-        alert('Erro na requisição.');
+        Swal.fire({
+            icon: 'error',
+            title: 'Erro!',
+            text: 'Erro ao enviar a review.',
+            confirmButtonText: 'OK'
+        });
     });
 });
 
@@ -140,10 +156,21 @@ function storeGame(id_playlist,id_game, event){
     .then(data => {
         if (data.success) {
             closeMenuList();
-            alert(data.message);
+            Swal.fire({
+                icon: 'success',
+                title: 'Enviado!',
+                text: data.message,
+                timer: 2000,
+                showConfirmButton: false
+        })
         } else {
             closeMenuList();
-            alert(data.message);
+            Swal.fire({
+            icon: 'error',
+            title: 'Erro!',
+            text: data.message,
+            confirmButtonText: 'OK'
+        });
         }
     })
     .catch(error => {
@@ -154,7 +181,7 @@ function storeGame(id_playlist,id_game, event){
 }
 
 
-function likeComment(id, user_id) {
+function likeComment(id, user_id, game_id) {
     // Exibe o formulário de review
     const reaction_type = 'like';
     const formData = new FormData();
@@ -162,6 +189,7 @@ function likeComment(id, user_id) {
     formData.append('reaction_type', reaction_type);
     formData.append('comment_id', id);
     formData.append('user_id', user_id);
+    formData.append('id_game', game_id);
     fetch('/jogo/like', {
         method: 'POST',
         body: formData, // Envia os dados do formulário
@@ -182,14 +210,24 @@ function likeComment(id, user_id) {
                 // like_comment.src = like_comment.dataset.reviewCurtido;
                 window.location.reload();
             }
-            alert(data.message);
+            // alert(data.message);
         } else {
-            alert(data.message);
+            Swal.fire({
+            icon: 'error',
+            title: 'Erro!',
+            text: 'Erro ao curtir a review.',
+            confirmButtonText: 'OK'
+        });
         }
     })
     .catch(error => {
         console.error('Erro:', error);
-        alert('Erro na requisição.');
+        Swal.fire({
+            icon: 'error',
+            title: 'Erro!',
+            text: 'Erro ao curtir a review.',
+            confirmButtonText: 'OK'
+        });
     });
 }
 
@@ -205,7 +243,6 @@ function favoriteGame(game_id) {
     .then(response => response.json()) // Converte a resposta para JSON
     .then(data => {
         if (data.success) {
-            alert(data.message);
             if(data.message == 'Favorito adicionado com sucesso!'){
                 const favoritar_game = document.getElementById('favoritar_game');
                 const imgLiked = favoritar_game.dataset.imgLiked;
@@ -218,12 +255,22 @@ function favoriteGame(game_id) {
                 favoritar_game.src = imgnolike;
             }
         } else {
-            alert('Erro ao enviar a review.');
+            Swal.fire({
+            icon: 'error',
+            title: 'Erro!',
+            text: 'Erro ao enviar a review.',
+            confirmButtonText: 'OK'
+            });
         }
     })
     .catch(error => {
         console.error('Erro:', error);
-        alert('Erro na requisição.');
+        Swal.fire({
+            icon: 'error',
+            title: 'Erro!',
+            text: 'Erro ao favoritar o game.',
+            confirmButtonText: 'OK'
+        });
     });
 }
 

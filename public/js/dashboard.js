@@ -14,28 +14,54 @@ function addPlaylist(){
 function excluirJogo(event, user_id ,playlist_id) {
     event.preventDefault();
 
-    const confirmacao = confirm("Tem certeza que deseja excluir este jogo?");
-    if (!confirmacao) return;
-    console.log(user_id);
-    console.log(playlist_id);
-
-    fetch(`/removeList/${playlist_id}/${user_id}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-        }
+    // const confirmacao = confirm("Tem certeza que deseja excluir este jogo?");
+    // if (!confirmacao) return;
+    // console.log(user_id);
+    // console.log(playlist_id);
+    Swal.fire({
+        title: 'Tem certeza?',
+        text: 'Essa ação não poderá ser desfeita!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sim, excluir!',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+       if(result.isConfirmed){
+         fetch(`/removeList/${playlist_id}/${user_id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                 Swal.fire({
+                    icon: 'success',
+                    title: 'Sucesso!',
+                    text: 'Playlist excluída com sucesso.',
+                    confirmButtonText: 'OK'
+                });
+                // Remover o card da interface
+                event.target.closest('.ancor_lista').remove();
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erro!',
+                    text: 'Erro ao excluir a playlist.',
+                    confirmButtonText: 'OK'
+                });
+            }
+        })
+        .catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erro inesperado',
+                    text: 'Algo deu errado. Tente novamente.'
+                });
+        });
+       }
     })
-    .then(response => {
-        if (response.ok) {
-            alert('Jogo excluído com sucesso!');
-            // Remover o card da interface
-            event.target.closest('.ancor_lista').remove();
-        } else {
-            alert('Erro ao excluir o jogo.');
-        }
-    })
-    .catch(error => console.error('Erro:', error));
 }
 
 form_image.addEventListener('click', () => {
@@ -69,34 +95,11 @@ form_picture.addEventListener('submit', (e) => {
     });
 });
 
-document.addEventListener('click', function (event) {
-    const menuListas = document.getElementById('menuListas');
-    const adicionarLista = document.querySelector('.adicionar_lista img');
     const btn_criar = document.getElementById('btn-criar');
-    const nm_lista = document.getElementById('nm_lista');
-    const pesquisar = document.getElementById('pesquisar');
-
-    if (!menuListas.contains(event.target) && event.target !== adicionarLista) {
-        menuListas.style.display = 'none';
-        pesquisar.classList.add('input_menuListas');
-        pesquisar.classList.remove('hide_custom')
-        nm_lista.classList.add('hide_custom');
-        nm_lista.classList.remove('input_menuListas')
-        btn_criar.removeAttribute('data-clicked', 'true');
-        nm_lista.value = '';
-    }
 
     btn_criar.addEventListener('click', () => {
-        nm_lista.classList.add('input_menuListas');
-        nm_lista.classList.remove('hide_custom');
-        pesquisar.classList.add('hide_custom');
-        pesquisar.classList.remove('input_menuListas');
-
-        // Verifique se o evento já foi adicionado
-        if (!btn_criar.hasAttribute('data-clicked')) {
-            btn_criar.setAttribute('data-clicked', 'true'); // Marca o evento como adicionado
-
-            btn_criar.addEventListener('click', () => {
+        const btn_criar = document.getElementById('btn-criar');
+        const nm_lista = document.getElementById('nm_lista');
                 console.log('Botão clicado novamente!');
                 const name = nm_lista.value;
                 const formData = new FormData();
@@ -111,10 +114,22 @@ document.addEventListener('click', function (event) {
                 .then(data => {
                     btn_criar.removeAttribute('data-clicked', 'true');
                     if (data.success) {
-                        console.log('Lista criada com sucesso!');
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Sucesso!',
+                            text: 'Playlist criada com sucesso.',
+                            confirmButtonText: 'OK'
+                        });
                         nm_lista.value = '';
+                        window.location.reload();
                     } else {
-                        console.log('Erro na criação da lista!');
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Erro!',
+                            text: 'Erro a criar playlist.',
+                            confirmButtonText: 'OK'
+                        });
+                        window.location.reload();
                     }
                 })
                 .catch(error => {
@@ -123,7 +138,4 @@ document.addEventListener('click', function (event) {
                     alert('Erro na requisição.');
                     nm_lista.value = '';
                 });
-            });
-        }
     });
-});
