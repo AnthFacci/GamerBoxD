@@ -26,64 +26,22 @@
         </div>
     </nav> --}}
 
-    <main class="container my-5">
+    <main class="fav my-5">
         @isset($playlist)
             <h1 class="text-center mb-4 title-custom">{{ $playlist->name }}</h1>
         @endisset
-        <div class="listas">
+        <div class="listas-fav">
             @forelse ($games as $jogo)
             @if (intval($jogo['rating'] == 0))
-                <div class="card" style="background-color: #BCBCBC;">
+                <div class="card_list" style="background-color: #BCBCBC;">
                     <a href="{{route('jogo', ['id' => $jogo['id']])}}">
-                        <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento">
-                        <div class="nome_nota">
-                            <p class="nm_lancamento">{{ $jogo['name'] }}</p>
-                            @if ($jogo['rating'] == 0)
-                                <p class="nt_lancamento">-</p>
+                        <div class="img_card_fav">
+                            @if(empty($jogo['background_image']))
+                                <img src="{{asset('svg/no-image.png')}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento_fav">
                             @else
-                                <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
+                                <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento_fav">
                             @endif
                         </div>
-                    </a>
-                    <img src="{{asset('svg/bin-svgrepo-com.svg')}}" onclick="excluirJogo(event, {{ $jogo['id'] }}, {{$playlist->id}})" alt="excluir lista" class="trash-icon-lista">
-                    {{-- <button class="btn-excluir" onclick="excluirJogo(event, {{ $jogo['id'] }}, {{$playlist->id}})">Excluir</button> --}}
-                </div>
-            @elseif (intval($jogo['rating']) >= 1 && intval($jogo['rating'] <= 2 ))
-                <div class="card" style="background-color: #CC697B;">
-                    <a href="{{route('jogo', ['id' => $jogo['id']])}}">
-                        <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento">
-                        <div class="nome_nota">
-                            <p class="nm_lancamento">{{ $jogo['name'] }}</p>
-                            @if ($jogo['rating'] == 0)
-                                <p class="nt_lancamento">-</p>
-                            @else
-                                <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
-                            @endif
-                        </div>
-                    </a>
-                    <img src="{{asset('svg/bin-svgrepo-com.svg')}}" onclick="excluirJogo(event, {{ $jogo['id'] }}, {{$playlist->id}})" alt="excluir lista" class="trash-icon-lista">
-                    {{-- <button class="btn-excluir" onclick="excluirJogo(event, {{ $jogo['id'] }}, {{$playlist->id}})">Excluir</button> --}}
-                </div>
-            @elseif (intval($jogo['rating']) >= 3 && intval($jogo['rating'] <= 4 ))
-                <div class="card" style="background-color: #6ECC8E;">
-                    <a href="{{route('jogo', ['id' => $jogo['id']])}}">
-                        <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento">
-                        <div class="nome_nota">
-                            <p class="nm_lancamento">{{ $jogo['name'] }}</p>
-                            @if ($jogo['rating'] == 0)
-                                <p class="nt_lancamento">-</p>
-                            @else
-                                <p class="nt_lancamento">{{ number_format(floatval($jogo['rating']) * 20) }}</p>
-                            @endif
-                        </div>
-                    </a>
-                    <img src="{{asset('svg/bin-svgrepo-com.svg')}}" onclick="excluirJogo(event, {{ $jogo['id'] }}, {{$playlist->id}})" alt="excluir lista" class="trash-icon-lista">
-                    {{-- <button class="btn-excluir" onclick="excluirJogo(event, {{ $jogo['id'] }}, {{$playlist->id}})">Excluir</button> --}}
-                </div>
-            @else
-                <div class="card" style="background-color: #53e584;">
-                    <a href="{{route('jogo', ['id' => $jogo['id']])}}">
-                        <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento">
                         <div class="nome_nota">
                             <p class="nm_lancamento">{{ $jogo['name'] }}</p>
                             @if ($jogo['rating'] == 0)
@@ -93,7 +51,85 @@
                             @endif
                         </div>
                     </a>
-                    <img src="{{asset('svg/bin-svgrepo-com.svg')}}" onclick="excluirJogo(event, {{ $jogo['id'] }}, {{$playlist->id}})" alt="excluir lista" class="trash-icon-lista">
+                    <div class="excluir" onclick="excluirJogo(event, {{ $jogo['id'] }}, {{$playlist->id}})" alt="excluir lista">
+                        <p>Excluir</p>
+                    </div>
+                    {{-- <img src="{{asset('svg/bin-svgrepo-com.svg')}}" onclick="excluirJogo(event, {{ $jogo['id'] }}, {{$playlist->id}})" alt="excluir lista" class="trash-icon-lista"> --}}
+                    {{-- <button class="btn-excluir" onclick="excluirJogo(event, {{ $jogo['id'] }}, {{$playlist->id}})">Excluir</button> --}}
+                </div>
+            @elseif (intval($jogo['rating']) >= 1 && intval($jogo['rating'] <= 2 ))
+                <div class="card_list" style="background-color: #CC697B;">
+                    <a href="{{route('jogo', ['id' => $jogo['id']])}}">
+                        <div class="img_card_fav">
+                            @if(empty($jogo['background_image']))
+                                <img src="{{asset('svg/no-image.png')}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento_fav">
+                            @else
+                                <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento_fav">
+                            @endif
+                        </div>
+                        <div class="nome_nota">
+                            <p class="nm_lancamento">{{ $jogo['name'] }}</p>
+                            @if ($jogo['rating'] == 0)
+                                <p class="nt_lancamento">-</p>
+                            @else
+                                <p class="nt_lancamento">{{ number_format(floatval($jogo['rating'])* 20)  }}</p>
+                            @endif
+                        </div>
+                    </a>
+                    <div class="excluir" onclick="excluirJogo(event, {{ $jogo['id'] }}, {{$playlist->id}})" alt="excluir lista">
+                        <p>Excluir</p>
+                    </div>
+                    {{-- <img src="{{asset('svg/bin-svgrepo-com.svg')}}" onclick="excluirJogo(event, {{ $jogo['id'] }}, {{$playlist->id}})" alt="excluir lista" class="trash-icon-lista"> --}}
+                    {{-- <button class="btn-excluir" onclick="excluirJogo(event, {{ $jogo['id'] }}, {{$playlist->id}})">Excluir</button> --}}
+                </div>
+            @elseif (intval($jogo['rating']) >= 3 && intval($jogo['rating'] <= 4 ))
+                <div class="card_list" style="background-color: #6ECC8E;">
+                    <a href="{{route('jogo', ['id' => $jogo['id']])}}">
+                        <div class="img_card_fav">
+                            @if(empty($jogo['background_image']))
+                                <img src="{{asset('svg/no-image.png')}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento_fav">
+                            @else
+                                <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento_fav">
+                            @endif
+                        </div>
+                        <div class="nome_nota">
+                            <p class="nm_lancamento">{{ $jogo['name'] }}</p>
+                            @if ($jogo['rating'] == 0)
+                                <p class="nt_lancamento">-</p>
+                            @else
+                                <p class="nt_lancamento">{{ number_format(floatval($jogo['rating'])* 20)  }}</p>
+                            @endif
+                        </div>
+                    </a>
+                    <div class="excluir" onclick="excluirJogo(event, {{ $jogo['id'] }}, {{$playlist->id}})" alt="excluir lista">
+                        <p>Excluir</p>
+                    </div>
+                    {{-- <img src="{{asset('svg/bin-svgrepo-com.svg')}}" onclick="excluirJogo(event, {{ $jogo['id'] }}, {{$playlist->id}})" alt="excluir lista" class="trash-icon-lista"> --}}
+                    {{-- <button class="btn-excluir" onclick="excluirJogo(event, {{ $jogo['id'] }}, {{$playlist->id}})">Excluir</button> --}}
+                </div>
+            @else
+                <div class="card_list" style="background-color: #53e584;">
+                    <a href="{{route('jogo', ['id' => $jogo['id']])}}">
+                        <div class="img_card_list">
+                            @if(empty($jogo['background_image']))
+                                <img src="{{asset('svg/no-image.png')}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento_fav">
+                            @else
+                                <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}" class="img_lancamento_fav">
+                            @endif
+                        </div>
+                        <div class="nome_nota_list">
+                            <p class="nm_lancamento">{{ $jogo['name'] }}</p>
+                            @if ($jogo['rating'] == 0)
+                                <p class="nt_lancamento">-</p>
+                            @else
+                                <p class="nt_lancamento">{{ number_format(floatval($jogo['rating'])* 20)  }}</p>
+                            @endif
+                        </div>
+                    </a>
+                    <div class="excluir" onclick="excluirJogo(event, {{ $jogo['id'] }}, {{$playlist->id}})" alt="excluir lista">
+                        <p>Excluir</p>
+                    </div>
+                    {{-- <img src="{{asset('svg/bin-svgrepo-com.svg')}}" onclick="excluirJogo(event, {{ $jogo['id'] }}, {{$playlist->id}})" alt="excluir lista" class="trash-icon-lista"> --}}
                     {{-- <button class="btn-excluir" onclick="excluirJogo(event, {{ $jogo['id'] }}, {{$playlist->id}})">Excluir</button> --}}
                 </div>
             @endif

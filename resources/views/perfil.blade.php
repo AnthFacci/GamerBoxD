@@ -9,7 +9,10 @@
         <div class="main--content--perfil--fotos--titulos">
             <h1>{{$informacoes_user['name']}}</h1>
             @if (isset($informacoes_user['picture']))
-                <img src="{{$informacoes_user['picture']}}" alt="">
+                <?php
+                    Log::info($informacoes_user->toArray());
+                ?>
+                <img src="data:image/jpeg;base64,{{ base64_encode($informacoes_user['picture']) }}" alt="">
             @else
                 <img src="{{$informacoes_user['profile_photo_url']}}" alt="">
             @endif

@@ -93,7 +93,7 @@ class JogoController extends Controller
             Cache::put($CacheCommentOnGame, $comments, $this->cacheTime);
         }
 
-        Log::info($game);
+        // Log::info($game);
         // Log::info('Esse é o primeiro comentário: '. $comments);
         // Log::info($game);
         // Log::info($stores);
@@ -101,6 +101,7 @@ class JogoController extends Controller
         //     $store = $stores[0]['url'];
         //     Log::info($store . 'eiittaa');
         // }
+        // Log::info($informacoes_user);
         return view('jogo', compact('game', 'comments', 'playlists', 'informacoes_user', 'favorite', 'stores'));
     }
     public function storeReview(Request $request)
@@ -142,11 +143,13 @@ class JogoController extends Controller
     }
     public function like(Request $request){
         Log::info($request);
+        Log::info('$request');
         try {
             $like = commentsreaction::where('comment_id', $request->comment_id)
             ->where('user_id', $request->user_id)->first();
             Log::info($like);
-            if($like){
+            Log::info('$like');
+            if(!empty($like)){
                 Log::info($like);
                 $like->delete();
                 Log::info('teste');

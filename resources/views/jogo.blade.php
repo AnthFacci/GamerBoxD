@@ -43,7 +43,11 @@
                 @if ((int)$game['rating'] <= 2)
                     {{-- <div class="cima" style="background-color: #CC697B;" id="cima"> --}}
                         <div class="img_capa">
-                            <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}" style="border: 10px solid #CC697B;">
+                            @if(empty($game['background_image']))
+                                <img src="{{asset('svg/no-image.png')}}" alt="capa do {{$game['name']}}" style="border: 10px solid #CC697B;">
+                            @else
+                                <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}" style="border: 10px solid #CC697B;">
+                            @endif
                         </div>
                         <div class="text" id="text">
                             <h3 id="h3_text">{{$game['name']}}</h3>
@@ -135,7 +139,7 @@
                                                 </li>
                                             @endforeach
                                         </ul>
-                                        <button type="button" id="cancel_list">Cancelar</button>
+                                        <button type="button" id="cancel_list">Sair</button>
                                     </div>
                                 {{-- </div> --}}
                             </div>
@@ -148,7 +152,11 @@
                                 <hr>
                             </div>
                             <div class="nota">
-                                <span><span class="nota_jogo">{{number_format(floatval($game['rating']) * 20)}}</span>/100</span>
+                                @if (!empty($game['metacritic']))
+                                    <span><span class="nota_jogo">{{$game['metacritic']}}</span>/100</span>
+                                @else
+                                    <span><span class="nota_jogo">{{number_format(floatval($game['rating']) * 20)}}</span>/100</span>
+                                @endif
                                 <hr>
                             </div>
                             <div class="generos">
@@ -161,7 +169,11 @@
                 @elseif ((float)$game['rating'] > 2 && (float)$game['rating'] <= 3.7)
                     {{-- <div class="cima" style="background-color: #96D9E0;" id="cima"> --}}
                         <div class="img_capa">
-                            <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}" style="border: 10px solid #96D9E0">
+                            @if(empty($game['background_image']))
+                                <img src="{{asset('svg/no-image.png')}}" alt="capa do {{$game['name']}}" style="border: 10px solid #96D9E0">
+                            @else
+                                <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}" style="border: 10px solid #96D9E0">
+                            @endif
                         </div>
                         <div class="text" id="text">
                             <h3 id="h3_text">{{$game['name']}}</h3>
@@ -254,7 +266,7 @@
                                                 </li>
                                             @endforeach
                                         </ul>
-                                        <button type="button" id="cancel_list">Cancelar</button>
+                                        <button type="button" id="cancel_list">Sair</button>
                                     </div>
                                 {{-- </div> --}}
                             </div>
@@ -267,7 +279,11 @@
                                 <hr>
                             </div>
                             <div class="nota">
-                                <span><span class="nota_jogo">{{number_format(floatval($game['rating']) * 20)}}</span>/100</span>
+                                @if (!empty($game['metacritic']))
+                                    <span><span class="nota_jogo">{{$game['metacritic']}}</span>/100</span>
+                                @else
+                                    <span><span class="nota_jogo">{{number_format(floatval($game['rating']) * 20)}}</span>/100</span>
+                                @endif
                                 <hr>
                             </div>
                             <div class="generos">
@@ -280,7 +296,11 @@
                 @elseif ((int)$game['rating'] > 3.7)
                     {{-- <div class="cima" style="background-color: #53e584;" id="cima"> --}}
                         <div class="img_capa">
-                            <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}" style="border: 10px solid #53e584;">
+                            @if(empty($game['background_image']))
+                                <img src="{{asset('svg/no-image.png')}}" alt="capa do {{$game['name']}}" style="border: 10px solid #53e584;">
+                            @else
+                                <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}" style="border: 10px solid #53e584;">
+                            @endif
                         </div>
                         <div class="text" id="text">
                             <h3 id="h3_text">{{$game['name']}}</h3>
@@ -301,7 +321,7 @@
                                                     </li>
                                                 @endforeach
                                             </ul>
-                                            <button type="button" id="cancel_list">Cancelar</button>
+                                            <button type="button" id="cancel_list">Sair</button>
                                         </div>
                                    @if ($favorite == true)
                                     <img style="cursor: pointer;" onclick="favoriteGame({{$game['id']}})" data-img-liked="{{asset('svg/game/heart-svgrepo-com-red.svg')}}" data-imgnolike="{{asset('svg/game/heart-svgrepo-com.svg')}}" src="{{asset('svg/game/heart-svgrepo-com-red.svg')}}" alt="Favoritar Jogo" id="favoritar_game">
@@ -384,7 +404,11 @@
                                 <hr>
                             </div>
                             <div class="nota">
-                                <span><span class="nota_jogo">{{number_format(floatval($game['rating']) * 20)}}</span>/100</span>
+                                @if (!empty($game['metacritic']))
+                                    <span><span class="nota_jogo">{{$game['metacritic']}}</span>/100</span>
+                                @else
+                                    <span><span class="nota_jogo">{{number_format(floatval($game['rating']) * 20)}}</span>/100</span>
+                                @endif
                                 <hr>
                             </div>
                             <div class="generos">
@@ -397,7 +421,11 @@
                 @else
                     {{-- <div class="cima" style="background-color: #BCBCBC;" id="cima"> --}}
                         <div class="img_capa">
-                            <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}" style="border: 10px solid #BCBCBC;">
+                            @if(empty($game['background_image']))
+                                <img src="{{asset('svg/no-image.png')}}" alt="capa do {{$game['name']}}" style="border: 10px solid #BCBCBC;">
+                            @else
+                                <img src="{{$game['background_image']}}" alt="capa do {{$game['name']}}" style="border: 10px solid #BCBCBC;">
+                            @endif
                         </div>
                         <div class="text" id="text">
                             <h3 id="h3_text">{{$game['name']}}</h3>
@@ -489,7 +517,7 @@
                                                 </li>
                                             @endforeach
                                             </ul>
-                                            <button type="button" id="cancel_list">Cancelar</button>
+                                            <button type="button" id="cancel_list">Sair</button>
                                     </div>
                                 </div>
                             </div>
@@ -502,7 +530,11 @@
                                 <hr>
                             </div>
                             <div class="nota">
-                                <span><span class="nota_jogo">{{number_format(floatval($game['rating']) * 20)}}</span>/100</span>
+                                @if (!empty($game['metacritic']))
+                                    <span><span class="nota_jogo">{{$game['metacritic']}}</span>/100</span>
+                                @else
+                                    <span><span class="nota_jogo">{{number_format(floatval($game['rating']) * 20)}}</span>/100</span>
+                                @endif
                                 <hr>
                             </div>
                             <div class="generos">
@@ -598,7 +630,7 @@
                                 <span style="color: white;">{{$comentario->content}}</span>
                                 <div class="like">
                                     @if (auth()->check())
-                                        <img style="cursor: pointer;" onclick="likeComment({{$comentario->id}}, {{$comentario->user_id}}, {{$game['id']}})" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" data-reviewCurtido="{{asset('svg/game/heart-svgrepo-com-red.svg')}}" data-semCurtida="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar comentário" id="like_comment">
+                                        <img style="cursor: pointer;" onclick="likeComment({{$comentario->id}}, {{$informacoes_user->id}}, {{$game['id']}})" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" data-reviewCurtido="{{asset('svg/game/heart-svgrepo-com-red.svg')}}" data-semCurtida="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar comentário" id="like_comment">
                                     @else
                                         <img style="cursor: pointer;" onclick="redirectToLogin()" src="{{asset('svg/game/heart-svgrepo-com.svg')}}" alt="Favoritar comentário" id="like_comment">
                                     @endif

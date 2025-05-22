@@ -75,6 +75,7 @@ class listGames extends Controller
 
         if(Cache::has($cacheKeyUser)){
             $informacoes_user = Cache::get($cacheKeyUser);
+            // var_dump($informacoes_user);
             Log::info('Cache entregou info users dashboard!');
         }else{
             $informacoes_user = User::where('id', $userId)->first();
@@ -147,6 +148,7 @@ class listGames extends Controller
                 'name' => $request->name
             ]);
             Cache::forget("Playlists_infos{$userId}");
+            Cache::forget("PlaylistsInsideGame{$userId}");
             return response()->json([
                 'success' => true,
                 'message' => 'Sucesso ao cadastrar nova lista.',

@@ -44,6 +44,7 @@
                 <span>{{$informacoes_user->name}}</span>
             </div>
             <div class="actions">
+                <a href="{{route('perfil.user', ['id' => $informacoes_user->id])}}" id="see_profile" aria-expanded="false"><img src="{{asset('svg/eye-quadrado.svg')}}" alt=""></a>
                 <a href="#" id="form_image" aria-expanded="false"><img src="{{asset('svg/edit.svg')}}" alt=""></a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

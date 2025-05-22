@@ -44,7 +44,7 @@
             </div>
         </nav> --}}
       {{-- MAIN SECTION --}}
-        <div class="container-fluid flex-grow-1 d-flex h-auto custom-padding" style="margin-top: 80px;">
+        <div class="container-fluid flex-grow-1 d-flex h-auto custom-padding" style="margin-top: 40px;">
             <div class="filtros">
                 <div class="titulo">
                     <h1>filtros</h1><small><a href="">limpar</a></small>

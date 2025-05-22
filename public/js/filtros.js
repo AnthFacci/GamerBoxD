@@ -184,12 +184,12 @@ function carregarJogos(data){
     data.results.forEach(jogo => {
         // Criação da div do card
         let card = document.createElement('div');
-        card.className = 'card';
+        card.className = 'card_filtro';
 
         // Criação link jogos
         let link = document.createElement('a');
-        link.href = `/jogo/${jogo.id}`; 
-        link.className = 'link-jogo'; 
+        link.href = `/jogo/${jogo.id}`;
+        link.className = 'link-jogo';
 
         // Verificação de métrica para diferenciar coloração
         if(jogo.rating == 0)
@@ -200,30 +200,42 @@ function carregarJogos(data){
             card.style.backgroundColor = '#96D9E0';
         else if(jogo.rating > 3.7)
             card.style.backgroundColor = '#53e584';
-        
+
         // Criação da imagem do card do jogo
         let img_card = document.createElement('img');
         img_card.src = jogo.background_image;
-        img_card.className = 'img_lancamento';
+        if(jogo.background_image == null){
+            img_card.src = '/svg/no-image.png';
+        }
+        let img_div = document.createElement('div');
+        img_div.className = 'img_div';
+        img_div.appendChild(img_card);
+        // img_card.className = 'img_lancamento';
         img_card.alt = `Capa ${jogo.name}`;
         // Criação div nome e nota
         let div_nm_nt = document.createElement('div');
-        div_nm_nt.className = 'nome_nota';
+        div_nm_nt.className = 'nome_nota_filtro';
         // Criação do p pro nome do jogo
         let p_nome = document.createElement('p');
-        p_nome.className = 'nm_lancamento';
+        let p_nome_div = document.createElement('div');
+        p_nome_div.classList = 'p_nome_div';
+        p_nome_div.appendChild(p_nome);
+        // p_nome.className = 'nm_lancamento';
         p_nome.innerHTML = jogo.name;
         // Criação do p pra nota do jogo
         let p_nota = document.createElement('p');
-        p_nota.className = 'nt_lancamento';
-        if(jogo.metacritic == 0)
+        let p_nota_div = document.createElement('div');
+        p_nota_div.classList = 'p_nota_div';
+        p_nota_div.appendChild(p_nota);
+        // p_nota.className = 'nt_lancamento';
+        if(jogo.metacritic == null)
             p_nota.innerHTML = '-';
         else
-            p_nota.innerHTML = Math.round(jogo.rating * 20);
+            p_nota.innerHTML = jogo.metacritic;
 
         // Atribuindo os elementos dentro da div principal
-        div_nm_nt.append(p_nome, p_nota);
-        card.append(img_card,div_nm_nt);
+        div_nm_nt.append(p_nome_div, p_nota_div);
+        card.append(img_div,div_nm_nt);
         link.append(card);
         card_jogos.append(link);
 

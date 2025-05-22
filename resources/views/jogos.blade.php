@@ -17,7 +17,11 @@
                         <div class="container--carrossel-images--jogos sem-nota">
                             <a href="{{route('jogo', ['id' => $jogo['id']])}}">
                                 <div class="container--carrossel-images--jogos--img">
-                                    <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @if(empty($jogo['background_image']))
+                                        <img src="{{asset('svg/no-image.png')}}" alt="imagem do {{$jogo['name']}}">
+                                    @else
+                                        <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @endif
                                 </div>
                                 <div class="container--carrossel-images--jogos--title">
                                     <div class="container--carrossel-images--jogos--title--nome">
@@ -33,7 +37,11 @@
                         <div class="container--carrossel-images--jogos ruim">
                             <a href="{{route('jogo', ['id' => $jogo['id']])}}">
                                 <div class="container--carrossel-images--jogos--img">
-                                    <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @if(empty($jogo['background_image']))
+                                        <img src="{{asset('svg/no-image.png')}}" alt="imagem do {{$jogo['name']}}">
+                                    @else
+                                        <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @endif
                                 </div>
                                 <div class="container--carrossel-images--jogos--title">
                                     <div class="container--carrossel-images--jogos--title--nome">
@@ -49,7 +57,11 @@
                         <div class="container--carrossel-images--jogos bom">
                             <a href="{{route('jogo', ['id' => $jogo['id']])}}">
                                 <div class="container--carrossel-images--jogos--img">
-                                    <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @if(empty($jogo['background_image']))
+                                        <img src="{{asset('svg/no-image.png')}}" alt="imagem do {{$jogo['name']}}">
+                                    @else
+                                        <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @endif
                                 </div>
                                 <div class="container--carrossel-images--jogos--title">
                                     <div class="container--carrossel-images--jogos--title--nome">
@@ -65,7 +77,11 @@
                         <div class="container--carrossel-images--jogos otimo">
                             <a href="{{route('jogo', ['id' => $jogo['id']])}}">
                                 <div class="container--carrossel-images--jogos--img">
-                                    <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @if(empty($jogo['background_image']))
+                                        <img src="{{asset('svg/no-image.png')}}" alt="imagem do {{$jogo['name']}}">
+                                    @else
+                                        <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @endif
                                 </div>
                                 <div class="container--carrossel-images--jogos--title">
                                     <div class="container--carrossel-images--jogos--title--nome">
@@ -93,7 +109,11 @@
                         <div class="container--carrossel-images--jogos sem-nota">
                             <a href="{{route('jogo', ['id' => $jogo['id']])}}">
                                 <div class="container--carrossel-images--jogos--img">
-                                    <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @if(empty($jogo['background_image']))
+                                        <img src="{{asset('svg/no-image.png')}}" alt="imagem do {{$jogo['name']}}">
+                                    @else
+                                        <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @endif
                                 </div>
                                 <div class="container--carrossel-images--jogos--title">
                                     <div class="container--carrossel-images--jogos--title--nome">
@@ -109,7 +129,11 @@
                         <div class="container--carrossel-images--jogos ruim">
                             <a href="{{route('jogo', ['id' => $jogo['id']])}}">
                                 <div class="container--carrossel-images--jogos--img">
-                                    <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @if(empty($jogo['background_image']))
+                                        <img src="{{asset('svg/no-image.png')}}" alt="imagem do {{$jogo['name']}}">
+                                    @else
+                                        <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @endif
                                 </div>
                                 <div class="container--carrossel-images--jogos--title">
                                     <div class="container--carrossel-images--jogos--title--nome">
@@ -125,7 +149,11 @@
                         <div class="container--carrossel-images--jogos bom">
                             <a href="{{route('jogo', ['id' => $jogo['id']])}}">
                                 <div class="container--carrossel-images--jogos--img">
-                                    <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @if(empty($jogo['background_image']))
+                                        <img src="{{asset('svg/no-image.png')}}" alt="imagem do {{$jogo['name']}}">
+                                    @else
+                                        <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @endif
                                 </div>
                                 <div class="container--carrossel-images--jogos--title">
                                     <div class="container--carrossel-images--jogos--title--nome">
@@ -141,7 +169,11 @@
                         <div class="container--carrossel-images--jogos otimo">
                             <a href="{{route('jogo', ['id' => $jogo['id']])}}">
                                 <div class="container--carrossel-images--jogos--img">
-                                    <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @if(empty($jogo['background_image']))
+                                        <img src="{{asset('svg/no-image.png')}}" alt="imagem do {{$jogo['name']}}">
+                                    @else
+                                        <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @endif
                                 </div>
                                 <div class="container--carrossel-images--jogos--title">
                                     <div class="container--carrossel-images--jogos--title--nome">
@@ -169,7 +201,11 @@
                         <div class="container--carrossel-images--jogos sem-nota">
                             <a href="{{route('jogo', ['id' => $jogo['id']])}}">
                                 <div class="container--carrossel-images--jogos--img">
-                                    <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @if(empty($jogo['background_image']))
+                                        <img src="{{asset('svg/no-image.png')}}" alt="imagem do {{$jogo['name']}}">
+                                    @else
+                                        <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @endif
                                 </div>
                                 <div class="container--carrossel-images--jogos--title">
                                     <div class="container--carrossel-images--jogos--title--nome">
@@ -185,7 +221,11 @@
                         <div class="container--carrossel-images--jogos ruim">
                             <a href="{{route('jogo', ['id' => $jogo['id']])}}">
                                 <div class="container--carrossel-images--jogos--img">
-                                    <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @if(empty($jogo['background_image']))
+                                        <img src="{{asset('svg/no-image.png')}}" alt="imagem do {{$jogo['name']}}">
+                                    @else
+                                        <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @endif
                                 </div>
                                 <div class="container--carrossel-images--jogos--title">
                                     <div class="container--carrossel-images--jogos--title--nome">
@@ -201,7 +241,11 @@
                         <div class="container--carrossel-images--jogos bom">
                             <a href="{{route('jogo', ['id' => $jogo['id']])}}">
                                 <div class="container--carrossel-images--jogos--img">
-                                    <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @if(empty($jogo['background_image']))
+                                        <img src="{{asset('svg/no-image.png')}}" alt="imagem do {{$jogo['name']}}">
+                                    @else
+                                        <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @endif
                                 </div>
                                 <div class="container--carrossel-images--jogos--title">
                                     <div class="container--carrossel-images--jogos--title--nome">
@@ -217,7 +261,11 @@
                         <div class="container--carrossel-images--jogos otimo">
                             <a href="{{route('jogo', ['id' => $jogo['id']])}}">
                                 <div class="container--carrossel-images--jogos--img">
-                                    <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @if(empty($jogo['background_image']))
+                                        <img src="{{asset('svg/no-image.png')}}" alt="imagem do {{$jogo['name']}}">
+                                    @else
+                                        <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @endif
                                 </div>
                                 <div class="container--carrossel-images--jogos--title">
                                     <div class="container--carrossel-images--jogos--title--nome">
@@ -245,7 +293,11 @@
                         <div class="container--carrossel-images--jogos sem-nota">
                             <a href="{{route('jogo', ['id' => $jogo['id']])}}">
                                 <div class="container--carrossel-images--jogos--img">
-                                    <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @if(empty($jogo['background_image']))
+                                        <img src="{{asset('svg/no-image.png')}}" alt="imagem do {{$jogo['name']}}">
+                                    @else
+                                        <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @endif
                                 </div>
                                 <div class="container--carrossel-images--jogos--title">
                                     <div class="container--carrossel-images--jogos--title--nome">
@@ -261,7 +313,11 @@
                         <div class="container--carrossel-images--jogos ruim">
                             <a href="{{route('jogo', ['id' => $jogo['id']])}}">
                                 <div class="container--carrossel-images--jogos--img">
-                                    <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @if(empty($jogo['background_image']))
+                                        <img src="{{asset('svg/no-image.png')}}" alt="imagem do {{$jogo['name']}}">
+                                    @else
+                                        <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @endif
                                 </div>
                                 <div class="container--carrossel-images--jogos--title">
                                     <div class="container--carrossel-images--jogos--title--nome">
@@ -277,7 +333,11 @@
                         <div class="container--carrossel-images--jogos bom">
                             <a href="{{route('jogo', ['id' => $jogo['id']])}}">
                                 <div class="container--carrossel-images--jogos--img">
-                                    <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @if(empty($jogo['background_image']))
+                                        <img src="{{asset('svg/no-image.png')}}" alt="imagem do {{$jogo['name']}}">
+                                    @else
+                                        <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @endif
                                 </div>
                                 <div class="container--carrossel-images--jogos--title">
                                     <div class="container--carrossel-images--jogos--title--nome">
@@ -293,7 +353,11 @@
                         <div class="container--carrossel-images--jogos otimo">
                             <a href="{{route('jogo', ['id' => $jogo['id']])}}">
                                 <div class="container--carrossel-images--jogos--img">
-                                    <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @if(empty($jogo['background_image']))
+                                        <img src="{{asset('svg/no-image.png')}}" alt="imagem do {{$jogo['name']}}">
+                                    @else
+                                        <img src="{{$jogo['background_image']}}" alt="imagem do {{$jogo['name']}}">
+                                    @endif
                                 </div>
                                 <div class="container--carrossel-images--jogos--title">
                                     <div class="container--carrossel-images--jogos--title--nome">
