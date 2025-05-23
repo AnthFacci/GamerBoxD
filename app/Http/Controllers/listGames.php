@@ -173,7 +173,7 @@ class listGames extends Controller
                 User::where('id', $userId)->update(['picture' => $conteudo]);
             }
 
-
+            Cache::forget('user_infos' . $userId);
             return response()->json([
                 'success' => true,
                 'message' => 'Imagem atualizada com sucesso',

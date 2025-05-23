@@ -94,7 +94,7 @@
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="7" id="switch" name="platforms[]">
                             <label class="form-check-label" for="switch">
-                              nitendo switch
+                              nintendo switch
                             </label>
                         </div>
                         <div class="form-check">

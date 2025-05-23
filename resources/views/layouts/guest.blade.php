@@ -43,7 +43,7 @@
                                 @if (auth()->check())
                                     <a href="#" id="btn-show-search" class="navbar--ancors--limite--children" aria-expanded="false"><img src="{{asset('svg/search.svg')}}" alt="" class="navbar--ancors--limite--children-img"></a>
                                     <a href="{{route('home')}}" class="navbar--ancors--limite--children">Home</a>
-                                    <a href="{{route('jogos')}}" class="navbar--ancors--limite--children">Em Alta</a>
+                                    <a href="{{route('jogos')}}" class="navbar--ancors--limite--children">Trend</a>
                                     <a href="{{route('catalogo')}}" class="navbar--ancors--limite--children">Jogos</a>
                                     @if (isset($informacoes_user->picture))
                                         <a href="{{route('dashboard')}}" class="navbar--ancors--limite--children"><img src="data:image/jpeg;base64,{{ base64_encode($informacoes_user->picture) }}" alt=""></a>
@@ -53,7 +53,7 @@
                                 @else
                                     <a href="#" id="btn-show-search" class="navbar--ancors--limite--children" aria-expanded="false"><img src="{{asset('svg/search.svg')}}" alt="" class="navbar--ancors--limite--children-img"></a>
                                     <a href="{{route('home')}}" class="navbar--ancors--limite--children" >Home</a>
-                                    <a href="{{route('jogos')}}" class="navbar--ancors--limite--children">Em Alta</a>
+                                    <a href="{{route('jogos')}}" class="navbar--ancors--limite--children">Trend</a>
                                     <a href="{{route('catalogo')}}" class="navbar--ancors--limite--children">Jogos</a>
                                     <a href="{{route('login')}}" class="navbar--ancors--limite--children">Login</a>
                                     <a href="{{route('register')}}" class="navbar--ancors--limite--children">Criar Conta</a>
